@@ -1,16 +1,8 @@
-values = {
-    1: 1,
-    2: 0,
-    3: 0,
-    4: 0
-}
+import json
 
-percentage = 0
-num_of_nums = 0
-
-for value in values:
-    pers = value * values[value]
-    percentage += pers
-    num_of_nums += value
-
-print(percentage / num_of_nums)
+text = ["{'id': 28, 'answer': '15'}", "{'id': 24, 'answer': '16'}", "{'id': 26, 'answer': '15'}"]
+for txt in text:
+    print(txt)
+    txt = txt.replace("\'", "\"")
+    obj = json.loads(txt)
+    print(obj['answer'])

@@ -1,0 +1,127 @@
+.App {
+  text-align: center;
+}
+
+body, * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/*Custom styling*/
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(113, 113, 255);
+  height: 8vh;
+}
+
+.app {
+  margin-top: 8vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.centerbox {
+  background-color: rgb(113, 113, 255);
+  padding: 4em;
+  border-radius: 20px;
+}
+
+.input-line {
+  width: 100%;
+  margin: 0.5em 0em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-input {
+  width: 100%;
+  height: 100%;
+  padding: 0.5em;
+  border: none;
+}
+
+.form-submit {
+  padding: 0.75em;
+  background-color: white;
+  color: rgb(113, 113, 255);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.link-button {
+  background-color: white;
+  padding: 0.5em;
+  border-radius: 10px;
+  margin: 5em;
+  color: rgb(113, 113, 255);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.heading {
+  margin-bottom: 1em;
+}
+
+.link-button:hover {
+  font-weight: bolder;
+}
+
+.edit-question {
+  position: fixed;
+  top: auto;
+  left: auto;
+  right: auto;
+  bottom: auto;
+  width: 50vw;
+  height: 50vw;
+  background-color: gray;
+
+}
