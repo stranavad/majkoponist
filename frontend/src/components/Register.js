@@ -19,14 +19,14 @@ class Register extends Component {
     };
 
     componentDidMount() {
-        axios.get("http://localhost:5000/questions", {params: {token: this.state.token}})
+        axios.get("http://192.46.233.86:5000/questions", {params: {token: this.state.token}})
             .then(res => {
                 this.setState({res: res.data.questions});
             });
     }
 
     registerFunction = (email, first_name, last_name, phone) => {
-        axios.post("http://localhost:5000/users", {user_email: email, first_name: first_name, last_name: last_name, user_phone_number: phone, token: this.state.token})
+        axios.post("http://192.46.233.86:5000/users", {user_email: email, first_name: first_name, last_name: last_name, user_phone_number: phone, token: this.state.token})
             .then((res) => {
                 if (res.data.message === "This email already exist") {
                     this.setState({
@@ -49,7 +49,7 @@ class Register extends Component {
         console.log(questions_answered);
         //let questions_answered_list = questions_answered.push({token: this.state.token})
         //console.log(questions_answered_list);
-        axios.post("http://localhost:5000/questions", {answers: questions_answered, token: this.state.token})
+        axios.post("http://192.46.233.86:5000/questions", {answers: questions_answered, token: this.state.token})
             .then(res => {
                 console.log(res.data);
                 this.setState({show_result_component: <ShowResult questions={res.data.scheme} average={res.data.average}/>});
