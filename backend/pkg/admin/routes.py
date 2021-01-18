@@ -82,10 +82,14 @@ class Admin(Resource):
     def put(self):
         args = update_question_args.parse_args()
         if args["token"] == api_token:
-            sql = "UPDATE questions SET question = %s AND a_right = %s AND a2 = %s AND a3 = %s AND a4 = %s AND difficulty = %s WHERE id = %s"
-            mycursor.execute(sql, (str(args["question"]), str(args["correct_answer"]), str(args["a2"]), str(args["a3"]), str(args["a4"]), int(args["difficulty"]), int(args["id"])))
-            mydb.commit()
             print(args)
+            sql = "DELETE FROM questions WHERE id = %s"
+            mycursor.execute(sql, (int(args["id"]),))
+            mydb.commit()
+            mycursor.execute(
+                "INSERT INTO questions (question, a_right, a2, a3, a4, difficulty) VALUES (%s, %s, %s, %s, %s, %s)",
+                (args["question"], args["correct_answer"], args["a2"], args["a3"], args["a4"], args["difficulty"]))
+            mydb.commit()
             return {
                 "message": "Question was updated",
                 "question": args["question"],

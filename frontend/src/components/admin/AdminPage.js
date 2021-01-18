@@ -20,7 +20,7 @@ class AdminPage extends Component {
 
     onEditQuestion = (question) => {
         this.setState({
-            editComponent: <EditQuestion question={question} editQuestion={this.editQuestion}/>,
+            editComponent: <EditQuestion question={question} editQuestion={this.editQuestion} onClose={this.onCloseEditQuestion} />,
         });
     }
 
@@ -34,7 +34,14 @@ class AdminPage extends Component {
     }
 
     onDeleteQuestion = (question_id) => {
-        console.log(question_id);
+        axios.delete("http://localhost:5000/admin", {params: {id: question_id, token: this.state.token}})
+            .then(res => console.log(res));
+    }
+
+    onCloseEditQuestion = () => {
+        this.setState({
+            editComponent: '',
+        });
     }
 
     render() {
@@ -42,10 +49,11 @@ class AdminPage extends Component {
             <div className="admin-page">
                 {this.state.editComponent}
                 <h1>{this.state.errorMessage}</h1>
-                <h1>Create Question</h1>
                 <CreateQuestion createQuestion={this.addQuestion} />
-                <h1>Questions</h1>
-                <AdminPageQuestions questions={this.props.questions} onEdit={this.onEditQuestion} onDelete={this.onDeleteQuestion}/>
+                <div className="admin-page-questions">
+                    <h1>Questions</h1>
+                    <AdminPageQuestions questions={this.props.questions} onEdit={this.onEditQuestion} onDelete={this.onDeleteQuestion}/>
+                </div>
             </div>
         );
     }

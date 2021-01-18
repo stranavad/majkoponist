@@ -7,7 +7,7 @@ class ShowResult extends Component {
     render() {
         return(
             <div>
-                <h1>Your average was: {this.props.average}</h1>
+                <h1>Your result: {this.props.average} correct</h1>
                 <ShowQuestions questions={this.props.questions}/>
             </div>
         );

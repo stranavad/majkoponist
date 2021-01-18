@@ -94,10 +94,9 @@ class Questions extends Component {
         component = <Question question={this.state.questions[this.state.question_number]} onSubmit={this.answerQuestion}/>
       }
       return (
-        <div>
+        <div className="centerbox">
           <button onClick={this.startTimer}>Start</button>
           s: {this.state.seconds}
-          <p>""</p>
           {component}
         </div>
       );

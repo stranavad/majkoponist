@@ -30,10 +30,11 @@ class CreateQuestion extends Component {
 
     render() {
         return(
-            <div className="question">
+            <div className="full-size">
                 <form className="question-form" onSubmit={this.onSubmit}>
+                    <h1>Create Question</h1>
                     <div className="input-line">
-                        <input
+                        <textarea
                         type="text"
                         name="question"
                         className="text-input"
@@ -43,6 +44,7 @@ class CreateQuestion extends Component {
                         required
                         />
                     </div>
+                    <h3>Difficulty</h3>
                     <div className="radios">
                         <div className="radio-group">
                             <input type="radio" id="1" name="difficulty" value="1" onChange={this.onChangeDifficulty}/>
@@ -62,10 +64,10 @@ class CreateQuestion extends Component {
                         </div>
                     </div>
                     <div className="answers">
-                        <input type="text" placeholder="Correct answer" className="answer-text-input" id="correct_answer" name="correct_answer" value={this.state.correct_answer} onChange={this.onChangeAnswer}/>
-                        <input type="text" placeholder="Answer 2" className="answer-text-input" id="a2" name="a2" value={this.state.a2} onChange={this.onChangeAnswer}/>
-                        <input type="text" placeholder="Answer 3" className="answer-text-input" id="a3" name="a3" value={this.state.a3} onChange={this.onChangeAnswer}/>
-                        <input type="text" placeholder="Answer 4" className="answer-text-input" id="a4" name="a4" value={this.state.a4} onChange={this.onChangeAnswer}/>
+                        <textarea type="text" placeholder="Correct answer" className="answer-text-input" id="correct_answer" name="correct_answer" value={this.state.correct_answer} onChange={this.onChangeAnswer}/>
+                        <textarea type="text" placeholder="Answer 2" className="answer-text-input" id="a2" name="a2" value={this.state.a2} onChange={this.onChangeAnswer}/>
+                        <textarea type="text" placeholder="Answer 3" className="answer-text-input" id="a3" name="a3" value={this.state.a3} onChange={this.onChangeAnswer}/>
+                        <textarea type="text" placeholder="Answer 4" className="answer-text-input" id="a4" name="a4" value={this.state.a4} onChange={this.onChangeAnswer}/>
                     </div>
                     <input
                         type="submit"

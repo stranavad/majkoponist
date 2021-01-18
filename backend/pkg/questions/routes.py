@@ -164,9 +164,22 @@ class Questions(Resource):
                     "id": answer
                 })
             average = make_average(answers_scheme)
+            answer_scheme_return = list()
+            for scheme in answers_scheme:
+                correct = "No"
+                if scheme['correct'] == 1:
+                    correct = "Yes"
+                answer_scheme_return.append({
+                    "question": scheme["question"],
+                    "difficulty": scheme["difficulty"],
+                    "correct_answer": scheme["correct_answer"],
+                    "user_answer": scheme["user_answer"],
+                    "correct": correct,
+                    "id": scheme["id"]
+                })
             result = {
                 "average": str(int(average * 100)) + "%",
-                "scheme": answers_scheme
+                "scheme": answer_scheme_return
             }
             return result
         else:

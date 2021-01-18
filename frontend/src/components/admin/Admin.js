@@ -16,6 +16,11 @@ class Admin extends Component {
             .then(res => this.setState({res: res.data.questions}));
     }
 
+    updateQuestions = () => {
+        axios.get("http://localhost:5000/admin", {params: {token: this.state.token}})
+            .then(res => this.setState({res: res.data.questions}));
+    }
+
     login = (email, password) => {
         axios.post("http://localhost:5000/validate_admin", {email: email, password: password, token: this.state.token})
             .then(res => {
@@ -36,7 +41,7 @@ class Admin extends Component {
             component = <AdminLogin loginFunction={this.login}/>
         }
         return (
-            <div>
+            <div className="full-size">
                 {component}
             </div>
         );
