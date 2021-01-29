@@ -25,9 +25,12 @@ class CreateQuestion extends Component {
     }
     
     onChangeAnswer = (e) => this.setState({ [e.target.name]: e.target.value});
-    onChangeQuestion = (e) => this.setState({ [e.target.name]: e.target.value});
     onChangeDifficulty = (e) => this.setState({ [e.target.name]: e.target.value});
-
+    onChangeQuestion = (e) => {
+        let value;
+        value = e.target.value.replace(/"/g, "'")
+        this.setState({ [e.target.name]: value});
+    }
     render() {
         return(
             <div className="full-size">
@@ -57,10 +60,6 @@ class CreateQuestion extends Component {
                         <div className="radio-group">
                             <input type="radio" id="3" name="difficulty" value="3" onChange={this.onChangeDifficulty}/>
                             <label for="3">3</label>
-                        </div>
-                        <div className="radio-group">
-                            <input type="radio" id="4" name="difficulty" value="4" onChange={this.onChangeDifficulty}/>
-                            <label for="4">4</label>
                         </div>
                     </div>
                     <div className="answers">

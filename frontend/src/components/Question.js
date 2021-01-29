@@ -23,7 +23,7 @@ class Question extends Component {
                     <h1 className="question-heading">{this.props.question.question}</h1>
                     <h4 className="question-desc">Obtiznost {this.props.question.difficulty}</h4>
                     <h4 className="question-desc">Zbyvajici cas {this.props.time_left}</h4>
-                    <h4 className="question-desc">Otazka {this.props.question_number} z 21</h4>
+                    <h4 className="question-desc">Otazka {this.props.question_number + 1} z 21</h4>
                     <div className="radios">
                         <div className="radio-group">
                             <input type="radio" id="answer" name="answer" value={this.props.question.a1} checked={this.state.answer === this.props.question.a1} onChange={this.onChangeAnswer}/>

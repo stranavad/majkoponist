@@ -37,7 +37,11 @@ class EditQuestion extends Component {
     }
     
     onChangeAnswer = (e) => this.setState({ [e.target.name]: e.target.value});
-    onChangeQuestion = (e) => this.setState({ [e.target.name]: e.target.value});
+    onChangeQuestion = (e) => {
+        let value;
+        value = e.target.value.replace(/"/g, "'")
+        this.setState({ [e.target.name]: value});
+    }
     onChangeDifficulty = (e) => this.setState({ [e.target.name]: e.target.value});
 
     render() {
