@@ -18,10 +18,12 @@ class Question extends Component {
 
     render() {
         return(
-            <div className="question">
-                <form className="question-form" onSubmit={this.onSubmit}>
-                    <h2 className="question_heading">{this.props.question.question}</h2>
-                    <h4 className="question_difficulty">{this.props.question.difficulty}</h4>
+            <div className="question-form-div">
+                <form className="quiz-question-form" onSubmit={this.onSubmit}>
+                    <h1 className="question-heading">{this.props.question.question}</h1>
+                    <h4 className="question-desc">Obtiznost {this.props.question.difficulty}</h4>
+                    <h4 className="question-desc">Zbyvajici cas {this.props.time_left}</h4>
+                    <h4 className="question-desc">Otazka {this.props.question_number} z 21</h4>
                     <div className="radios">
                         <div className="radio-group">
                             <input type="radio" id="answer" name="answer" value={this.props.question.a1} checked={this.state.answer === this.props.question.a1} onChange={this.onChangeAnswer}/>
@@ -55,7 +57,9 @@ class Question extends Component {
 
 Question.propTypes = {
     question: PropTypes.object.isRequired,
-    onSubmit: PropTypes.func.isRequired
+    onSubmit: PropTypes.func.isRequired,
+    question_number: PropTypes.number.isRequired,
+    time_left: PropTypes.number.isRequired
 };
 
 export default Question;

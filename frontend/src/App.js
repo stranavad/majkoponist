@@ -16,7 +16,7 @@ class App extends Component {
       <Router>
         <div className="app">
           <div className="menu">
-            <h1>Majko Ponist</h1>
+            <h1><a href="/">Majko Ponist</a></h1>
           </div>
           <Route
           exact
@@ -24,8 +24,8 @@ class App extends Component {
           render={props =>(
             <React.Fragment>
               <div className="centerbox">
-                <h1>Welcome here Hana Hegerova</h1>
-                <a href="/quiz" className="link-button">Play</a>
+                <h1>Hana Hegerova quizzzzzz</h1>
+                <a href="/quiz" className="play-button">Play</a>
               </div>
             </React.Fragment>
           )}

@@ -1,6 +1,7 @@
 from flask_restful import Resource, reqparse
 from flask_cors import cross_origin
-from pkg import mycursor, mydb, api_token
+from flask_mail import Message
+from pkg import mycursor, mydb, api_token, mail_global
 import random
 import json
 
@@ -26,7 +27,7 @@ def sort_questions(all_questions):
     question_return = []
     for j in all_questions:
         added = 0
-        while added <= 4:
+        while added <= 6:
             question = random.choice(j)
             j.remove(question)
             answers = [question[2], question[3], question[4], question[5]]
@@ -43,7 +44,6 @@ def sort_questions(all_questions):
             question_return.append(question_dict)
             added += 1
     return question_return
-
 
 
 def get_correct_answers(question_ids):
@@ -68,27 +68,58 @@ def sum_of_list(num_list):
     return num_sum
 
 
+def send_email(email_scheme, email, first_name, last_name, phone_number):
+    msg = Message(
+        "Dalsi vyherce kvizu Hany Hegerovej",
+        sender="hanahegerovaquiz@gmail.com",
+        recipients=["mr.ajemifajn@protonmail.com"]
+    )
+
+    msg_body = f"""
+        User: {first_name} {last_name}.
+        Email: {email}.
+        Phone number: {phone_number}.
+
+        """
+
+    for answer in email_scheme:
+        msg_body += (f"""
+            Otazka: {answer["question"]}.
+            Obtiznost: {answer["difficulty"]}.
+            Odpoved uzivatele: {answer["user_answer"]}.
+            Spravna odpoved: {answer["correct_answer"]}.
+            Odpovedal spravne: {answer["correct"]}
+            """)
+    msg.body = msg_body
+    mail_global.send(msg)
+
+
 def make_average(scheme):
     diff1 = []
     diff2 = []
     diff3 = []
-    diff4 = []
     for q in scheme:
         if q["difficulty"] == 1:
-            diff1.append(q["correct"])
+            if q["correct"] == "Nie":
+                diff1.append(0)
+            else:
+                diff1.append(1)
         elif q["difficulty"] == 2:
-            diff2.append(q["correct"])
+            if q["correct"] == "Nie":
+                diff2.append(0)
+            else:
+                diff2.append(1)
         elif q["difficulty"] == 3:
-            diff3.append(q["correct"])
-        elif q["difficulty"] == 4:
-            diff4.append(q["correct"])
+            if q["correct"] == "Nie":
+                diff3.append(0)
+            else:
+                diff3.append(1)
         else:
             print("There was some error in the average section")
     diff1_avg = sum_of_list(diff1) / len(diff1)
     diff2_avg = sum_of_list(diff2) / len(diff2)
     diff3_avg = sum_of_list(diff3) / len(diff3)
-    diff4_avg = sum_of_list(diff4) / len(diff4)
-    avg = (diff1_avg + diff2_avg * 2 + diff3_avg * 3 + diff4_avg * 4) / 10  # 10 is the number of nums, 1+2+3+4
+    avg = (diff1_avg + diff2_avg * 2 + diff3_avg * 3) / 6  # 10 is the number of nums, 1+2+3+4
     return avg
 
 
@@ -120,16 +151,8 @@ class Questions(Resource):
             diff_two = mycursor.fetchall()
             mycursor.execute("SELECT * FROM questions WHERE difficulty = 3")
             diff_three = mycursor.fetchall()
-            mycursor.execute("SELECT * FROM questions WHERE difficulty = 4")
-            diff_four = mycursor.fetchall()
-            # dict_one = create_dict(diff_one)
-            # dict_two = create_dict(diff_two)
-            # dict_three = create_dict(diff_three)
-            # dict_four = create_dict(diff_four)
-            mycursor.execute("SELECT * FROM questions")
-            questions_db = mycursor.fetchall()
-            res = []
-            questions_list = sort_questions([diff_one, diff_two, diff_three, diff_four])
+            questions_list = sort_questions([diff_one, diff_two, diff_three])
+            # TODO something to do with quotes in JSON, now in database single quotes - try back double
             return {"questions": questions_list}
         else:
             return {
@@ -152,9 +175,9 @@ class Questions(Resource):
             correct_answers = get_correct_answers(question_ids)
             answers_scheme = list()
             for answer in answers:
-                correct = 0
+                correct = "Nie"
                 if answers[answer] == correct_answers[answer]["correct_answer"]:
-                    correct = 1
+                    correct = "Ano"
                 answers_scheme.append({
                     "question": correct_answers[answer]["question"],
                     "difficulty": correct_answers[answer]["difficulty"],
@@ -164,23 +187,13 @@ class Questions(Resource):
                     "id": answer
                 })
             average = make_average(answers_scheme)
-            answer_scheme_return = list()
-            for scheme in answers_scheme:
-                correct = "No"
-                if scheme['correct'] == 1:
-                    correct = "Yes"
-                answer_scheme_return.append({
-                    "question": scheme["question"],
-                    "difficulty": scheme["difficulty"],
-                    "correct_answer": scheme["correct_answer"],
-                    "user_answer": scheme["user_answer"],
-                    "correct": correct,
-                    "id": scheme["id"]
-                })
             result = {
                 "average": str(int(average * 100)) + "%",
-                "scheme": answer_scheme_return
+                "scheme": answers_scheme,
+                "winner": "false",
             }
+            if average >= 0.8:
+                result["winner"] = "true"
             return result
         else:
             return {

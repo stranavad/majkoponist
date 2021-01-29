@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import Question from './Question';
 
 class Questions extends Component {
@@ -18,13 +17,13 @@ class Questions extends Component {
       }
 
       setQuestion() {
-        if(this.state.question_number == 19) {
+        if(this.state.question_number === 20) {
           clearInterval(this.timer);
           let quest_number = this.question_number + 1;
           this.setState({display_question: false, question_number: quest_number});
           this.props.showResult(this.state.answeredQuestions);
           console.log("Questions were answered");
-        } else if (this.state.question_number < 19) {
+        } else if (this.state.question_number < 20) {
           this.setState({
             question_number: this.state.question_number + 1,
             display_question: true,
@@ -33,11 +32,11 @@ class Questions extends Component {
       }
     
       startTimer() {
-        if (this.timer == 0 && this.state.seconds > 0) {
+        if (this.timer === 0 && this.state.seconds > 0) {
           this.setQuestion();
           this.timer = setInterval(this.countDown, 1000);
         }
-        else if (this.state.seconds == 0) {
+        else if (this.state.seconds === 0) {
           this.setQuestion();
           this.setState({
             seconds: this.state.seconds_to_set,
@@ -78,7 +77,7 @@ class Questions extends Component {
             // Check if we're at zero.
             if (seconds <= 0) {
               this.setState(state => {
-                const answeredQuestions = state.answeredQuestions.concat({id: this.state.questions[this.state.question_number].id, asnwer: ''});
+                const answeredQuestions = state.answeredQuestions.concat({id: this.state.questions[this.state.question_number].id, answer: ''});
                 return {
                   answeredQuestions,
                 };
@@ -91,12 +90,12 @@ class Questions extends Component {
     render() {
       let component;
       if (this.state.display_question) {
-        component = <Question question={this.state.questions[this.state.question_number]} onSubmit={this.answerQuestion}/>
+        component = <Question question={this.state.questions[this.state.question_number]} question_number={this.state.question_number + 1} onSubmit={this.answerQuestion} time_left={this.state.seconds}/>
+      } else {
+        component = <button className="start-game-button" onClick={this.startTimer}>Hrat!</button>
       }
       return (
         <div className="centerbox">
-          <button onClick={this.startTimer}>Start</button>
-          s: {this.state.seconds}
           {component}
         </div>
       );

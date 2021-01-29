@@ -30,7 +30,6 @@ token_parser = reqparse.RequestParser()
 token_parser.add_argument("token", type=str, help="API token")
 
 
-
 class Admin(Resource):
     @cross_origin(supports_credentials=True)
     def get(self):
@@ -66,8 +65,9 @@ class Admin(Resource):
             for question in question_names_db:
                 if question[0] == args["question"]:
                     return {"message": "This question already exists"}
+            question_replaced = args["question"].replace("\"", "\'")
             mycursor.execute("INSERT INTO questions (question, a_right, a2, a3, a4, difficulty) VALUES (%s, %s, %s, %s, %s, %s)",
-                             (args["question"], args["correct_answer"], args["a2"], args["a3"], args["a4"], args["difficulty"]))
+                             (question_replaced, args["correct_answer"], args["a2"], args["a3"], args["a4"], args["difficulty"]))
             mydb.commit()
             return {
                 "question": args["question"],

@@ -6,6 +6,7 @@ body, * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  transition: 0.2s ease;
 }
 
 .App-logo {
@@ -44,6 +45,18 @@ body, * {
 }
 
 /*Custom styling*/
+
+/* Body styling */
+
+body {
+  background-image: url(./components/assets/hana_background.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-color: #0B152A;
+}
+
+/* END OF BODY STYLING */
 .menu {
   position: fixed;
   top: 0;
@@ -53,8 +66,20 @@ body, * {
   width: 100%;
   justify-content: center;
   align-items: center;
-  background-color: rgb(113, 113, 255);
+  background-color: transparent;
   height: 8vh;
+}
+
+.menu a {
+  color: #d5ba5c;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.menu a:hover {
+  color: rgb(160, 160, 160);
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .app {
@@ -76,10 +101,31 @@ body, * {
 }
 
 .centerbox {
-  background-color: rgb(113, 113, 255);
+  background-color: transparent;
   padding: 4em;
   border-radius: 20px;
+  color: #d5ba5c;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+.centerbox h1 {
+  margin-bottom: 1em;
+}
+
+.play-button {
+  background-color: #d5ba5c;
+  padding: 0.5em 1.5em;
+  border-radius: 10px;
+  color: #0B152A;
+  text-decoration: none;
+}
+
+.play-button:hover {
+  background-color: rgb(160, 160, 160);
+}
+
+/* Form stuff */
 
 .input-line {
   width: 100%;
@@ -87,6 +133,18 @@ body, * {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.input-line input {
+  padding: 0.75em;
+  background-color: #d5ba5c;
+  color: black;
+  font-size: 1.2em;
+  border-radius: 5px;
+}
+
+.input-line input::placeholder{
+  color: rgb(80, 80, 80);
 }
 
 .text-input {
@@ -98,12 +156,17 @@ body, * {
 
 .form-submit {
   padding: 0.75em;
-  background-color: white;
-  color: rgb(113, 113, 255);
+  background-color:#d5ba5c;
+  color: white;
   border: none;
   border-radius: 10px;
   cursor: pointer;
 }
+
+.form-submit:hover {
+  background-color: rgb(160, 160, 160);
+}
+
 
 .link-button {
   background-color: white;
@@ -120,8 +183,10 @@ body, * {
 }
 
 .link-button:hover {
-  font-weight: bolder;
+  background-color: rgb(160, 160, 160);
 }
+
+
 
 /* Edit question box */
 
@@ -136,9 +201,8 @@ body, * {
   align-items: center;
 }
 
-.question-form { /* Create, edit question form */
-  background-color: rgb(113, 113, 255);
-  color: white;
+.question-form { /* Create, edit, answer question form */
+  color: #d5ba5c;
   border-radius: 10px;
   padding: 0.75em;
   margin: 1.5em 0;
@@ -149,8 +213,42 @@ body, * {
   max-width: 700px;
 }
 
+.quiz-question-form {
+  color: #d5ba5c;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 700px;
+}
+
+.question-desc {
+  margin: 0.25em;
+}
+
+.quiz-question-form h1 {
+  margin-bottom: 0.5em;
+  text-align: center;
+}
+
 .answers {  /* Div with textareas for answers, also create quesiton form */
   margin: 0.5em 0;
+}
+
+/* Start game elements */ 
+
+.start-game-button, .retry-game-button {
+  padding: 0.75em 1.25em;
+  background-color:#d5ba5c;
+  color: #0B152A;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 1.3em;
+}
+
+.start-game-button:hover, .retry-game-button:hover {
+  background-color: rgb(160, 160, 160);
 }
 
 /* Form elements */
@@ -205,7 +303,6 @@ body, * {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border: 1px solid black;
   padding: 0.25em;
   border-radius: 5px
 }
@@ -249,10 +346,10 @@ body, * {
 
 /* Show questions after quiz result */
 .question {
-  background-color: rgb(113, 113, 255);
-  color: white;
   border-radius: 10px;
-  padding: 0.75em;
+  padding: 0.5em;
+  border: 1px solid  #d5ba5c;
+  color:  #d5ba5c;
   margin: 1.5em 0;
   display: flex;
   flex-direction: column;
@@ -261,3 +358,37 @@ body, * {
   max-width: 500px;
 }
 
+.result-heading {
+  color:  #d5ba5c;
+  margin-bottom: 1em;
+}
+
+/* Register and rules page styles */
+
+.register-parts {
+  display: flex;
+  min-width: 40vw;
+  color: #d5ba5c;
+}
+
+.register-part {
+  width: 50%;
+  padding: 2em;
+}
+
+.register-part h1 {
+  margin-bottom: 1em;
+}
+
+.register-part li {
+  margin: 1em;
+  font-size: 1.3em;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 15vw;
+}

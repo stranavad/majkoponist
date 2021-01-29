@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 
 class RegisterForm extends Component {
     state = {
@@ -28,65 +27,77 @@ class RegisterForm extends Component {
 
     render() {
         return(
-            <div className="centerbox">
-                <h1>
-                    Register Form
-                </h1>
-                <form onSubmit={this.onSubmit} className="form">
-                    <div className="input-line">
-                        <input
-                        type="email"
-                        name="email"
-                        className="text-input"
-                        placeholder="Email"
-                        value={this.state.email}
-                        onChange={this.onChangeEmail}
-                        required
-                        />
-                    </div>
-                    <div className="input-line">
-                        <input
-                        type="text"
-                        name="first_name"
-                        className="text-input"
-                        placeholder="First Name"
-                        value={this.state.first_name}
-                        onChange={this.onChangeFirstName}
-                        required
-                        />
-                    </div>
-                    <div className="input-line">
-                        <input
-                        type="text"
-                        name="last_name"
-                        className="text-input"
-                        placeholder="Last Name"
-                        value={this.state.last_name}
-                        onChange={this.onChangeLastName}
-                        required
-                        />
-                    </div>
-                    <div className="input-line">
-                        <input
-                        type="text"
-                        name="phone"
-                        className="text-input"
-                        placeholder="Your phone number"
-                        value={this.state.phone}
-                        onChange={this.onChangePhone}
-                        required
-                        />
-                    </div>
-                    <div className="input-line">
-                        <input
-                        type="submit"
-                        name="submit"
-                        className="form-submit"
-                        value="Register"
-                        required
-                        />
-                    </div>
-                </form>
+            <div className="register-parts">
+                <div className="register-part">
+                    <h1>Pravidla a postup hry</h1>
+                    <ul>
+                        <li>Kvíz obsahuje 20 otázek, 5 otázek z každé obtížnosti. Na každou otázku máte 15s</li>
+                        <li>Po zodpovězení otázek se vám zobrazí váš výsledek a správné odpovědi</li>
+                        <li>Pokud odpovíte správně na více než 90% otázek, budete si moc vybrat vaší výhru</li>
+                        <li>Další pravidlo</li>
+                        <li>Další pravidlo</li>
+                        <li>Další pravidlo</li>
+                        <li>Další pravidlo</li>
+                    </ul>
+                </div>
+                <div className="register-part">
+                    <h1>Registrace</h1>
+                    <form onSubmit={this.onSubmit} className="form">
+                        <div className="input-line">
+                            <input
+                            type="email"
+                            name="email"
+                            className="text-input"
+                            placeholder="Váš Email"
+                            value={this.state.email}
+                            onChange={this.onChangeEmail}
+                            required
+                            />
+                        </div>
+                        <div className="input-line">
+                            <input
+                            type="text"
+                            name="first_name"
+                            className="text-input"
+                            placeholder="Křestní jméno"
+                            value={this.state.first_name}
+                            onChange={this.onChangeFirstName}
+                            required
+                            />
+                        </div>
+                        <div className="input-line">
+                            <input
+                            type="text"
+                            name="last_name"
+                            className="text-input"
+                            placeholder="Příjmení"
+                            value={this.state.last_name}
+                            onChange={this.onChangeLastName}
+                            required
+                            />
+                        </div>
+                        <div className="input-line">
+                            <input
+                            type="text"
+                            name="phone"
+                            className="text-input"
+                            placeholder="Vaše telefoné číslo"
+                            value={this.state.phone}
+                            onChange={this.onChangePhone}
+                            required
+                            />
+                        </div>
+                        <div className="input-line">
+                            <input
+                            type="submit"
+                            name="submit"
+                            className="form-submit"
+                            value="Hrát"
+                            required
+                            />
+                        </div>
+                    </form>
+                </div>
             </div>
         );
     }

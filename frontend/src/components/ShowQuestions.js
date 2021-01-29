@@ -11,7 +11,7 @@ class ShowQuestions extends Component {
 }
 
 ShowQuestions.propTypes = {
-    questions: PropTypes.array.isRequired,
+    questions: PropTypes.array,
 }
 
 export default ShowQuestions
