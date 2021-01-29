@@ -28,13 +28,13 @@ class AdminPage extends Component {
         this.setState({
             editComponent: '',
         });
-        axios.put("http://localhost:5000/admin", {question, difficulty, correct_answer, a2, a3, a4, id, token: this.state.token})
+        axios.put("http://192.46.233.86:5000/admin", {question, difficulty, correct_answer, a2, a3, a4, id, token: this.state.token})
             .then(res => console.log(res));
         console.log("Qustion edit");
     }
 
     onDeleteQuestion = (question_id) => {
-        axios.delete("http://localhost:5000/admin", {params: {id: question_id, token: this.state.token}})
+        axios.delete("http://192.46.233.86:5000/admin", {params: {id: question_id, token: this.state.token}})
             .then(res => console.log(res));
     }
 
