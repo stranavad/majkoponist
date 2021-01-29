@@ -29,7 +29,7 @@ class ShowResult extends Component {
     }
 
     onSubmitPrize = (name, info) => {
-        axios.post("http://localhost:5000/prizes", {
+        axios.post("http://192.46.233.86:5000/prizes", {
             token: this.state.api_token,
             prize_name: name,
             email: this.props.user.email,
@@ -43,7 +43,7 @@ class ShowResult extends Component {
 
     componentDidMount() {
         if (this.props.winner === "true") {
-            axios.get("http://localhost:5000/prizes", {params: {token: this.state.api_token}})
+            axios.get("http://192.46.233.86:5000/prizes", {params: {token: this.state.api_token}})
                 .then((res) => {
                     this.setState({
                         prizes: res.data.prizes,
