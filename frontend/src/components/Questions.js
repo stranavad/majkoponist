@@ -5,7 +5,7 @@ import Question from './Question';
 class Questions extends Component {
     constructor() {
         super();
-        this.state = {display_question: false, question_number: -1, seconds: 10, seconds_to_set: 10, current_question: {question: '', id: '', a1: '', a2: '', a3: '', a4: '', difficulty: ''}, questions: '', answeredQuestions: [],};
+        this.state = {display_question: false, question_number: -1, seconds: 30, seconds_to_set: 30, current_question: {question: '', id: '', a1: '', a2: '', a3: '', a4: '', difficulty: ''}, questions: '', answeredQuestions: [],};
         this.timer = 0;
         this.startTimer = this.startTimer.bind(this);
         this.countDown = this.countDown.bind(this);

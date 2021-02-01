@@ -20,14 +20,14 @@ class Register extends Component {
     };
 
     componentDidMount() {
-        axios.get("http://192.46.233.86:5000/questions", {params: {token: this.state.token}})
+        axios.get("http://localhost:5000/questions", {params: {token: this.state.token}})
             .then(res => {
                 this.setState({res: res.data.questions});
             });
     }
 
     registerFunction = (email, first_name, last_name, phone) => {
-        axios.post("http://192.46.233.86:5000/users", {user_email: email, first_name: first_name, last_name: last_name, user_phone_number: phone, token: this.state.token})
+        axios.post("http://localhost:5000/users", {user_email: email, first_name: first_name, last_name: last_name, user_phone_number: phone, token: this.state.token})
             .then((res) => {
                 if (res.data.message === "This email already exist") {
                     this.setState({
@@ -48,7 +48,7 @@ class Register extends Component {
     showResult = (questions_answered) => {
         console.log("Show Result");
         console.log(questions_answered);
-        axios.post("http://192.46.233.86:5000/questions", {answers: questions_answered, token: this.state.token})
+        axios.post("http://localhost:5000/questions", {answers: questions_answered, token: this.state.token, email: this.state.user.email, name: this.state.user.first_name + " " + this.state.user.last_name, phone_number: this.state.user.phone_number})
             .then(res => {
                 console.log(res.data);
                 this.setState({show_result_component: <ShowResult user={this.state.user} winner={res.data.winner} questions={res.data.scheme} average={res.data.average} playAgain={this.playAgain} tries={this.state.tries} />});
@@ -57,7 +57,7 @@ class Register extends Component {
     }
 
     playAgain = () => {
-        axios.get("http://192.46.233.86:5000/questions", {params: {token: this.state.token}})
+        axios.get("http://localhost:5000/questions", {params: {token: this.state.token}})
             .then(res => {
                 this.setState({res: res.data.questions, tries: this.state.tries + 1, register_form: false, showResult: false});
             });

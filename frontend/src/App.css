@@ -392,3 +392,14 @@ body {
   justify-content: flex-start;
   max-width: 15vw;
 }
+
+/* Audio button */
+.audio-button {
+  color: #d5ba5c;
+  font-size: 1.6em;
+  cursor: pointer;
+}
+
+.audio-button:hover {
+  opacity: 0.6;
+}

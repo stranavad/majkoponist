@@ -38,6 +38,8 @@ def send_mail(args):
     Email: {args["email"]}.
     Phone number: {args["phone_number"]}.
     
+    Skore: {args["average"]}
+    
     Zvolil vyhru "{args['prize_name']}".
     Dodal informacie "{args['information']}".
     
@@ -65,6 +67,13 @@ def send_mail(args):
     mail_global.send(msg)
 
 
+def add_prize_result(args):
+    prize = {"prize_name": args["prize_name"], "information": args["information"]}
+    sql = "UPDATE answered SET prize = JSON_SET(prize, '$.prize', %s) WHERE email = %s"
+    mycursor.execute(sql, (json.dumps(prize), args["email"]))
+    mydb.commit()
+
+
 class Prizes(Resource):
     @cross_origin(supports_credentials=True)
     def get(self):
@@ -89,6 +98,7 @@ class Prizes(Resource):
         args = get_prize_args.parse_args()
         print(args)
         if args['token'] == api_token:
+            add_prize_result(args)
             send_mail(args)
             return {"message": "No U"}
         else:

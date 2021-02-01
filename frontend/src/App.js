@@ -1,15 +1,29 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
 import './App.css';
+import GreatWar from './GreatWar.mp3'
+import GreatWarOgg from './GreatWarOgg.ogg';
 //import axios from 'axios';
 import Register from './components/Register';
-import EmailExists from './components/EmailExists';
+import EmailExists from './EmailExists';
 import Admin from './components/admin/Admin';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faVolumeUp } from '@fortawesome/free-solid-svg-icons'
+//import { volumeUp } from '@fortawesome/free-solid-svg-icons'
 
 class App extends Component {
   state = {
     todos: [],
   };
+
+  playAudio = () => {
+    const audio = document.getElementById("track");
+    if(audio.paused === false) {
+      audio.pause();
+    } else {
+      audio.play()
+    }
+  }
 
   render() {
     return (
@@ -50,6 +64,11 @@ class App extends Component {
           path="/admin_wrong_credentials"
           component={Admin} // TODO create component for it with redirect button
           />
+          <audio id="track" loop>  
+            <source src={GreatWar} type="audio/mpeg"/>
+            <source src={GreatWarOgg} type="audio/ogg"/>
+          </audio>
+          <FontAwesomeIcon className="audio-button" onClick={this.playAudio} icon={faVolumeUp} />
         </div>
       </Router>
     );

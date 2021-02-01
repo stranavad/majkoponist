@@ -1,5 +1,5 @@
 import mysql.connector
-import random
+import json
 
 mydb = mysql.connector.connect(
     host="192.46.233.86",
@@ -7,41 +7,29 @@ mydb = mysql.connector.connect(
     passwd="<Code><Tech> 127521",
     database="majkoponist"
 )
+
+first_json = {"questions1": {"How muchen tuchen 1": {"difficulty": 1, "user_answer": "user_answer1", "correct_answer": "correct_answer1", "correct": "No"},
+                             "How muchen tuchen 2": {"difficulty": 2, "user_answer": "user_answer2", "correct_answer": "correct_answer2", "correct": "No"},
+                             "How muchen tuchen 3": {"difficulty": 3, "user_answer": "user_answer3", "correct_answer": "correct_answer3", "correct": "No"},
+                             }, "questions2": {}, "questions3": {}}
 mycursor = mydb.cursor()
+data = ("emailemailemailemail@mail.com", "Pepa z Depa", "+421 moje cislo", json.dumps({"score1": 0.8, "score2": 0, "score3": 0}), json.dumps(first_json), 1, json.dumps({"prize_name": "Moje vyhra kamarati", "information": "This information is meine information"}))
 
+sql = "INSERT INTO answered (email, name, phone_number, score, answers, answered, prize) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+mycursor.execute(sql, data)
+mydb.commit()
 
-def sort_questions(all_questions):
-    question_return = []
-    for j in all_questions:
-        print(len(j))
-        added = 0
-        while added <= 6:
-            question = random.choice(j)
-            j.remove(question)
-            answers = [question[2], question[3], question[4], question[5]]
-            random.shuffle(answers)
-            question_dict = {
-                "id": question[0],
-                "question": question[1],
-                "a1": answers[0],
-                "a2": answers[1],
-                "a3": answers[2],
-                "a4": answers[3],
-                "difficulty": question[6]
-            }
-            question_return.append(question_dict)
-            added += 1
-    return question_return
+data_second = (json.dumps({"How muchen tuchen 21": {"difficulty": 1, "user_answer": "user_answer1", "correct_answer": "correct_answer1", "correct": "No"},
+                             "How muchen tuchen 22": {"difficulty": 2, "user_answer": "user_answer2", "correct_answer": "correct_answer2", "correct": "No"},
+                             "How muchen tuchen 23": {"difficulty": 3, "user_answer": "user_answer3", "correct_answer": "correct_answer3", "correct": "No"},
+                             }),)
+sql_update = "UPDATE answered SET answers = JSON_SET(answers, '$.questions2', %s) WHERE email = 'emailemailemailemail@mail.com'"
+mycursor.execute(sql_update, data_second)
+mydb.commit()
 
+# mycursor.execute(sql, data)
+# mydb.commit()
 
-def select():
-    mycursor.execute("SELECT * FROM questions WHERE difficulty = 1")
-    diff_one = mycursor.fetchall()
-    mycursor.execute("SELECT * FROM questions WHERE difficulty = 2")
-    diff_two = mycursor.fetchall()
-    mycursor.execute("SELECT * FROM questions WHERE difficulty = 3")
-    diff_three = mycursor.fetchall()
-    questions_list = sort_questions([diff_one, diff_two, diff_three])
-    print(questions_list)
-
-select()
+mycursor.execute("SELECT * FROM answered WHERE email = %s", ("emailemail@mail.com",))
+res = mycursor.fetchone()
+print(res)

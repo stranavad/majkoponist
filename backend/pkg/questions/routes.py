@@ -94,6 +94,39 @@ def send_email(email_scheme, email, first_name, last_name, phone_number):
     mail_global.send(msg)
 
 
+def add_result(email, name, phone_number, answers_scheme, average):
+    mycursor.execute("SELECT * FROM answered WHERE email = %s", (email,))
+    res = mycursor.fetchall()
+    questions_dict = dict()
+    for question in answers_scheme:
+        questions_dict[question["question"]] = {"difficulty": question["difficulty"], "user_answer": question["user_answer"], "correct_answer": question["correct_answer"], "correct": question["correct"]}
+
+    if not res:
+        data = (
+            email,
+            name,
+            phone_number,
+            json.dumps({"score1": average, "score2": 0, "score3": 0}),
+            json.dumps({"questions1": questions_dict, "questions2": "", "questions3": ""}),
+            1,
+            json.dumps({"prize": "none"})
+        )
+        sql = "INSERT INTO answered (email, name, phone_number, score, answers, answered, prize) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        mycursor.execute(sql, data)
+        mydb.commit()
+    else:
+        if res[0][6] == 1:
+            sql = "UPDATE answered SET score = JSON_SET(score, '$.score2', %s) AND answers = JSON_SET(answers, '$.questions2', %s) AND answered = 2 WHERE email = %s"
+            mycursor.execute(sql, (average, questions_dict, email))
+            mydb.commit()
+        elif res[0][6] == 2:
+            sql = "UPDATE answered SET score = JSON_SET(score, '$.score3', %s) AND answers = JSON_SET(answers, '$.questions3', %s) AND answered = 2 WHERE email = %s"
+            mycursor.execute(sql, (average, questions_dict, email))
+            mydb.commit()
+        else:
+            print("You are stupid mate")
+
+
 def make_average(scheme):
     diff1 = []
     diff2 = []
@@ -134,6 +167,9 @@ token_parser.add_argument("token", type=str, help="API token")
 
 answer_args = reqparse.RequestParser()
 answer_args.add_argument("answers", action="append")
+answer_args.add_argument("email", type=str)
+answer_args.add_argument("name", type=str)
+answer_args.add_argument("phone_number", type=str)
 answer_args.add_argument("token", type=str, help="API token")
 
 
@@ -187,6 +223,7 @@ class Questions(Resource):
                     "id": answer
                 })
             average = make_average(answers_scheme)
+            add_result(args["email"], args["name"], args["phone_number"], answers_scheme, average)
             result = {
                 "average": str(int(average * 100)) + "%",
                 "scheme": answers_scheme,

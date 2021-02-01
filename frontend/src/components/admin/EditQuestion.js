@@ -64,7 +64,7 @@ class EditQuestion extends Component {
                         required
                         />
                     </div>
-                    <h3>Difficulty</h3>
+                    <h3>Obtiznost</h3>
                     <div className="radios">
                         <div className="radio-group">
                             <input type="radio" id="1" name="difficulty" value="1" onChange={this.onChangeDifficulty}/>
@@ -77,10 +77,6 @@ class EditQuestion extends Component {
                         <div className="radio-group">
                             <input type="radio" id="3" name="difficulty" value="3" onChange={this.onChangeDifficulty}/>
                             <label for="3">3</label>
-                        </div>
-                        <div className="radio-group">
-                            <input type="radio" id="4" name="difficulty" value="4" onChange={this.onChangeDifficulty}/>
-                            <label for="4">4</label>
                         </div>
                     </div>
                     <div className="answers">

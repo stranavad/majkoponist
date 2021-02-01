@@ -1,7 +1,7 @@
 from flask_restful import Resource, reqparse
 from flask_cors import cross_origin
 from pkg import mycursor, mydb, api_token
-import random
+import json
 
 create_question_args = reqparse.RequestParser()
 create_question_args.add_argument("question", type=str, help="Question")
@@ -37,6 +37,58 @@ class Admin(Resource):
         if token_arg["token"] == api_token:
             mycursor.execute("SELECT * FROM questions")
             questions_db = mycursor.fetchall()
+            mycursor.execute("SELECT * FROM answered")
+            answered_db = mycursor.fetchall()
+            answered = list()
+            for answer in answered_db:
+                questions_db_json = json.loads(answer[5])
+                questions_list_1 = list()
+                questions_list_2 = list()
+                questions_list_3 = list()
+                if questions_db_json["questions1"]:
+                    for question in questions_db_json["questions1"]:
+                        questions_list_1.append({
+                            "question": question,
+                            "difficulty": questions_db_json[question]["difficulty"],
+                            "user_answer": questions_db_json[question]["user_answer"],
+                            "correct_answer": questions_db_json[question]["correct_answer"],
+                            "correct": questions_db_json[question]["correct"]
+                        })
+
+                    if questions_db_json["questions2"]:
+                        for question in questions_db_json["questions2"]:
+                            questions_list_2.append({
+                                "question": question,
+                                "difficulty": questions_db_json[question]["difficulty"],
+                                "user_answer": questions_db_json[question]["user_answer"],
+                                "correct_answer": questions_db_json[question]["correct_answer"],
+                                "correct": questions_db_json[question]["correct"]
+                            })
+                        if questions_db_json["questions3"]:
+                            for question in questions_db_json["questions3"]:
+                                questions_list_3.append({
+                                    "question": question,
+                                    "difficulty": questions_db_json[question]["difficulty"],
+                                    "user_answer": questions_db_json[question]["user_answer"],
+                                    "correct_answer": questions_db_json[question]["correct_answer"],
+                                    "correct": questions_db_json[question]["correct"]
+                                })
+                        else:
+                            questions_list_3.append("")
+                    else:
+                        questions_list_2.append("")
+                else:
+                    questions_list_1.append("")
+
+                answered.append({
+                    "email": answer[1],
+                    "name": answer[2],
+                    "phone_number": answer[3],
+                    "score": json.loads(answer[4]),
+                    "questions1": json.loads(questions_list_1),
+                    "questions2": json.loads(questions_list_2),
+                    "questions3": json.loads(questions_list_3)
+                    })
             # print(questions_db)
             questions = []
             for question in questions_db:
@@ -50,7 +102,7 @@ class Admin(Resource):
                     "difficulty": question[6]
                 }
                 questions.append(question_dict)
-            return {"questions": questions}
+            return {"questions": questions, "answered": answered}
         else:
             return {
                 "message": "Wrong token"

@@ -8,21 +8,22 @@ class Admin extends Component {
     state = {
         loggedIn: false,
         token: 'ts9pFkGuXKgcmo43Mmj0^eG%iiR3m',
-        res: '',
+        res_questions: '',
+        res_answered: '',
     };
 
     componentDidMount() {
-        axios.get("http://192.46.233.86:5000/admin", {params: {token: this.state.token}})
-            .then(res => this.setState({res: res.data.questions}));
+        axios.get("http://localhost:5000/admin", {params: {token: this.state.token}})
+            .then(res => this.setState({res_questions: res.data.questions, res_answered: res.data.answered}));
     }
 
     updateQuestions = () => {
-        axios.get("http://192.46.233.86:5000/admin", {params: {token: this.state.token}})
+        axios.get("http://localhost:5000/admin", {params: {token: this.state.token}})
             .then(res => this.setState({res: res.data.questions}));
     }
 
     login = (email, password) => {
-        axios.post("http://192.46.233.86:5000/validate_admin", {email: email, password: password, token: this.state.token})
+        axios.post("http://localhost:5000/validate_admin", {email: email, password: password, token: this.state.token})
             .then(res => {
                 console.log(res);
                 if (res.data.message === "login approved") {
@@ -36,7 +37,7 @@ class Admin extends Component {
     render() {
         let component;
         if (this.state.loggedIn){
-            component = <AdminPage questions={this.state.res}/>
+            component = <AdminPage questions={this.state.res} answered={this.state.res_answered}/>
         } else {
             component = <AdminLogin loginFunction={this.login}/>
         }
