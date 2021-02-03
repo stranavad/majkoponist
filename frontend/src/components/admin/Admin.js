@@ -37,12 +37,12 @@ class Admin extends Component {
     render() {
         let component;
         if (this.state.loggedIn){
-            component = <AdminPage questions={this.state.res} answered={this.state.res_answered}/>
+            component = <AdminPage questions={this.state.res_questions} answered={this.state.res_answered}/>
         } else {
             component = <AdminLogin loginFunction={this.login}/>
         }
         return (
-            <div className="full-size">
+            <div className="container">
                 {component}
             </div>
         );

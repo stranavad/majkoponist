@@ -9,9 +9,9 @@ class Prize extends Component {
     render() {
         return(
             <div className="question">
-                <h2>{this.props.prize.name}</h2>
-                <p>Obtiznost: {this.props.prize.description}</p>
-                <button className="retry-game-button" onClick={this.onSelectPrize}>Vybrat tuto vyhru</button>
+                <h2 className="medium-heading">{this.props.prize.name}</h2>
+                <text className="medium-text">Obtiznost: {this.props.prize.description}</text>
+                <button className="large-button" onClick={this.onSelectPrize}>Vybrat tuto vyhru</button>
             </div>
         );
     }

@@ -27,10 +27,10 @@ class RegisterForm extends Component {
 
     render() {
         return(
-            <div className="register-parts">
-                <div className="register-part">
-                    <h1>Pravidla a postup hry</h1>
-                    <ul>
+            <div className="columns-container">
+                <div className="column-container">
+                    <h1 className="medium-heading">Pravidla a postup hry</h1>
+                    <ul className="rules-list">
                         <li>Kvíz obsahuje 20 otázek, 5 otázek z každé obtížnosti. Na každou otázku máte 15s</li>
                         <li>Po zodpovězení otázek se vám zobrazí váš výsledek a správné odpovědi</li>
                         <li>Pokud odpovíte správně na více než 90% otázek, budete si moc vybrat vaší výhru</li>
@@ -40,8 +40,8 @@ class RegisterForm extends Component {
                         <li>Další pravidlo</li>
                     </ul>
                 </div>
-                <div className="register-part">
-                    <h1>Registrace</h1>
+                <div className="column-container">
+                    <h1 className="medium-heading">Registrace</h1>
                     <form onSubmit={this.onSubmit} className="form">
                         <div className="input-line">
                             <input
@@ -91,7 +91,7 @@ class RegisterForm extends Component {
                             <input
                             type="submit"
                             name="submit"
-                            className="form-submit"
+                            className="medium-button"
                             value="Hrát"
                             required
                             />

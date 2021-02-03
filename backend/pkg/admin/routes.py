@@ -49,29 +49,29 @@ class Admin(Resource):
                     for question in questions_db_json["questions1"]:
                         questions_list_1.append({
                             "question": question,
-                            "difficulty": questions_db_json[question]["difficulty"],
-                            "user_answer": questions_db_json[question]["user_answer"],
-                            "correct_answer": questions_db_json[question]["correct_answer"],
-                            "correct": questions_db_json[question]["correct"]
+                            "difficulty": questions_db_json["questions1"][question]["difficulty"],
+                            "user_answer": questions_db_json["questions1"][question]["user_answer"],
+                            "correct_answer": questions_db_json["questions1"][question]["correct_answer"],
+                            "correct": questions_db_json["questions1"][question]["correct"]
                         })
 
                     if questions_db_json["questions2"]:
                         for question in questions_db_json["questions2"]:
                             questions_list_2.append({
                                 "question": question,
-                                "difficulty": questions_db_json[question]["difficulty"],
-                                "user_answer": questions_db_json[question]["user_answer"],
-                                "correct_answer": questions_db_json[question]["correct_answer"],
-                                "correct": questions_db_json[question]["correct"]
+                                "difficulty": questions_db_json["questions2"][question]["difficulty"],
+                                "user_answer": questions_db_json["questions2"][question]["user_answer"],
+                                "correct_answer": questions_db_json["questions2"][question]["correct_answer"],
+                                "correct": questions_db_json["questions2"][question]["correct"]
                             })
                         if questions_db_json["questions3"]:
                             for question in questions_db_json["questions3"]:
                                 questions_list_3.append({
                                     "question": question,
-                                    "difficulty": questions_db_json[question]["difficulty"],
-                                    "user_answer": questions_db_json[question]["user_answer"],
-                                    "correct_answer": questions_db_json[question]["correct_answer"],
-                                    "correct": questions_db_json[question]["correct"]
+                                    "difficulty": questions_db_json["questions3"][question]["difficulty"],
+                                    "user_answer": questions_db_json["questions3"][question]["user_answer"],
+                                    "correct_answer": questions_db_json["questions3"][question]["correct_answer"],
+                                    "correct": questions_db_json["questions3"][question]["correct"]
                                 })
                         else:
                             questions_list_3.append("")
@@ -85,9 +85,9 @@ class Admin(Resource):
                     "name": answer[2],
                     "phone_number": answer[3],
                     "score": json.loads(answer[4]),
-                    "questions1": json.loads(questions_list_1),
-                    "questions2": json.loads(questions_list_2),
-                    "questions3": json.loads(questions_list_3)
+                    "questions1": questions_list_1,
+                    "questions2": questions_list_2,
+                    "questions3": questions_list_3
                     })
             # print(questions_db)
             questions = []

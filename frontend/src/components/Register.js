@@ -75,7 +75,7 @@ class Register extends Component {
             component_to_show = <Questions questions={this.state.res} showResult={this.showResult}/>;
         }
         return (
-            <div className="full-size">
+            <div className="container">
                 {component_to_show}
             </div>
         );

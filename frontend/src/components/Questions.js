@@ -59,8 +59,6 @@ class Questions extends Component {
               //value: '',
             };
           });
-          console.log("Question was answered");
-          console.log(this.state.answeredQuestions);
           this.startTimer();
       }
     
@@ -92,7 +90,7 @@ class Questions extends Component {
       if (this.state.display_question) {
         component = <Question question={this.state.questions[this.state.question_number]} question_number={this.state.question_number + 1} onSubmit={this.answerQuestion} time_left={this.state.seconds}/>
       } else {
-        component = <button className="start-game-button" onClick={this.startTimer}>Hrat!</button>
+        component = <button className="large-button" onClick={this.startTimer}>Hrat!</button>
       }
       return (
         <div className="centerbox">

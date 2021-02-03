@@ -33,9 +33,9 @@ class CreateQuestion extends Component {
     }
     render() {
         return(
-            <div className="full-size">
-                <form className="question-form" onSubmit={this.onSubmit}>
-                    <h1>Create Question</h1>
+            <div className="container">
+                <form className="form" onSubmit={this.onSubmit}>
+                    <h1 className="medium-heading">Create Question</h1>
                     <div className="input-line">
                         <textarea
                         type="text"
@@ -47,34 +47,34 @@ class CreateQuestion extends Component {
                         required
                         />
                     </div>
-                    <h3>Difficulty</h3>
+                    <h3 className="small-heading">Difficulty</h3>
                     <div className="radios">
                         <div className="radio-group">
-                            <input type="radio" id="1" name="difficulty" value="1" onChange={this.onChangeDifficulty}/>
+                            <input className="radio" type="radio" id="1" name="difficulty" value="1" onChange={this.onChangeDifficulty}/>
                             <label for="1">1</label>
                         </div>
                         <div className="radio-group">
-                            <input type="radio" id="2" name="difficulty" value="2" onChange={this.onChangeDifficulty}/>
+                            <input className="radio" type="radio" id="2" name="difficulty" value="2" onChange={this.onChangeDifficulty}/>
                             <label for="2">2</label>
                         </div>
                         <div className="radio-group">
-                            <input type="radio" id="3" name="difficulty" value="3" onChange={this.onChangeDifficulty}/>
+                            <input className="radio" type="radio" id="3" name="difficulty" value="3" onChange={this.onChangeDifficulty}/>
                             <label for="3">3</label>
                         </div>
                     </div>
                     <div className="answers">
-                        <textarea type="text" placeholder="Correct answer" className="answer-text-input" id="correct_answer" name="correct_answer" value={this.state.correct_answer} onChange={this.onChangeAnswer}/>
-                        <textarea type="text" placeholder="Answer 2" className="answer-text-input" id="a2" name="a2" value={this.state.a2} onChange={this.onChangeAnswer}/>
-                        <textarea type="text" placeholder="Answer 3" className="answer-text-input" id="a3" name="a3" value={this.state.a3} onChange={this.onChangeAnswer}/>
-                        <textarea type="text" placeholder="Answer 4" className="answer-text-input" id="a4" name="a4" value={this.state.a4} onChange={this.onChangeAnswer}/>
+                        <textarea type="text" placeholder="Correct answer" className="textarea-half" id="correct_answer" name="correct_answer" value={this.state.correct_answer} onChange={this.onChangeAnswer}/>
+                        <textarea type="text" placeholder="Answer 2" className="textarea-half" id="a2" name="a2" value={this.state.a2} onChange={this.onChangeAnswer}/>
+                        <textarea type="text" placeholder="Answer 3" className="textarea-half" id="a3" name="a3" value={this.state.a3} onChange={this.onChangeAnswer}/>
+                        <textarea type="text" placeholder="Answer 4" className="textarea-half" id="a4" name="a4" value={this.state.a4} onChange={this.onChangeAnswer}/>
                     </div>
                     <input
                         type="submit"
                         name="submit"
-                        className="form-submit"
+                        className="medium-button"
                         value="Answer"
                         required
-                        />
+                    />
                 </form>
             </div>
         );

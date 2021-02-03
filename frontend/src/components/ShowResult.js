@@ -36,6 +36,7 @@ class ShowResult extends Component {
             first_name: this.props.user.first_name,
             last_name: this.props.user.last_name,
             information: info,
+            average: this.props.average,
             answers: this.props.questions,
             phone_number: this.props.user.phone_number,
         }).then((res) => console.log(res.data));
@@ -59,22 +60,21 @@ class ShowResult extends Component {
             component_main = <SelectPrize prize={this.state.select_prize_obj} onSubmit={this.onSubmitPrize} />
         } else {
             if (this.state.show_prizes === true) {
-                console.log("Show prizes");
                 component_main =  <Prizes onSelect={this.onSelectPrize} prizes={this.state.prizes}/>;
             } else {
                 component_main = <ShowQuestions questions={this.props.questions}/>
                 if (this.props.winner === "true") {
-                    component = <button onClick={this.showPrizes} className="retry-game-button">Zobrazit vyhry</button>
+                    component = <button onClick={this.showPrizes} className="large-button">Zobrazit vyhry</button>
                 } else if (this.props.tries <= 2) {
-                    component = <button onClick={this.props.playAgain} className="retry-game-button">Hrat jeste raz</button>
+                    component = <button onClick={this.props.playAgain} className="large-button">Hrat jeste raz</button>
                 } else {
-                    component = <h2 className="attempt-text">You don't have any attempt left</h2>
+                    component = <h2 className="error-text">You don't have any attempt left</h2>
                 }
             }
         }
         return(
             <div>
-                <h1 className="result-heading">Vas vysledek: {this.props.average} spravne</h1>
+                <h1 className="medium-heading">Vas vysledek: {this.props.average} spravne</h1>
                 {component}
                 {component_main}
             </div>

@@ -23,10 +23,10 @@ get_prize_args.add_argument("email", type=str)
 get_prize_args.add_argument("first_name", type=str)
 get_prize_args.add_argument("last_name", type=str)
 get_prize_args.add_argument("phone_number", type=str)
+get_prize_args.add_argument("average", type=str)
 
 
 def send_mail(args):
-    print(args['answers'])
     msg = Message(
         "Dalsi vyherce kvizu Hany Hegerovej",
         sender="hanahegerovaquiz@gmail.com",
@@ -53,9 +53,7 @@ def send_mail(args):
         answer = answer.replace("\'}", "\"}")
         answer = answer.replace(", \'", ", \"")
         answer = answer.replace("\': ", "\": ")
-        print(answer)
         obj = json.loads(answer)
-        print(obj)
         msg_body += (f"""
         Otazka: {obj["question"]}.
         Obtiznost: {obj["difficulty"]}.
@@ -96,7 +94,6 @@ class Prizes(Resource):
     @cross_origin(supports_credentials=True)
     def post(self):
         args = get_prize_args.parse_args()
-        print(args)
         if args['token'] == api_token:
             add_prize_result(args)
             send_mail(args)

@@ -37,9 +37,9 @@ class App extends Component {
           path="/"
           render={props =>(
             <React.Fragment>
-              <div className="centerbox">
-                <h1>Hana Hegerova quizzzzzz</h1>
-                <a href="/quiz" className="play-button">Play</a>
+              <div className="container-center">
+                <h1 className="medium-heading">Hana Hegerova quizzzzzz</h1>
+                <a href="/quiz" className="large-button">Play</a>
               </div>
             </React.Fragment>
           )}

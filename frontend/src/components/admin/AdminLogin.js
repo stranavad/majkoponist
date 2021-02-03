@@ -21,8 +21,8 @@ class AdminLogin extends Component {
 
     render() {
         return(
-            <div className="centerbox">
-                <h1>Login form</h1>
+            <div className="container-center">
+                <h1 className="medium-heading">Login</h1>
                 <form onSubmit={this.onSubmit} className="form">
                     <div className="input-line">
                         <input
@@ -50,7 +50,7 @@ class AdminLogin extends Component {
                         <input
                         type="submit"
                         name="submit"
-                        className="form-submit"
+                        className="medium-button"
                         value="Register"
                         required
                         />
