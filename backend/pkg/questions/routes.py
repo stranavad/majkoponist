@@ -178,8 +178,6 @@ class Questions(Resource):
     @cross_origin(supports_credentials=True)
     def get(self):
         token_arg = token_parser.parse_args()
-        print(token_arg)
-        print(api_token)
         if token_arg["token"] == api_token:
             mycursor.execute("SELECT * FROM questions WHERE difficulty = 1")
             diff_one = mycursor.fetchall()

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Question from './Question';
+import PlayScreen from './PlayScreen';
 
 class Questions extends Component {
     constructor() {
@@ -22,7 +23,6 @@ class Questions extends Component {
           let quest_number = this.question_number + 1;
           this.setState({display_question: false, question_number: quest_number});
           this.props.showResult(this.state.answeredQuestions);
-          console.log("Questions were answered");
         } else if (this.state.question_number < 20) {
           this.setState({
             question_number: this.state.question_number + 1,
@@ -50,13 +50,11 @@ class Questions extends Component {
           this.setState({
               seconds: 0,
           });
-          let answeredQuestions_list = this.state.answeredQuestions;
-          console.log(answeredQuestions_list);
+          //let answeredQuestions_list = this.state.answeredQuestions;
           this.setState(state => {
-            const answeredQuestions = state.answeredQuestions.concat({"id": question_id, "answer": question_answer});
+            const answeredQuestions = this.state.answeredQuestions.concat({"id": question_id, "answer": question_answer});
             return {
               answeredQuestions,
-              //value: '',
             };
           });
           this.startTimer();
@@ -90,7 +88,7 @@ class Questions extends Component {
       if (this.state.display_question) {
         component = <Question question={this.state.questions[this.state.question_number]} question_number={this.state.question_number + 1} onSubmit={this.answerQuestion} time_left={this.state.seconds}/>
       } else {
-        component = <button className="large-button" onClick={this.startTimer}>Hrat!</button>
+        component = <PlayScreen playButton={this.startTimer}/>;
       }
       return (
         <div className="centerbox">

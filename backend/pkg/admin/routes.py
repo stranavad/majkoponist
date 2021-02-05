@@ -102,7 +102,15 @@ class Admin(Resource):
                     "difficulty": question[6]
                 }
                 questions.append(question_dict)
-            return {"questions": questions, "answered": answered}
+
+            # Prizes
+            mycursor.execute("SELECT * FROM prizes")
+            result = mycursor.fetchall()
+            prizes = list()
+            for res in result:
+                prizes.append({"id": res[0], "prize_name": res[1], "prize_information": res[2]})
+
+            return {"questions": questions, "answered": answered, "prizes": prizes}
         else:
             return {
                 "message": "Wrong token"

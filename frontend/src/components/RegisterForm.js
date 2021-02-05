@@ -34,7 +34,7 @@ class RegisterForm extends Component {
                         <li>Kvíz obsahuje 20 otázek, 5 otázek z každé obtížnosti. Na každou otázku máte 15s</li>
                         <li>Po zodpovězení otázek se vám zobrazí váš výsledek a správné odpovědi</li>
                         <li>Pokud odpovíte správně na více než 90% otázek, budete si moc vybrat vaší výhru</li>
-                        <li>Další pravidlo</li>
+                        <li>Zadejte prave osobni udaji, pro moznou budouci komunikaci ohledne vyhry</li>
                         <li>Další pravidlo</li>
                         <li>Další pravidlo</li>
                         <li>Další pravidlo</li>

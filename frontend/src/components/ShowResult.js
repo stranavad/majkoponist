@@ -39,7 +39,8 @@ class ShowResult extends Component {
             average: this.props.average,
             answers: this.props.questions,
             phone_number: this.props.user.phone_number,
-        }).then((res) => console.log(res.data));
+        });
+        this.props.afterPriceSelect();
     }
 
     componentDidMount() {
@@ -89,6 +90,7 @@ ShowResult.propTypes = {
     playAgain: PropTypes.func.isRequired,
     tries: PropTypes.number.isRequired,
     user: PropTypes.object.isRequired,
+    afterPriceSelect: PropTypes.func.isRequired,
 }
 
 export default ShowResult;

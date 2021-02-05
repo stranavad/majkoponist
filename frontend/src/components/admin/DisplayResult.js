@@ -10,8 +10,8 @@ class DisplayResult extends Component {
         return(
             <div className="question">
                 <h2 className="medium-heading">{this.props.answered.name}</h2>
-                <text className="medium-text">Email: {this.props.answered.email}</text>
-                <text className="medium-text">Phone number: {this.props.answered.phone_number}</text>
+                <p className="medium-text">Email: {this.props.answered.email}</p>
+                <p className="medium-text">Phone number: {this.props.answered.phone_number}</p>
                 <button onClick={this.showResult} className="small-button">Show Result</button>
             </div>
         );

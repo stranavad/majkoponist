@@ -6,6 +6,9 @@ import CreateQuestion from './CreateQuestion';
 import EditQuestion from './EditQuestion';
 import DisplayResults from './DisplayResults';
 import ShowResult from './ShowResult';
+import CreatePrize from './CreatePrize';
+import DisplayPrizes from './DisplayPrizes';
+import EditPrize from './EditPrize';
 
 class AdminPage extends Component {
     state = {
@@ -18,17 +21,21 @@ class AdminPage extends Component {
         showPrizes: false,
         showQuestions: true,
         showCreateQuestion: false,
+        showCreatePrize: false,
     }
     addQuestion = (question, difficulty, correct_answer, a2, a3, a4) => {
-        axios.post("http://localhost:5000/admin", {question, difficulty, correct_answer, a2, a3, a4, token: this.state.token})
-            .then(res => {
-                console.log(res);
-            });
+        axios.post("http://localhost:5000/admin", {question, difficulty, correct_answer, a2, a3, a4, token: this.state.token});
+        //this.props.updateState();
+    }
+
+    addPrize = (name, information) => {
+        axios.put("http://localhost:5000/prizes", {name, information, token: this.state.token});
+        //this.props.updateState();
     }
 
     onEditQuestion = (question) => {
         this.setState({
-            editComponent: <EditQuestion question={question} editQuestion={this.editQuestion} onClose={this.onCloseEditQuestion} />,
+            editComponent: <EditQuestion question={question} editQuestion={this.editQuestion} onClose={this.onCloseEdit} />,
         });
     }
 
@@ -36,17 +43,35 @@ class AdminPage extends Component {
         this.setState({
             editComponent: '',
         });
-        axios.put("http://localhost:5000/admin", {question, difficulty, correct_answer, a2, a3, a4, id, token: this.state.token})
-            .then(res => console.log(res));
-        console.log("Qustion edit");
+        axios.put("http://localhost:5000/admin", {question, difficulty, correct_answer, a2, a3, a4, id, token: this.state.token});
+        //this.props.updateState();
+    }
+
+    onEditPrize = (prize) => {
+        this.setState({
+            editComponent: <EditPrize prize={prize} editPrize={this.editPrize} onClose={this.onCloseEdit} />,
+        });
+    }
+
+    editPrize = (name, information, id) => {
+        this.setState({
+            editComponent: '',
+        });
+        axios.patch("http://localhost:5000/prizes", {name, information, id: id, token: this.state.token}).then((res) => console.log(res));
+        //this.props.updateState();
+    }
+
+    onDeletePrize = (prize_id) => {
+        axios.delete("http://localhost:5000/prizes", {params: {id: prize_id, token: this.state.token}});
+        //this.props.updateState();
     }
 
     onDeleteQuestion = (question_id) => {
-        axios.delete("http://localhost:5000/admin", {params: {id: question_id, token: this.state.token}})
-            .then(res => console.log(res));
+        axios.delete("http://localhost:5000/admin", {params: {id: question_id, token: this.state.token}});
+        //this.props.updateState();
     }
 
-    onCloseEditQuestion = () => {
+    onCloseEdit = () => {
         this.setState({
             editComponent: '',
         });
@@ -70,6 +95,7 @@ class AdminPage extends Component {
             showQuestions: false,
             showResult: false,
             showCreateQuestion: false,
+            showCreatePrize: false,
         });
     }
 
@@ -80,6 +106,7 @@ class AdminPage extends Component {
             showQuestions: true,
             showResult: false,
             showCreateQuestion: false,
+            showCreatePrize: false,
         });
     }
 
@@ -90,6 +117,7 @@ class AdminPage extends Component {
             showQuestions: false,
             showResult: false,
             showCreateQuestion: false,
+            showCreatePrize: false,
         });
     }
 
@@ -100,6 +128,18 @@ class AdminPage extends Component {
             showQuestions: false,
             showResult: false,
             showCreateQuestion: true,
+            showCreatePrize: false,
+        });
+    }
+
+    showCreatePrize = () => {
+        this.setState({
+            showResults: false,
+            showPrizes: false,
+            showQuestions: false,
+            showResult: false,
+            showCreateQuestion: false,
+            showCreatePrize: true,
         });
     }
 
@@ -110,11 +150,13 @@ class AdminPage extends Component {
         } else if (this.state.showResults) {
             component = <DisplayResults answered={this.props.answered} showResult={this.showResult}/>;
         } else if (this.state.showPrizes) {
-            component = <h1>Showing prizes</h1>
+            component = <DisplayPrizes prizes={this.props.prizes} onEdit={this.onEditPrize} onDelete={this.onDeletePrize}/>;
         } else if (this.state.showQuestions) {
             component = <AdminPageQuestions questions={this.props.questions} onEdit={this.onEditQuestion} onDelete={this.onDeleteQuestion}/>;
         } else if (this.state.showCreateQuestion){
             component = <CreateQuestion createQuestion={this.addQuestion} />;
+        } else if (this.state.showCreatePrize) {
+            component = <CreatePrize createPrize={this.addPrize} />;
         } else {
             component = <h1>Everything is fucked up and IT DOESN'T WORK</h1>
         }
@@ -125,6 +167,7 @@ class AdminPage extends Component {
                     <button onClick={this.showResults} className="medium-button">Show Results</button>
                     <button onClick={this.showPrizes} className="medium-button">Show Prizes</button>
                     <button onClick={this.showCreateQuestion} className="medium-button">Create Question</button>
+                    <button onClick={this.showCreatePrize} className="medium-button">Create Prize</button>
                 </div>
                 <div className="component">{component}</div>
                 {this.state.editComponent}
@@ -135,7 +178,9 @@ class AdminPage extends Component {
 
 AdminPage.propTypes = {
     questions: PropTypes.array.isRequired,
-    answered: PropTypes.array.isRequired
+    answered: PropTypes.array.isRequired,
+    prizes: PropTypes.array.isRequired,
+    updateState: PropTypes.func.isRequired
 }
 
 export default AdminPage;

@@ -12,7 +12,17 @@ get_prizes.add_argument("token", type=str, help="API token")
 create_prize = reqparse.RequestParser()
 create_prize.add_argument("token", type=str, help="API token")
 create_prize.add_argument("name", type=str, help="Prize Name")
-create_prize.add_argument("description", type=str, help="Prize description")
+create_prize.add_argument("information", type=str, help="Prize description")
+
+update_prize = reqparse.RequestParser()
+update_prize.add_argument("token", type=str, help="API token")
+update_prize.add_argument("name", type=str, help="Prize Name")
+update_prize.add_argument("information", type=str, help="Prize description")
+update_prize.add_argument("id", type=str, help="Prize ID")
+
+delete_prize = reqparse.RequestParser()
+delete_prize.add_argument("token", type=str, help="API token")
+delete_prize.add_argument("id", type=str, help="Prize ID")
 
 get_prize_args = reqparse.RequestParser()
 get_prize_args.add_argument("token", type=str, help="API token")
@@ -105,8 +115,32 @@ class Prizes(Resource):
     def put(self):
         args = create_prize.parse_args()
         if args["token"] == api_token:
-            mycursor.execute("INSERT INTO prizes (name, description) VALUES (%s, %s)", (args["name"], args["description"]))
+            mycursor.execute("INSERT INTO prizes (name, description) VALUES (%s, %s)", (args["name"], args["information"]))
             mydb.commit()
             return {"message": "Prize was added"}
+        else:
+            return {"message": "Wrong api token"}
+
+    @cross_origin(supports_credentials=True)
+    def patch(self):
+        args = update_prize.parse_args()
+        if args["token"] == api_token:
+            mycursor.execute("DELETE FROM prizes WHERE id = %s", (args["id"],))
+            mydb.commit()
+            mycursor.execute("INSERT INTO prizes (name, description) VALUES (%s, %s)",
+                             (args["name"], args["information"]))
+            mydb.commit()
+            return {"message": "Prize was edited"}
+        else:
+            return {"message": "Wrong api token"}
+
+    @cross_origin(supports_credentials=True)
+    def delete(self):
+        args = delete_prize.parse_args()
+        if args["token"] == api_token:
+            mycursor.execute("DELETE FROM prizes WHERE id = %s",
+                             (args["id"],))
+            mydb.commit()
+            return {"message": "Prize was edited"}
         else:
             return {"message": "Wrong api token"}

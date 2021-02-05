@@ -6,7 +6,7 @@ class AdminPageQuestion extends Component {
         return(
             <div className="question">
                 <h2 className="medium-heading">{this.props.question.question}</h2>
-                <text className="medium-text">Difficulty: {this.props.question.difficulty}</text>
+                <p className="medium-text">Difficulty: {this.props.question.difficulty}</p>
                 <ul className="rules-list">
                     <li>Correct Answer: {this.props.question.correct_answer}</li>
                     <li>Answer 2: {this.props.question.a2}</li>

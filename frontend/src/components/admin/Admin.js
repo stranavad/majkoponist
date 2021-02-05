@@ -10,22 +10,21 @@ class Admin extends Component {
         token: 'ts9pFkGuXKgcmo43Mmj0^eG%iiR3m',
         res_questions: '',
         res_answered: '',
+        res_prizes: ''
     };
 
     componentDidMount() {
         axios.get("http://localhost:5000/admin", {params: {token: this.state.token}})
-            .then(res => this.setState({res_questions: res.data.questions, res_answered: res.data.answered}));
+            .then(res => this.setState({res_questions: res.data.questions, res_answered: res.data.answered, res_prizes: res.data.prizes}));
     }
 
-    updateQuestions = () => {
+    updateState = () => {
         axios.get("http://localhost:5000/admin", {params: {token: this.state.token}})
-            .then(res => this.setState({res: res.data.questions}));
+            .then(res => this.setState({res_questions: res.data.questions, res_answered: res.data.answered, res_prizes: res.data.prizes}));
     }
-
     login = (email, password) => {
         axios.post("http://localhost:5000/validate_admin", {email: email, password: password, token: this.state.token})
             .then(res => {
-                console.log(res);
                 if (res.data.message === "login approved") {
                     this.setState({loggedIn: true});
                 } else {
@@ -37,7 +36,7 @@ class Admin extends Component {
     render() {
         let component;
         if (this.state.loggedIn){
-            component = <AdminPage questions={this.state.res_questions} answered={this.state.res_answered}/>
+            component = <AdminPage questions={this.state.res_questions} answered={this.state.res_answered} prizes={this.state.res_prizes} updateState={this.updateState}/>
         } else {
             component = <AdminLogin loginFunction={this.login}/>
         }
