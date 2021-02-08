@@ -4,7 +4,7 @@ import Question from './Question';
 import PlayScreen from './PlayScreen';
 
 class Questions extends Component {
-    constructor() {
+    /* constructor() {
         super();
         this.state = {display_question: false, question_number: -1, seconds: 30, seconds_to_set: 30, current_question: {question: '', id: '', a1: '', a2: '', a3: '', a4: '', difficulty: ''}, questions: '', answeredQuestions: [],};
         this.timer = 0;
@@ -12,14 +12,16 @@ class Questions extends Component {
         this.countDown = this.countDown.bind(this);
         this.answerQuestion = this.answerQuestion.bind(this);
         this.setQuestion = this.setQuestion.bind(this);
-      }
+    } */
+    state = {timer: 0, display_question: false, question_number: -1, seconds: 30, seconds_to_set: 30, current_question: {question: '', id: '', a1: '', a2: '', a3: '', a4: '', difficulty: ''}, questions: '', answeredQuestions: [],};
+    
       componentDidMount() {
         this.setState({questions: this.props.questions});
       }
 
-      setQuestion() {
+      setQuestion = () => {
         if(this.state.question_number === 20) {
-          clearInterval(this.timer);
+          clearInterval(this.state.timer);
           let quest_number = this.question_number + 1;
           this.setState({display_question: false, question_number: quest_number});
           this.props.showResult(this.state.answeredQuestions);
@@ -31,10 +33,10 @@ class Questions extends Component {
         }
       }
     
-      startTimer() {
-        if (this.timer === 0 && this.state.seconds > 0) {
+      startTimer = () => {
+        if (this.state.timer === 0 && this.state.seconds > 0) {
           this.setQuestion();
-          this.timer = setInterval(this.countDown, 1000);
+          this.setState({timer: setInterval(this.countDown, 1000)});
         }
         else if (this.state.seconds === 0) {
           this.setQuestion();
@@ -42,11 +44,11 @@ class Questions extends Component {
             seconds: this.state.seconds_to_set,
             timer: 0,
           });
-          this.timer = setInterval(this.countDown, 1000);
+          this.setState({timer: setInterval(this.countDown, 1000)})
         }
       }
 
-      answerQuestion(question_id, question_answer) {
+      answerQuestion = (question_id, question_answer) => {
           this.setState({
               seconds: 0,
           });
@@ -60,11 +62,11 @@ class Questions extends Component {
           this.startTimer();
       }
     
-      countDown() {
+      countDown = () => {
         // Remove one second, set state so a re-render happens.
         if (this.state.seconds <= 0) {
             this.startTimer();
-            clearInterval(this.timer);
+            clearInterval(this.state.timer);
         } else {
             let seconds = this.state.seconds - 1;
             this.setState({
@@ -79,7 +81,7 @@ class Questions extends Component {
                 };
               });
               this.startTimer();
-              clearInterval(this.timer);
+              clearInterval(this.state.timer);
             }
         }
       }

@@ -49,8 +49,7 @@ class Register extends Component {
     showResult = (questions_answered) => {
         axios.post("http://localhost:5000/questions", {answers: questions_answered, token: this.state.token, email: this.state.user.email, name: this.state.user.first_name + " " + this.state.user.last_name, phone_number: this.state.user.phone_number})
             .then(res => {
-                this.setState({show_result_component: <ShowResult user={this.state.user} winner={res.data.winner} questions={res.data.scheme} average={res.data.average} playAgain={this.playAgain} tries={this.state.tries} afterPriceSelect={this.afterPriceSelect}/>});
-                this.setState({show_result: true});
+                this.setState({show_result_component: <ShowResult user={this.state.user} winner={res.data.winner} questions={res.data.scheme} average={res.data.average} playAgain={this.playAgain} tries={this.state.tries} afterPriceSelect={this.afterPriceSelect}/>, show_result: true});
             });
     }
 
@@ -63,9 +62,7 @@ class Register extends Component {
             .then(res => {
                 this.setState({res: res.data.questions, tries: this.state.tries + 1, register_form: false, show_result: false, price_selected: false});
             });
-        console.log("Play again");
     }
-
 
     render() {
         let component_to_show;

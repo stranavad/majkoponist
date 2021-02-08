@@ -39,7 +39,6 @@ class Users(Resource):
     @cross_origin(supports_credentials=True)
     def post(self):
         args = add_user_args.parse_args()
-        print(args)
         if args["token"] == api_token:
             mycursor.execute("SELECT email FROM users")
             existing_emails_db = mycursor.fetchall()

@@ -30,7 +30,7 @@ def sort_questions(all_questions):
         while added <= 6:
             question = random.choice(j)
             j.remove(question)
-            answers = [question[2], question[3], question[4], question[5]]
+            answers = list(question[2:6])
             random.shuffle(answers)
             question_dict = {
                 "id": question[0],
@@ -179,14 +179,20 @@ class Questions(Resource):
     def get(self):
         token_arg = token_parser.parse_args()
         if token_arg["token"] == api_token:
-            mycursor.execute("SELECT * FROM questions WHERE difficulty = 1")
-            diff_one = mycursor.fetchall()
-            mycursor.execute("SELECT * FROM questions WHERE difficulty = 2")
-            diff_two = mycursor.fetchall()
-            mycursor.execute("SELECT * FROM questions WHERE difficulty = 3")
-            diff_three = mycursor.fetchall()
-            questions_list = sort_questions([diff_one, diff_two, diff_three])
-            # TODO something to do with quotes in JSON, now in database single quotes - try back double
+            mycursor.execute("SELECT * FROM questions")
+            result = mycursor.fetchall()
+            df_one, df_two, df_three = [], [], []
+            for question in result:
+                if question[6] == 1:
+                    df_one.append(question)
+                elif question[6] == 2:
+                    df_two.append(question)
+                elif question[6] == 3:
+                    df_three.append(question)
+                else:
+                    print("You are stupid")
+
+            questions_list = sort_questions([df_one, df_two, df_three])
             return {"questions": questions_list}
         else:
             return {
@@ -198,16 +204,17 @@ class Questions(Resource):
     def post(self):
         args = answer_args.parse_args()
         if args["token"] == api_token:
-            answers = dict()
+            answers, question_ids, answers_scheme = dict(), [], []
             for arg in args["answers"]:
                 arg = arg.replace("\'", "\"")
                 obj = json.loads(arg)
                 answers[int(obj['id'])] = obj['answer']
-            question_ids = []
+
             for question_id in answers:
                 question_ids.append(question_id)
+
             correct_answers = get_correct_answers(question_ids)
-            answers_scheme = list()
+
             for answer in answers:
                 correct = "Nie"
                 if answers[answer] == correct_answers[answer]["correct_answer"]:

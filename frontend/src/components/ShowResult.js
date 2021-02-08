@@ -69,12 +69,12 @@ class ShowResult extends Component {
                 } else if (this.props.tries <= 2) {
                     component = <button onClick={this.props.playAgain} className="large-button">Hrat jeste raz</button>
                 } else {
-                    component = <h2 className="error-text">You don't have any attempt left</h2>
+                    component = <h2 className="error-text">Uz nemate dalsi pokusy na kviz</h2>
                 }
             }
         }
         return(
-            <div>
+            <div className="container">
                 <h1 className="medium-heading">Vas vysledek: {this.props.average} spravne</h1>
                 {component}
                 {component_main}

@@ -12,16 +12,12 @@ import { faVolumeUp } from '@fortawesome/free-solid-svg-icons'
 //import { volumeUp } from '@fortawesome/free-solid-svg-icons'
 
 class App extends Component {
-  state = {
-    todos: [],
-  };
-
   playAudio = () => {
     const audio = document.getElementById("track");
-    if(audio.paused === false) {
-      audio.pause();
+    if(audio.paused) {
+      audio.play();
     } else {
-      audio.play()
+      audio.pause()
     }
   }
 
@@ -30,7 +26,7 @@ class App extends Component {
       <Router>
         <div className="app">
           <div className="menu">
-            <h1><a href="/">Majko Ponist</a></h1>
+            <h1><a href="/">Quiz Hana</a></h1>
           </div>
           <Route
           exact

@@ -12,7 +12,6 @@ class ValidateAdmin(Resource):
     @cross_origin(supports_credentials=True)
     def post(self):
         args = validate_admin.parse_args()
-        print(args)
         if args["token"] == api_token:
             if args["email"] == admin_email and args["password"] == admin_password:
                 return {"message": "login approved"}

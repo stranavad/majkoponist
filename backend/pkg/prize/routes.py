@@ -107,7 +107,7 @@ class Prizes(Resource):
         if args['token'] == api_token:
             add_prize_result(args)
             send_mail(args)
-            return {"message": "No U"}
+            return {"message": "Prize"}
         else:
             return {"message": "Wrong API token"}
 
@@ -115,7 +115,8 @@ class Prizes(Resource):
     def put(self):
         args = create_prize.parse_args()
         if args["token"] == api_token:
-            mycursor.execute("INSERT INTO prizes (name, description) VALUES (%s, %s)", (args["name"], args["information"]))
+            mycursor.execute("INSERT INTO prizes (name, description) VALUES (%s, %s)",
+                             (args["name"], args["information"]))
             mydb.commit()
             return {"message": "Prize was added"}
         else:

@@ -11,11 +11,17 @@ class Question extends Component {
         return(
             <div className="question">
                 <div className="form">
+                    <div className="question-top-bar">
+                        <div className="question-top-bar-part">
+                            <p className="small-text">Obtiznost {this.props.question.difficulty}</p>
+                        </div>
+                        <div className="question-top-bar-part">
+                            <p className="small-text">Zbyvajici cas {this.props.time_left}/30</p>
+                            <p className="small-text">Otazka {this.props.question_number} z 21</p>
+                        </div>
+                    </div>
                     <h1 className="medium-heading">{this.props.question.question}</h1>
-                    <p className="medium-text">Obtiznost {this.props.question.difficulty}</p>
-                    <p className="medium-text">Zbyvajici cas {this.props.time_left}/30</p>
-                    <p className="medium-text">Otazka {this.props.question_number} z 21</p>
-                    <div className="horizontal-container">
+                    <div className="vertical-container">
                         <button className="question-button" value={this.props.question.a1} onClick={this.onSubmit}>
                             {this.props.question.a1}
                         </button>
