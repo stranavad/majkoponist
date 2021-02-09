@@ -16,8 +16,7 @@ class CreatePrize extends Component {
         });
     }
     
-    onChangePrize = (e) => this.setState({ [e.target.name]: e.target.value});
-    onChangeInformation = (e) => this.setState({ [e.target.name]: e.target.value});
+    onChangeValue = (e) => this.setState({ [e.target.name]: e.target.value});
 
     render() {
         return(
@@ -31,7 +30,7 @@ class CreatePrize extends Component {
                             className="text-input"
                             placeholder="Jmeno vyhry"
                             value={this.state.prize_name}
-                            onChange={this.onChangePrize}
+                            onChange={this.onChangeValue}
                             required
                             />
                     </div>
@@ -42,7 +41,7 @@ class CreatePrize extends Component {
                         className="text-input"
                         placeholder="Popis vyhry"
                         value={this.state.prize_information}
-                        onChange={this.onChangeInformation}
+                        onChange={this.onChangeValue}
                         required
                         />
                     </div>

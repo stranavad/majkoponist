@@ -4,13 +4,22 @@ import Question from './Question';
 import PlayScreen from './PlayScreen';
 
 class Questions extends Component {
+    /* constructor() {
+        super();
+        this.state = {display_question: false, question_number: -1, seconds: 30, seconds_to_set: 30, current_question: {question: '', id: '', a1: '', a2: '', a3: '', a4: '', difficulty: ''}, questions: '', answeredQuestions: [],};
+        this.timer = 0;
+        this.startTimer = this.startTimer.bind(this);
+        this.countDown = this.countDown.bind(this);
+        this.answerQuestion = this.answerQuestion.bind(this);
+        this.setQuestion = this.setQuestion.bind(this);
+    } */
     state = {timer: 0, display_question: false, question_number: -1, seconds: 30, seconds_to_set: 30, current_question: {question: '', id: '', a1: '', a2: '', a3: '', a4: '', difficulty: ''}, questions: '', answeredQuestions: [],};
     
       componentDidMount() {
         this.setState({questions: this.props.questions});
       }
 
-      setQuestion = () => {
+      setQuestion() {
         if(this.state.question_number === 20) {
           clearInterval(this.state.timer);
           let quest_number = this.question_number + 1;
@@ -24,10 +33,10 @@ class Questions extends Component {
         }
       }
     
-      startTimer = () => {
+      startTimer() {
         if (this.state.timer === 0 && this.state.seconds > 0) {
           this.setQuestion();
-          this.setState({timer: setInterval(this.countDown, 1000)});
+          this.setState({timer = setInterval(this.countDown, 1000)});
         }
         else if (this.state.seconds === 0) {
           this.setQuestion();
@@ -39,26 +48,25 @@ class Questions extends Component {
         }
       }
 
-      answerQuestion = (question_id, question_answer) => {
-          //this.setState({
-              //seconds: 0,
-          //});
+      answerQuestion(question_id, question_answer) {
           this.setState({
-            answeredQuestions: this.state.answeredQuestion.concat({id: question_id, answer: question_answer}),
-            seconds: 0
+              seconds: 0,
           });
-          //this.setState(state => {
-            //const answeredQuestions = this.state.answeredQuestions.concat({"id": question_id, "answer": question_answer});
-            //return answeredQuestion;
-          //});
+          //let answeredQuestions_list = this.state.answeredQuestions;
+          this.setState(state => {
+            const answeredQuestions = this.state.answeredQuestions.concat({"id": question_id, "answer": question_answer});
+            return {
+              answeredQuestions,
+            };
+          });
           this.startTimer();
       }
     
-      countDown = () => {
+      countDown() {
         // Remove one second, set state so a re-render happens.
         if (this.state.seconds <= 0) {
             this.startTimer();
-            clearInterval(this.state.timer);
+            clearInterval(this.timer);
         } else {
             let seconds = this.state.seconds - 1;
             this.setState({
@@ -66,18 +74,14 @@ class Questions extends Component {
             });
             // Check if we're at zero.
             if (seconds <= 0) {
-              //this.setState(state => {
-                //const answeredQuestions = state.answeredQuestions.concat({id: this.state.questions[this.state.question_number].id, answer: ''});
-                //return {
-                  //answeredQuestions,
-                //};
-              //});
-              this.setState({
-                answeredQuestions: this.state.answeredQuestions.concat({id: this.state.questions[this.state.question_number].id, answer: ''})
+              this.setState(state => {
+                const answeredQuestions = state.answeredQuestions.concat({id: this.state.questions[this.state.question_number].id, answer: ''});
+                return {
+                  answeredQuestions,
+                };
               });
-              
               this.startTimer();
-              clearInterval(this.state.timer);
+              clearInterval(this.timer);
             }
         }
       }

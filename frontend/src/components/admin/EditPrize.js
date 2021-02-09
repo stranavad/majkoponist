@@ -8,10 +8,9 @@ class EditPrize extends Component {
     }
 
     componentDidMount() {
-        let prize = this.props.prize;
         this.setState({
-            prize_name: prize.prize_name,
-            prize_information: prize.prize_information
+            prize_name: this.props.prize.prize_name,
+            prize_information: this.props.prize.prize_information
         });
     }
 
@@ -24,8 +23,7 @@ class EditPrize extends Component {
         });
     }
     
-    onChangePrize = (e) => this.setState({ [e.target.name]: e.target.value});
-    onChangeInformation = (e) => this.setState({ [e.target.name]: e.target.value});
+    onChangeValue = (e) => this.setState({ [e.target.name]: e.target.value});
 
     render() {
         return(
@@ -43,7 +41,7 @@ class EditPrize extends Component {
                             className="text-input"
                             placeholder="Jmeno vyhry"
                             value={this.state.prize_name}
-                            onChange={this.onChangePrize}
+                            onChange={this.onChangeValue}
                             required
                             />
                     </div>
@@ -54,7 +52,7 @@ class EditPrize extends Component {
                         className="text-input"
                         placeholder="Popis vyhry"
                         value={this.state.prize_information}
-                        onChange={this.onChangeInformation}
+                        onChange={this.onChangeValue}
                         required
                         />
                     </div>

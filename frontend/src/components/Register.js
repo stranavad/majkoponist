@@ -4,10 +4,11 @@ import RegisterForm from './RegisterForm';
 import Questions from './Questions';
 import ShowResult from './ShowResult';
 import Completed from './Completed';
+import Config from './Config';
 
 class Register extends Component {
     state = {
-        token: 'ts9pFkGuXKgcmo43Mmj0^eG%iiR3m',
+        token: Config.token,
         res_answers: '',
         res_average: '',
         register_form: true,

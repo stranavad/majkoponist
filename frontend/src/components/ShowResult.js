@@ -4,12 +4,13 @@ import ShowQuestions from './ShowQuestions';
 import Prizes from './Prizes';
 import axios from 'axios';
 import SelectPrize from './SelectPrize';
+import Config from './Config';
 
 class ShowResult extends Component {
     state = {
         component_main: '',
         show_prizes: false,
-        api_token: 'ts9pFkGuXKgcmo43Mmj0^eG%iiR3m',
+        token: Config.text,
         prizes: '',
         select_prize: false,
         select_prize_id: '',
@@ -30,7 +31,7 @@ class ShowResult extends Component {
 
     onSubmitPrize = (name, info) => {
         axios.post("http://localhost:5000/prizes", {
-            token: this.state.api_token,
+            token: this.state.token,
             prize_name: name,
             email: this.props.user.email,
             first_name: this.props.user.first_name,
@@ -45,7 +46,7 @@ class ShowResult extends Component {
 
     componentDidMount() {
         if (this.props.winner === "true") {
-            axios.get("http://localhost:5000/prizes", {params: {token: this.state.api_token}})
+            axios.get("http://localhost:5000/prizes", {params: {token: this.state.token}})
                 .then((res) => {
                     this.setState({
                         prizes: res.data.prizes,

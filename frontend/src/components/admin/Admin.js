@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import AdminLogin from './AdminLogin';
 import AdminPage from './AdminPage';
+import Config from '../Config';
 //import PropTypes from 'prop-types';
 
 class Admin extends Component {
     state = {
         loggedIn: false,
-        token: 'ts9pFkGuXKgcmo43Mmj0^eG%iiR3m',
+        token: Config.token,
         res_questions: '',
         res_answered: '',
         res_prizes: ''

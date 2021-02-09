@@ -20,10 +20,10 @@ class RegisterForm extends Component {
         });
     }
     
-    onChangeEmail = (e) => this.setState({ [e.target.name]: e.target.value});
-    onChangeFirstName = (e) => this.setState({ [e.target.name]: e.target.value});
-    onChangeLastName = (e) => this.setState({ [e.target.name]: e.target.value});
-    onChangePhone = (e) => this.setState({ [e.target.name]: e.target.value});
+    onChangeValue = (e) => this.setState({ [e.target.name]: e.target.value});
+    //onChangeFirstName = (e) => this.setState({ [e.target.name]: e.target.value});
+    //onChangeLastName = (e) => this.setState({ [e.target.name]: e.target.value});
+    //onChangePhone = (e) => this.setState({ [e.target.name]: e.target.value});
 
     render() {
         return(
@@ -50,7 +50,7 @@ class RegisterForm extends Component {
                             className="text-input"
                             placeholder="Váš Email"
                             value={this.state.email}
-                            onChange={this.onChangeEmail}
+                            onChange={this.onChangeValue}
                             required
                             />
                         </div>
@@ -61,7 +61,7 @@ class RegisterForm extends Component {
                             className="text-input"
                             placeholder="Křestní jméno"
                             value={this.state.first_name}
-                            onChange={this.onChangeFirstName}
+                            onChange={this.onChangeValue}
                             required
                             />
                         </div>
@@ -72,7 +72,7 @@ class RegisterForm extends Component {
                             className="text-input"
                             placeholder="Příjmení"
                             value={this.state.last_name}
-                            onChange={this.onChangeLastName}
+                            onChange={this.onChangeValue}
                             required
                             />
                         </div>
@@ -83,7 +83,7 @@ class RegisterForm extends Component {
                             className="text-input"
                             placeholder="Vaše telefoné číslo"
                             value={this.state.phone}
-                            onChange={this.onChangePhone}
+                            onChange={this.onChangeValue}
                             required
                             />
                         </div>

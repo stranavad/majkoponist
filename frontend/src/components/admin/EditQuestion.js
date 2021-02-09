@@ -36,13 +36,12 @@ class EditQuestion extends Component {
         });
     }
     
-    onChangeAnswer = (e) => this.setState({ [e.target.name]: e.target.value});
+    onChangeValue = (e) => this.setState({ [e.target.name]: e.target.value});
     onChangeQuestion = (e) => {
         let value;
         value = e.target.value.replace(/"/g, "'")
         this.setState({ [e.target.name]: value});
     }
-    onChangeDifficulty = (e) => this.setState({ [e.target.name]: e.target.value});
 
     render() {
         return(
@@ -67,23 +66,23 @@ class EditQuestion extends Component {
                     <h3>Obtiznost</h3>
                     <div className="horizontal-container">
                         <div className="radio-group">
-                            <input className="raido-button" type="radio" id="1" name="difficulty" value="1" onChange={this.onChangeDifficulty}/>
+                            <input className="raido-button" type="radio" id="1" name="difficulty" value="1" onChange={this.onChangeValue}/>
                             <label for="1">1</label>
                         </div>
                         <div className="radio-group">
-                            <input className="raido-button" type="radio" id="2" name="difficulty" value="2" onChange={this.onChangeDifficulty}/>
+                            <input className="raido-button" type="radio" id="2" name="difficulty" value="2" onChange={this.onChangeValue}/>
                             <label for="2">2</label>
                         </div>
                         <div className="radio-group">
-                            <input className="raido-button" type="radio" id="3" name="difficulty" value="3" onChange={this.onChangeDifficulty}/>
+                            <input className="raido-button" type="radio" id="3" name="difficulty" value="3" onChange={this.onChangeValue}/>
                             <label for="3">3</label>
                         </div>
                     </div>
                     <div className="answers">
-                        <textarea type="text" placeholder="Correct answer" className="textarea" id="correct_answer" name="correct_answer" value={this.state.correct_answer} onChange={this.onChangeAnswer}/>
-                        <textarea type="text" placeholder="Answer 2" className="textarea" id="a2" name="a2" value={this.state.a2} onChange={this.onChangeAnswer}/>
-                        <textarea type="text" placeholder="Answer 3" className="textarea" id="a3" name="a3" value={this.state.a3} onChange={this.onChangeAnswer}/>
-                        <textarea type="text" placeholder="Answer 4" className="textarea" id="a4" name="a4" value={this.state.a4} onChange={this.onChangeAnswer}/>
+                        <textarea type="text" placeholder="Correct answer" className="textarea" id="correct_answer" name="correct_answer" value={this.state.correct_answer} onChange={this.onChangeValue}/>
+                        <textarea type="text" placeholder="Answer 2" className="textarea" id="a2" name="a2" value={this.state.a2} onChange={this.onChangeValue}/>
+                        <textarea type="text" placeholder="Answer 3" className="textarea" id="a3" name="a3" value={this.state.a3} onChange={this.onChangeValue}/>
+                        <textarea type="text" placeholder="Answer 4" className="textarea" id="a4" name="a4" value={this.state.a4} onChange={this.onChangeValue}/>
                     </div>
                     <input
                         type="submit"

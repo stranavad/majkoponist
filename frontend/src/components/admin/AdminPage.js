@@ -9,11 +9,12 @@ import ShowResult from './ShowResult';
 import CreatePrize from './CreatePrize';
 import DisplayPrizes from './DisplayPrizes';
 import EditPrize from './EditPrize';
+import Config from '../Config'
 
 class AdminPage extends Component {
     state = {
         errorMessage: '',
-        token: 'ts9pFkGuXKgcmo43Mmj0^eG%iiR3m',
+        token: Config.token,
         editComponent: '',
         showResult: false,
         showResultComponent: '',
