@@ -15,12 +15,14 @@ class SelectPrize extends Component {
 
     render() {
         return(
-            <form onSubmit={this.onSubmit} className="form">
-                <h2 className="small-heading">{this.props.prize.name}</h2>
-                <p className="medium-text">{this.props.prize.description}</p>
-                <textarea type="text" placeholder="Sem napiste veskere poznamky jako idealni termin a adresi" className="textarea" value={this.state.information} onChange={this.onChangeInformation}/>
-                <input type="submit" value="Odoslat" className="medium-button"/>
-            </form>
+            <div className="question">
+                <form onSubmit={this.onSubmit} className="form">
+                    <h2 className="small-heading">{this.props.prize.name}</h2>
+                    <p className="medium-text">{this.props.prize.description}</p>
+                    <textarea type="text" placeholder="Sem napiste veskere poznamky jako idealni termin a adresi" className="textarea" value={this.state.information} onChange={this.onChangeInformation}/>
+                    <input type="submit" value="Odoslat" className="medium-button"/>
+                </form>
+            </div>
         );
     }
 }

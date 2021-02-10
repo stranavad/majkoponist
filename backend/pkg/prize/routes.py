@@ -8,6 +8,7 @@ import json
 
 get_prizes = reqparse.RequestParser()
 get_prizes.add_argument("token", type=str, help="API token")
+get_prizes.add_argument("average", type=str, help="User average for returning prizes")
 
 create_prize = reqparse.RequestParser()
 create_prize.add_argument("token", type=str, help="API token")
@@ -90,7 +91,10 @@ class Prizes(Resource):
     def get(self):
         args = get_prizes.parse_args()
         if args["token"] == api_token:
-            mycursor.execute("SELECT * FROM prizes")
+            if args["average"] == 1:
+                mycursor.execute("SELECT * FROM prizes")
+            else:
+                mycursor.execute("SELECT * FROM prizes WHERE special = False")
             result = mycursor.fetchall()
             prizes_return = list()
             for res in result:

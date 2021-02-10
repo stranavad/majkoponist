@@ -8,6 +8,7 @@ import EmailExists from './components/EmailExists';
 import Admin from './components/admin/Admin';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faVolumeUp } from '@fortawesome/free-solid-svg-icons'
+import HomePage from './components/HomePage';
 
 class App extends Component {
   playAudio = () => {
@@ -29,14 +30,7 @@ class App extends Component {
           <Route
           exact
           path="/"
-          render={props =>(
-            <React.Fragment>
-              <div className="container-center">
-                <h1 className="medium-heading">Hana Hegerova quizzzzzz</h1>
-                <a href="/quiz" className="large-button">Play</a>
-              </div>
-            </React.Fragment>
-          )}
+          component={HomePage}
           />
           <Route
           exact

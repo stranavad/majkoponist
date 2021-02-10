@@ -189,7 +189,7 @@ body {
 /*█░█ █▀▀ ▄▀█ █▀▄ █ █▄░█ █▀▀ █▀//
 //█▀█ ██▄ █▀█ █▄▀ █ █░▀█ █▄█ ▄█*/
 
-.small-heading, .medium-heading {
+.small-heading, .medium-heading, .large-heading {
   margin: 0.5em 0;
 }
 
@@ -221,6 +221,12 @@ body {
 
 .bolder {
   font-weight: bolder;
+}
+
+.homepage-text {
+  max-width: 650px;
+  font-size: 1.2em;
+  margin-top: 2em;
 }
 
 
@@ -337,7 +343,9 @@ body {
 
 .textarea {
   min-width: 100%;
-  max-width: 100%
+  max-width: 100%;
+  min-height: 3em;
+  font-size: 1.2em;
 }
 
 .textarea-half {

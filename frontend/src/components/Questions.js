@@ -44,7 +44,7 @@ class Questions extends Component {
               //seconds: 0,
           //});
           this.setState({
-            answeredQuestions: this.state.answeredQuestion.concat({id: question_id, answer: question_answer}),
+            answeredQuestions: this.state.answeredQuestions.concat({id: question_id, answer: question_answer}),
             seconds: 0
           });
           //this.setState(state => {
