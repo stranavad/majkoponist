@@ -14,6 +14,7 @@ token_parser.add_argument("token", type=str, help="API token")
 
 
 class Users(Resource):
+    # Getting users for displaying somewhere. NEVER USED
     @cross_origin(supports_credentials=True)
     def get(self):
         token_arg = token_parser.parse_args()
@@ -36,6 +37,7 @@ class Users(Resource):
                 "message": "Wrong token"
             }
 
+    # Registering/Creating new user
     @cross_origin(supports_credentials=True)
     def post(self):
         args = add_user_args.parse_args()
@@ -43,9 +45,9 @@ class Users(Resource):
             mycursor.execute("SELECT email FROM users")
             existing_emails_db = mycursor.fetchall()
             existing_emails = []
-            for email in existing_emails_db:
+            for email in existing_emails_db:  # Email from db to list
                 existing_emails.append(email[0])
-            if args["user_email"] in existing_emails:
+            if args["user_email"] in existing_emails:  # Checking if email is in db already
                 return {"message": "This email already exist"}
             mycursor.execute("INSERT INTO users (email, first_name, last_name, phone_number) VALUES (%s, %s, %s, %s)",
                              (args["user_email"], args["first_name"], args["last_name"], args["user_phone_number"]))

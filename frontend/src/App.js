@@ -3,18 +3,13 @@ import { BrowserRouter as Router, Route} from 'react-router-dom';
 import './App.css';
 import GreatWar from './components/assets/GreatWar.mp3'
 import GreatWarOgg from './components/assets/GreatWarOgg.ogg';
-//import axios from 'axios';
 import Register from './components/Register';
 import EmailExists from './components/EmailExists';
 import Admin from './components/admin/Admin';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faVolumeUp } from '@fortawesome/free-solid-svg-icons'
-//import { volumeUp } from '@fortawesome/free-solid-svg-icons'
 
 class App extends Component {
-  state = {
-    token: 'ts9pFkGuXKgcmo43Mmj0^eG%iiR3m'
-  }
   playAudio = () => {
     const audio = document.getElementById("track");
     if(audio.paused) {

@@ -15,16 +15,16 @@ class Admin extends Component {
     };
 
     componentDidMount() {
-        axios.get("http://localhost:5000/admin", {params: {token: this.state.token}})
+        axios.get("http://192.46.233.86:5000/admin", {params: {token: this.state.token}})
             .then(res => this.setState({res_questions: res.data.questions, res_answered: res.data.answered, res_prizes: res.data.prizes}));
     }
 
     updateState = () => {
-        axios.get("http://localhost:5000/admin", {params: {token: this.state.token}})
+        axios.get("http://192.46.233.86:5000/admin", {params: {token: this.state.token}})
             .then(res => this.setState({res_questions: res.data.questions, res_answered: res.data.answered, res_prizes: res.data.prizes}));
     }
     login = (email, password) => {
-        axios.post("http://localhost:5000/validate_admin", {email: email, password: password, token: this.state.token})
+        axios.post("http://192.46.233.86:5000/validate_admin", {email: email, password: password, token: this.state.token})
             .then(res => {
                 if (res.data.message === "login approved") {
                     this.setState({loggedIn: true});

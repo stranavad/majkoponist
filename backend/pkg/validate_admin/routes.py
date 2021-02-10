@@ -13,8 +13,8 @@ class ValidateAdmin(Resource):
     def post(self):
         args = validate_admin.parse_args()
         if args["token"] == api_token:
-            if args["email"] == admin_email and args["password"] == admin_password:
-                return {"message": "login approved"}
+            if args["email"] == admin_email and args["password"] == admin_password:  # If form data from web is correct
+                return {"message": "login approved"}  # DON'T CHANGE THE MESSAGE. IT'S USED IN FE CODE
             else:
                 return {"message": "Credentials were incorrect"}
         else:

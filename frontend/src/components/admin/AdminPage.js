@@ -25,12 +25,12 @@ class AdminPage extends Component {
         showCreatePrize: false,
     }
     addQuestion = (question, difficulty, correct_answer, a2, a3, a4) => {
-        axios.post("http://localhost:5000/admin", {question, difficulty, correct_answer, a2, a3, a4, token: this.state.token});
+        axios.post("http://192.46.233.86:5000/admin", {question, difficulty, correct_answer, a2, a3, a4, token: this.state.token});
         //this.props.updateState();
     }
 
     addPrize = (name, information) => {
-        axios.put("http://localhost:5000/prizes", {name, information, token: this.state.token});
+        axios.put("http://192.46.233.86:5000/prizes", {name, information, token: this.state.token});
         //this.props.updateState();
     }
 
@@ -44,7 +44,7 @@ class AdminPage extends Component {
         this.setState({
             editComponent: '',
         });
-        axios.put("http://localhost:5000/admin", {question, difficulty, correct_answer, a2, a3, a4, id, token: this.state.token});
+        axios.put("http://192.46.233.86:5000/admin", {question, difficulty, correct_answer, a2, a3, a4, id, token: this.state.token});
         //this.props.updateState();
     }
 
@@ -58,17 +58,17 @@ class AdminPage extends Component {
         this.setState({
             editComponent: '',
         });
-        axios.patch("http://localhost:5000/prizes", {name, information, id: id, token: this.state.token}).then((res) => console.log(res));
+        axios.patch("http://192.46.233.86:5000/prizes", {name, information, id: id, token: this.state.token}).then((res) => console.log(res));
         //this.props.updateState();
     }
 
     onDeletePrize = (prize_id) => {
-        axios.delete("http://localhost:5000/prizes", {params: {id: prize_id, token: this.state.token}});
+        axios.delete("http://192.46.233.86:5000/prizes", {params: {id: prize_id, token: this.state.token}});
         //this.props.updateState();
     }
 
     onDeleteQuestion = (question_id) => {
-        axios.delete("http://localhost:5000/admin", {params: {id: question_id, token: this.state.token}});
+        axios.delete("http://192.46.233.86:5000/admin", {params: {id: question_id, token: this.state.token}});
         //this.props.updateState();
     }
 

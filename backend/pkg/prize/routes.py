@@ -56,7 +56,8 @@ def send_mail(args):
     """
 
     for answer in args['answers']:
-        # answer = answer.replace("\'", "\"")
+        # replacing json from web to python dictionary -> You can use all quotes in FE form
+        # but they will be converted to single quotes
         answer = answer.replace("{\'", "{\"")
         answer = answer.replace("\': \'", "\": \"")
         answer = answer.replace("\', \'", "\", \"")
@@ -76,6 +77,7 @@ def send_mail(args):
 
 
 def add_prize_result(args):
+    #  Setting the prize for the appropriate user
     prize = {"prize_name": args["prize_name"], "information": args["information"]}
     sql = "UPDATE answered SET prize = JSON_SET(prize, '$.prize', %s) WHERE email = %s"
     mycursor.execute(sql, (json.dumps(prize), args["email"]))
@@ -83,6 +85,7 @@ def add_prize_result(args):
 
 
 class Prizes(Resource):
+    # Getting prizes from db to show on web
     @cross_origin(supports_credentials=True)
     def get(self):
         args = get_prizes.parse_args()
@@ -101,16 +104,18 @@ class Prizes(Resource):
         else:
             return {"message": "Wrong api token"}
 
+    # User submits form
     @cross_origin(supports_credentials=True)
     def post(self):
         args = get_prize_args.parse_args()
         if args['token'] == api_token:
-            add_prize_result(args)
-            send_mail(args)
+            add_prize_result(args)  # Add prize to user
+            send_mail(args)  # Send mail to admin
             return {"message": "Prize"}
         else:
             return {"message": "Wrong API token"}
 
+    # Creating prize
     @cross_origin(supports_credentials=True)
     def put(self):
         args = create_prize.parse_args()
@@ -122,6 +127,7 @@ class Prizes(Resource):
         else:
             return {"message": "Wrong api token"}
 
+    # Updating prize
     @cross_origin(supports_credentials=True)
     def patch(self):
         args = update_prize.parse_args()
@@ -135,6 +141,7 @@ class Prizes(Resource):
         else:
             return {"message": "Wrong api token"}
 
+    # Deleting prize
     @cross_origin(supports_credentials=True)
     def delete(self):
         args = delete_prize.parse_args()

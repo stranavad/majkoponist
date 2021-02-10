@@ -6,24 +6,8 @@ import random
 import json
 
 
-def create_dict(diff):
-    res = dict()
-    while len(res) <= 4:
-        question = random.choice(diff)
-        diff.remove(question)
-        question_dict = dict()
-        question_dict["id"] = question[0]
-        question_dict["question"] = question[1]
-        question_dict["a1"] = question[2]
-        question_dict["a2"] = question[3]
-        question_dict["a3"] = question[4]
-        question_dict["a4"] = question[5]
-        question_dict["difficulty"] = question[6]
-        res[question[0]] = question_dict
-    return res
-
-
 def sort_questions(all_questions):
+    # Create dictionary with 3 difficulties and 7 random questions from each difficulty
     question_return = []
     for j in all_questions:
         added = 0
@@ -47,6 +31,7 @@ def sort_questions(all_questions):
 
 
 def get_correct_answers(question_ids):
+    # Getting correct_answers from database and creating datatype that we can work with
     correct_answers = dict()
     for question_id in question_ids:
         mycursor.execute("SELECT * FROM questions WHERE id = %s", (int(question_id),))
@@ -62,6 +47,7 @@ def get_correct_answers(question_ids):
 
 
 def sum_of_list(num_list):
+    # Total sum of numbers in a list
     num_sum = 0
     for num in num_list:
         num_sum += num
@@ -69,6 +55,7 @@ def sum_of_list(num_list):
 
 
 def send_email(email_scheme, email, first_name, last_name, phone_number):
+    # Sending email with result to quiz admin
     msg = Message(
         "Dalsi vyherce kvizu Hany Hegerovej",
         sender="hanahegerovaquiz@gmail.com",
@@ -128,9 +115,8 @@ def add_result(email, name, phone_number, answers_scheme, average):
 
 
 def make_average(scheme):
-    diff1 = []
-    diff2 = []
-    diff3 = []
+    # Simple "algorithm" for making average from numbers with different "value"
+    diff1, diff2, diff3 = [], [], []
     for q in scheme:
         if q["difficulty"] == 1:
             if q["correct"] == "Nie":
@@ -156,12 +142,6 @@ def make_average(scheme):
     return avg
 
 
-check_answers_args = reqparse.RequestParser()
-for ans in range(0, 20):  # TODO edit to number of questions, now 1, 2, 3
-    id_comb = "id-" + str(ans)
-    check_answers_args.add_argument(str(ans), type=str, help="Combo of id and answer in type id^^answer", required=True)
-check_answers_args.add_argument("token", type=str, help="API token")
-
 token_parser = reqparse.RequestParser()
 token_parser.add_argument("token", type=str, help="API token")
 
@@ -179,9 +159,10 @@ class Questions(Resource):
     def get(self):
         token_arg = token_parser.parse_args()
         if token_arg["token"] == api_token:
-            mycursor.execute("SELECT * FROM questions")
+            mycursor.execute("SELECT * FROM questions")  # Getting all questions from DB
             result = mycursor.fetchall()
             df_one, df_two, df_three = [], [], []
+            # Converting db result to lists by difficulty
             for question in result:
                 if question[6] == 1:
                     df_one.append(question)
@@ -192,7 +173,7 @@ class Questions(Resource):
                 else:
                     print("You are stupid")
 
-            questions_list = sort_questions([df_one, df_two, df_three])
+            questions_list = sort_questions([df_one, df_two, df_three])  # Choosing 7 random question from each difficulty
             return {"questions": questions_list}
         else:
             return {
@@ -205,16 +186,19 @@ class Questions(Resource):
         args = answer_args.parse_args()
         if args["token"] == api_token:
             answers, question_ids, answers_scheme = dict(), [], []
+            # Converting data from web to python dictionary
             for arg in args["answers"]:
                 arg = arg.replace("\'", "\"")
                 obj = json.loads(arg)
                 answers[int(obj['id'])] = obj['answer']
 
+            # Getting questions ids for checking answers
             for question_id in answers:
                 question_ids.append(question_id)
 
             correct_answers = get_correct_answers(question_ids)
 
+            # Converting data to display on web, with all of the items in question
             for answer in answers:
                 correct = "Nie"
                 if answers[answer] == correct_answers[answer]["correct_answer"]:
@@ -227,7 +211,7 @@ class Questions(Resource):
                     "correct": correct,
                     "id": answer
                 })
-            average = make_average(answers_scheme)
+            average = make_average(answers_scheme)  # Making result average
             add_result(args["email"], args["name"], args["phone_number"], answers_scheme, average)
             result = {
                 "average": str(int(average * 100)) + "%",

@@ -8,12 +8,13 @@ from flask_mail import Mail
 api_token = config["api_token"]
 admin_email = config["email"]
 admin_password = config["password"]
+db_password = config["db_password"]
 mail_global = ""
 
 mydb = mysql.connector.connect(
     host="192.46.233.86",
     user="root",
-    passwd="<Code><Tech> 127521",
+    passwd=db_password,
     database="majkoponist"
 )
 mycursor = mydb.cursor()
