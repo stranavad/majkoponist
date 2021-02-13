@@ -41,7 +41,7 @@ class ShowResult extends Component {
                     <button onClick={this.questions2} className="small-button">Questions 2</button>
                     <button onClick={this.questions3} className="small-button">Questions 3</button>
                 </div>
-                <h2 className="small-heading">Score: {this.state.score * 100}%</h2>
+                <h2 className="small-heading">Skore: {this.state.score * 100}%</h2>
                 {this.state.questionsComponent}
             </div>
         );

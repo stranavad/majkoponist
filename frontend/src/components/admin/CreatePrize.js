@@ -22,7 +22,7 @@ class CreatePrize extends Component {
         return(
             <div className="container">
                 <form className="form" onSubmit={this.onSubmit}>
-                    <h1 className="medium-heading">Create Prize</h1>
+                    <h1 className="medium-heading">Vytvorit vyhru</h1>
                     <div className="input-line">
                             <input
                             type="text"

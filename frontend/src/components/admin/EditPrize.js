@@ -33,7 +33,7 @@ class EditPrize extends Component {
                     <div className="close-button-line2"/>
                 </div>
                 <form className="form" onSubmit={this.onSubmit}>
-                    <h1>Edit Prize</h1>
+                    <h1>Upravit vyhru</h1>
                     <div className="input-line">
                             <input
                             type="text"
@@ -60,7 +60,7 @@ class EditPrize extends Component {
                         type="submit"
                         name="submit"
                         className="medium-button"
-                        value="Pridat"
+                        value="Upravit"
                         required
                     />
                 </form>

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ShowPrizes from './ShowPrizes';
-import { faDivide } from '@fortawesome/free-solid-svg-icons';
-import SpecialPrize from './SpecialPrize';
 
 class Prizes extends Component {
     render() {

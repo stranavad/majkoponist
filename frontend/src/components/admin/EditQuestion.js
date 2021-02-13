@@ -51,13 +51,13 @@ class EditQuestion extends Component {
                     <div className="close-button-line2"/>
                 </div>
                 <form className="form" onSubmit={this.onSubmit}>
-                    <h1>Edit Question Question</h1>
+                    <h1>Upravit otazku</h1>
                     <div className="input-line">
                         <textarea
                         type="text"
                         name="question"
                         className="text-input"
-                        placeholder="Question"
+                        placeholder="Otazka"
                         value={this.state.question}
                         onChange={this.onChangeQuestion}
                         required
@@ -79,16 +79,16 @@ class EditQuestion extends Component {
                         </div>
                     </div>
                     <div className="answers">
-                        <textarea type="text" placeholder="Correct answer" className="textarea" id="correct_answer" name="correct_answer" value={this.state.correct_answer} onChange={this.onChangeValue}/>
-                        <textarea type="text" placeholder="Answer 2" className="textarea" id="a2" name="a2" value={this.state.a2} onChange={this.onChangeValue}/>
-                        <textarea type="text" placeholder="Answer 3" className="textarea" id="a3" name="a3" value={this.state.a3} onChange={this.onChangeValue}/>
-                        <textarea type="text" placeholder="Answer 4" className="textarea" id="a4" name="a4" value={this.state.a4} onChange={this.onChangeValue}/>
+                        <textarea type="text" placeholder="Spravna odpoved" className="textarea" id="correct_answer" name="correct_answer" value={this.state.correct_answer} onChange={this.onChangeValue}/>
+                        <textarea type="text" placeholder="Odpoved 2" className="textarea" id="a2" name="a2" value={this.state.a2} onChange={this.onChangeValue}/>
+                        <textarea type="text" placeholder="Odpoved 3" className="textarea" id="a3" name="a3" value={this.state.a3} onChange={this.onChangeValue}/>
+                        <textarea type="text" placeholder="Odpoved 4" className="textarea" id="a4" name="a4" value={this.state.a4} onChange={this.onChangeValue}/>
                     </div>
                     <input
                         type="submit"
                         name="submit"
                         className="medium-button"
-                        value="Answer"
+                        value="Upravit"
                         required
                     />
                 </form>

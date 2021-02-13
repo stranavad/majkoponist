@@ -164,11 +164,11 @@ class AdminPage extends Component {
         return (
             <div className="container">
                 <div className="admin-page-menu">
-                    <button onClick={this.showQuestions} className="medium-button">Show Questions</button>
-                    <button onClick={this.showResults} className="medium-button">Show Results</button>
-                    <button onClick={this.showPrizes} className="medium-button">Show Prizes</button>
-                    <button onClick={this.showCreateQuestion} className="medium-button">Create Question</button>
-                    <button onClick={this.showCreatePrize} className="medium-button">Create Prize</button>
+                    <button onClick={this.showQuestions} className="medium-button">Otazky v kvizu</button>
+                    <button onClick={this.showResults} className="medium-button">Vysledky uzivatelu</button>
+                    <button onClick={this.showPrizes} className="medium-button">Vyhry</button>
+                    <button onClick={this.showCreateQuestion} className="medium-button">Vytvorit otazku</button>
+                    <button onClick={this.showCreatePrize} className="medium-button">Vytvorit vyhru</button>
                 </div>
                 <div className="component">{component}</div>
                 {this.state.editComponent}

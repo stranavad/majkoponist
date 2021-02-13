@@ -11,8 +11,8 @@ class DisplayResult extends Component {
             <div className="question">
                 <h2 className="medium-heading">{this.props.answered.name}</h2>
                 <p className="medium-text">Email: {this.props.answered.email}</p>
-                <p className="medium-text">Phone number: {this.props.answered.phone_number}</p>
-                <button onClick={this.showResult} className="small-button">Show Result</button>
+                <p className="medium-text">Telefone cislo: {this.props.answered.phone_number}</p>
+                <button onClick={this.showResult} className="small-button">Zobrazit vysledky</button>
             </div>
         );
     }

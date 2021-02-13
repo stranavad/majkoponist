@@ -6,15 +6,15 @@ class AdminPageQuestion extends Component {
         return(
             <div className="question">
                 <h2 className="medium-heading">{this.props.question.question}</h2>
-                <p className="medium-text">Difficulty: {this.props.question.difficulty}</p>
+                <p className="medium-text">Obtiznost: {this.props.question.difficulty}</p>
                 <ul className="rules-list">
-                    <li>Correct Answer: {this.props.question.correct_answer}</li>
-                    <li>Answer 2: {this.props.question.a2}</li>
-                    <li>Answer 3: {this.props.question.a3}</li>
-                    <li>Answer 4: {this.props.question.a4}</li>
+                    <li>Spravna Otazka: {this.props.question.correct_answer}</li>
+                    <li>Odpoved 2: {this.props.question.a2}</li>
+                    <li>Odpoved 3: {this.props.question.a3}</li>
+                    <li>Odpoved 4: {this.props.question.a4}</li>
                 </ul>
-                <button className="small-button" onClick={this.props.onEdit.bind(this, this.props.question)}>Edit</button>
-                <button className="small-button" onClick={this.props.onDelete.bind(this, this.props.question.id)}>Delete</button>
+                <button className="small-button" onClick={this.props.onEdit.bind(this, this.props.question)}>Upravit</button>
+                <button className="small-button danger" onClick={this.props.onDelete.bind(this, this.props.question.id)}>Smazat</button>
             </div>
         );
     }

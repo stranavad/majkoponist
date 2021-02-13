@@ -10,7 +10,7 @@ class HomePage extends Component {
                     Ste si istý ? <br/>
                     Vaše vedomosti si môžete overiť v kvíze o našej najznámejšej šansoniérke.
                 </p>
-                <a href="/quiz" className="large-button">Play</a>
+                <a href="/quiz" className="large-button">Hrat</a>
             </div>
         );
     }

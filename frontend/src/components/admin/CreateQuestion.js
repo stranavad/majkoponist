@@ -34,19 +34,19 @@ class CreateQuestion extends Component {
         return(
             <div className="container">
                 <form className="form" onSubmit={this.onSubmit}>
-                    <h1 className="medium-heading">Create Question</h1>
+                    <h1 className="medium-heading">Vytvorit otazku</h1>
                     <div className="input-line">
                         <textarea
                         type="text"
                         name="question"
                         className="text-input"
-                        placeholder="Question"
+                        placeholder="Otazka"
                         value={this.state.question}
                         onChange={this.onChangeQuestion}
                         required
                         />
                     </div>
-                    <h3 className="small-heading">Difficulty</h3>
+                    <h3 className="small-heading">Obtiznost</h3>
                     <div className="radios">
                         <div className="radio-group">
                             <input className="radio" type="radio" id="1" name="difficulty" value="1" onChange={this.onChangeValue}/>
@@ -62,10 +62,10 @@ class CreateQuestion extends Component {
                         </div>
                     </div>
                     <div className="answers">
-                        <textarea type="text" placeholder="Correct answer" className="textarea-half" id="correct_answer" name="correct_answer" value={this.state.correct_answer} onChange={this.onChangeAnswer}/>
-                        <textarea type="text" placeholder="Answer 2" className="textarea-half" id="a2" name="a2" value={this.state.a2} onChange={this.onChangeValue}/>
-                        <textarea type="text" placeholder="Answer 3" className="textarea-half" id="a3" name="a3" value={this.state.a3} onChange={this.onChangeValue}/>
-                        <textarea type="text" placeholder="Answer 4" className="textarea-half" id="a4" name="a4" value={this.state.a4} onChange={this.onChangeValue}/>
+                        <textarea type="text" placeholder="Spravna odpoved" className="textarea-half" id="correct_answer" name="correct_answer" value={this.state.correct_answer} onChange={this.onChangeAnswer}/>
+                        <textarea type="text" placeholder="Odpoved 2" className="textarea-half" id="a2" name="a2" value={this.state.a2} onChange={this.onChangeValue}/>
+                        <textarea type="text" placeholder="Odpoved 3" className="textarea-half" id="a3" name="a3" value={this.state.a3} onChange={this.onChangeValue}/>
+                        <textarea type="text" placeholder="Odpoved 4" className="textarea-half" id="a4" name="a4" value={this.state.a4} onChange={this.onChangeValue}/>
                     </div>
                     <input
                         type="submit"

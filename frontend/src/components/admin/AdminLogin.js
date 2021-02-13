@@ -40,7 +40,7 @@ class AdminLogin extends Component {
                         type="password"
                         name="password"
                         className="text-input"
-                        placeholder="Password"
+                        placeholder="Heslo"
                         value={this.state.password}
                         onChange={this.onChangePassword}
                         required
@@ -51,7 +51,7 @@ class AdminLogin extends Component {
                         type="submit"
                         name="submit"
                         className="medium-button"
-                        value="Register"
+                        value="Prihlasit"
                         required
                         />
                     </div>

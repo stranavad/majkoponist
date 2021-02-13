@@ -268,6 +268,11 @@ body {
   font-size: 1.2em;
 }
 
+.danger{
+  background-color: red !important;
+  color: white !important;
+}
+
 .small-button:hover, .medium-button:hover, .large-button:hover{
   background-color: rgb(160, 160, 160);
 }

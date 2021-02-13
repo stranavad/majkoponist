@@ -19,8 +19,8 @@ class DisplayPrize extends Component {
             <div className="question">
                 <h2 className="medium-heading">Vyhra: {this.props.prize.prize_name}</h2>
                 <p className="medium-text">Popis vyhry: {this.props.prize.prize_information}</p>
-                <button className="small-button" onClick={this.onEdit}>Edit</button>
-                <button className="small-button" onClick={this.onDelete}>Delete</button>
+                <button className="small-button" onClick={this.onEdit}>Upravit</button>
+                <button className="small-button danger" onClick={this.onDelete}>Smazat</button>
             </div>
         );
     }

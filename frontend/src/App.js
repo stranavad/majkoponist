@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
 import './App.css';
-import GreatWar from './components/assets/GreatWar.mp3'
-import GreatWarOgg from './components/assets/GreatWarOgg.ogg';
+import HanaSong from './components/assets/HanaSong.mp3'
+import HanaSongOgg from './components/assets/HanaSongOgg.ogg';
 import Register from './components/Register';
 import EmailExists from './components/EmailExists';
 import Admin from './components/admin/Admin';
@@ -53,8 +53,8 @@ class App extends Component {
           component={Admin} // TODO create component for it with redirect button
           />
           <audio id="track" loop>  
-            <source src={GreatWar} type="audio/mpeg"/>
-            <source src={GreatWarOgg} type="audio/ogg"/>
+            <source src={HanaSong} type="audio/mpeg"/>
+            <source src={HanaSongOgg} type="audio/ogg"/>
           </audio>
           <FontAwesomeIcon className="audio-button" onClick={this.playAudio} icon={faVolumeUp} />
         </div>
