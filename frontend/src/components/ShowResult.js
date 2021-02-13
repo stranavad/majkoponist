@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ShowQuestions from './ShowQuestions';
-import Prizes from './Prizes';
 import axios from 'axios';
 import SelectPrize from './SelectPrize';
+import ShowPrizes from './ShowPrizes';
 import Config from './Config';
 
 class ShowResult extends Component {
@@ -62,7 +62,8 @@ class ShowResult extends Component {
             component_main = <SelectPrize prize={this.state.select_prize_obj} onSubmit={this.onSubmitPrize} />
         } else {
             if (this.state.show_prizes === true) {
-                component_main =  <Prizes onSelect={this.onSelectPrize} prizes={this.state.prizes}/>;
+                //component_main =  <Prizes onSelect={this.onSelectPrize} prizes={this.state.prizes}/>;
+                component_main = <ShowPrizes prizes={this.state.prizes} onSelect={this.onSelectPrize}/>;
             } else {
                 component_main = <ShowQuestions questions={this.props.questions}/>
                 if (this.props.winner === "true") {

@@ -5,14 +5,16 @@ class CreatePrize extends Component {
     state = {
         prize_name: '',
         prize_information: '',
+        prize_image: '',
     }
 
     onSubmit = (e) => {
         e.preventDefault();
-        this.props.createPrize(this.state.prize_name, this.state.prize_information);
+        this.props.createPrize(this.state.prize_name, this.state.prize_information, this.props.prize_image);
         this.setState({
             prize_name: '',
             prize_information: '',
+            prize_image: '',
         });
     }
     
@@ -44,6 +46,17 @@ class CreatePrize extends Component {
                         onChange={this.onChangeValue}
                         required
                         />
+                    </div>
+                    <div className="input-line">
+                            <input
+                            type="text"
+                            name="prize_image"
+                            className="text-input"
+                            placeholder="Obrazek vyhry"
+                            value={this.state.prize_image}
+                            onChange={this.onChangeValue}
+                            required
+                            />
                     </div>
                     <input
                         type="submit"

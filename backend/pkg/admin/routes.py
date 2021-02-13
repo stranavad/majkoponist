@@ -108,7 +108,7 @@ class Admin(Resource):
             result = mycursor.fetchall()
             prizes = list()
             for res in result:
-                prizes.append({"id": res[0], "prize_name": res[1], "prize_information": res[2]})
+                prizes.append({"id": res[0], "prize_name": res[1], "prize_information": res[2], "prize_image": res[4]})
 
             return {"questions": questions, "answered": answered, "prizes": prizes}
         else:

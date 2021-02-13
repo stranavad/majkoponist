@@ -14,11 +14,13 @@ create_prize = reqparse.RequestParser()
 create_prize.add_argument("token", type=str, help="API token")
 create_prize.add_argument("name", type=str, help="Prize Name")
 create_prize.add_argument("information", type=str, help="Prize description")
+create_prize.add_argument("image", type=str, help="Prize image")
 
 update_prize = reqparse.RequestParser()
 update_prize.add_argument("token", type=str, help="API token")
 update_prize.add_argument("name", type=str, help="Prize Name")
 update_prize.add_argument("information", type=str, help="Prize description")
+update_prize.add_argument("image", type=str, help="Prize image")
 update_prize.add_argument("id", type=str, help="Prize ID")
 
 delete_prize = reqparse.RequestParser()
@@ -48,12 +50,12 @@ def send_mail(args):
     User: {args["first_name"]} {args["last_name"]}.
     Email: {args["email"]}.
     Phone number: {args["phone_number"]}.
-    
+
     Skore: {args["average"]}
-    
+
     Zvolil vyhru "{args['prize_name']}".
     Dodal informacie "{args['information']}".
-    
+
     """
 
     for answer in args['answers']:
@@ -101,7 +103,8 @@ class Prizes(Resource):
                 res_dict = {
                     "id": res[0],
                     "name": res[1],
-                    "description": res[2]
+                    "description": res[2],
+                    "image": res[4],
                 }
                 prizes_return.append(res_dict)
             return {"prizes": prizes_return}
@@ -124,8 +127,8 @@ class Prizes(Resource):
     def put(self):
         args = create_prize.parse_args()
         if args["token"] == api_token:
-            mycursor.execute("INSERT INTO prizes (name, description) VALUES (%s, %s)",
-                             (args["name"], args["information"]))
+            mycursor.execute("INSERT INTO prizes (name, description, image) VALUES (%s, %s, %s)",
+                             (args["name"], args["information"], args['image']))
             mydb.commit()
             return {"message": "Prize was added"}
         else:
@@ -138,8 +141,8 @@ class Prizes(Resource):
         if args["token"] == api_token:
             mycursor.execute("DELETE FROM prizes WHERE id = %s", (args["id"],))
             mydb.commit()
-            mycursor.execute("INSERT INTO prizes (name, description) VALUES (%s, %s)",
-                             (args["name"], args["information"]))
+            mycursor.execute("INSERT INTO prizes (name, description, image) VALUES (%s, %s, %s)",
+                             (args["name"], args["information"], args['image']))
             mydb.commit()
             return {"message": "Prize was edited"}
         else:

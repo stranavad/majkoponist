@@ -5,6 +5,7 @@ class EditPrize extends Component {
     state = {
         prize_name: '',
         prize_information: '',
+        prize_image: '',
     }
 
     componentDidMount() {
@@ -16,10 +17,11 @@ class EditPrize extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        this.props.editPrize(this.state.prize_name, this.state.prize_information, this.props.prize.id);
+        this.props.editPrize(this.state.prize_name, this.state.prize_information, this.state.prize_image, this.props.prize.id);
         this.setState({
             prize_name: '',
-            prize_information: ''
+            prize_information: '',
+            prize_image: '',
         });
     }
     
@@ -55,6 +57,17 @@ class EditPrize extends Component {
                         onChange={this.onChangeValue}
                         required
                         />
+                    </div>
+                    <div className="input-line">
+                            <input
+                            type="text"
+                            name="prize_image"
+                            className="text-input"
+                            placeholder="Obrazek vyhry"
+                            value={this.state.prize_image}
+                            onChange={this.onChangeValue}
+                            required
+                            />
                     </div>
                     <input
                         type="submit"

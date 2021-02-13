@@ -29,8 +29,8 @@ class AdminPage extends Component {
         //this.props.updateState();
     }
 
-    addPrize = (name, information) => {
-        axios.put("http://localhost:5000/prizes", {name, information, token: this.state.token});
+    addPrize = (name, information, image) => {
+        axios.put("http://localhost:5000/prizes", {name, information, image, token: this.state.token});
         //this.props.updateState();
     }
 
@@ -54,11 +54,11 @@ class AdminPage extends Component {
         });
     }
 
-    editPrize = (name, information, id) => {
+    editPrize = (name, information, image, id) => {
         this.setState({
             editComponent: '',
         });
-        axios.patch("http://localhost:5000/prizes", {name, information, id: id, token: this.state.token}).then((res) => console.log(res));
+        axios.patch("http://localhost:5000/prizes", {name, information, image,  id, token: this.state.token}).then((res) => console.log(res));
         //this.props.updateState();
     }
 
