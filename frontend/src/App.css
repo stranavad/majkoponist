@@ -87,6 +87,7 @@ body {
 }
 
 .container-overlay {
+  padding: 5em;
   position: absolute;
   top: 0;
   right: 0;
@@ -312,6 +313,7 @@ body {
   align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
+  padding: 0.5em;
 }
 
 .input-line {
@@ -382,4 +384,84 @@ body {
 
 .rules-list li{
   margin: 1em;
+}
+
+
+/*██████╗░███████╗░██████╗██████╗░░█████╗░███╗░░██╗░██████╗██╗██╗░░░██╗███████╗
+//██╔══██╗██╔════╝██╔════╝██╔══██╗██╔══██╗████╗░██║██╔════╝██║██║░░░██║██╔════╝
+//██████╔╝█████╗░░╚█████╗░██████╔╝██║░░██║██╔██╗██║╚█████╗░██║╚██╗░██╔╝█████╗░░
+//██╔══██╗██╔══╝░░░╚═══██╗██╔═══╝░██║░░██║██║╚████║░╚═══██╗██║░╚████╔╝░██╔══╝░░
+//██║░░██║███████╗██████╔╝██║░░░░░╚█████╔╝██║░╚███║██████╔╝██║░░╚██╔╝░░███████╗
+//╚═╝░░╚═╝╚══════╝╚═════╝░╚═╝░░░░░░╚════╝░╚═╝░░╚══╝╚═════╝░╚═╝░░░╚═╝░░░╚══════╝
+
+//██████╗░███████╗░██████╗██╗░██████╗░███╗░░██╗
+//██╔══██╗██╔════╝██╔════╝██║██╔════╝░████╗░██║
+//██║░░██║█████╗░░╚█████╗░██║██║░░██╗░██╔██╗██║
+//██║░░██║██╔══╝░░░╚═══██╗██║██║░░╚██╗██║╚████║
+//██████╔╝███████╗██████╔╝██║╚██████╔╝██║░╚███║
+//╚═════╝░╚══════╝╚═════╝░╚═╝░╚═════╝░╚═╝░░╚══╝*/
+
+
+
+/*█▀▀ █▀█ █▄░█ ▀█▀ ▄▀█ █ █▄░█ █▀▀ █▀█ █▀//
+//█▄▄ █▄█ █░▀█ ░█░ █▀█ █ █░▀█ ██▄ █▀▄ ▄█*/
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .columns-container {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .column-container {
+    width: 100%;
+    padding: 0.5em 2em;
+  }
+
+  .question, .show-result-question {
+    width: 90vw;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .columns-container {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .column-container {
+    width: 100%;
+    padding: 0 2em;
+  }
+
+  .question, .show-result-question {
+    width: 90vw;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .columns-container {
+    display: flex;
+    flex-direction: row;
+  }
+  .column-container {
+    width: 50%;
+    padding: 2em;
+  }
+
+  .question, .show-result-question {
+    width: 75vw;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .question {
+    width: 850px;
+  }
+
+  .show-result-question {
+    width: 700px;
+  }
 }

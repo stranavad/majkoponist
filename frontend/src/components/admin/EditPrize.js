@@ -11,7 +11,8 @@ class EditPrize extends Component {
     componentDidMount() {
         this.setState({
             prize_name: this.props.prize.prize_name,
-            prize_information: this.props.prize.prize_information
+            prize_information: this.props.prize.prize_information,
+            prize_image: this.props.prize.prize_image,
         });
     }
 

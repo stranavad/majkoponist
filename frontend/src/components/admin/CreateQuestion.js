@@ -49,15 +49,34 @@ class CreateQuestion extends Component {
                     <h3 className="small-heading">Obtiznost</h3>
                     <div className="radios">
                         <div className="radio-group">
-                            <input className="radio" type="radio" id="1" name="difficulty" value="1" onChange={this.onChangeValue}/>
+                            <input 
+                            className="radio" 
+                            type="radio" 
+                            id="1" 
+                            name="difficulty" 
+                            value="1" 
+                            onChange={this.onChangeValue}/>
                             <label for="1">1</label>
                         </div>
                         <div className="radio-group">
-                            <input className="radio" type="radio" id="2" name="difficulty" value="2" onChange={this.onChangeValue}/>
+                            <input 
+                            className="radio" 
+                            type="radio" 
+                            id="2" 
+                            name="difficulty" 
+                            value="2" 
+                            onChange={this.onChangeValue}/>
                             <label for="2">2</label>
                         </div>
                         <div className="radio-group">
-                            <input className="radio" type="radio" id="3" name="difficulty" value="3" onChange={this.onChangeValue}/>
+                            <input 
+                            className="radio" 
+                            type="radio" 
+                            id="3" 
+                            name="difficulty" 
+                            value="3"
+                            onChange={this.onChangeValue}
+                            />
                             <label for="3">3</label>
                         </div>
                     </div>
