@@ -40,17 +40,10 @@ class Questions extends Component {
       }
 
       answerQuestion = (question_id, question_answer) => {
-          //this.setState({
-              //seconds: 0,
-          //});
           this.setState({
             answeredQuestions: this.state.answeredQuestions.concat({id: question_id, answer: question_answer}),
             seconds: 0
           });
-          //this.setState(state => {
-            //const answeredQuestions = this.state.answeredQuestions.concat({"id": question_id, "answer": question_answer});
-            //return answeredQuestion;
-          //});
           this.startTimer();
       }
     
@@ -66,12 +59,6 @@ class Questions extends Component {
             });
             // Check if we're at zero.
             if (seconds <= 0) {
-              //this.setState(state => {
-                //const answeredQuestions = state.answeredQuestions.concat({id: this.state.questions[this.state.question_number].id, answer: ''});
-                //return {
-                  //answeredQuestions,
-                //};
-              //});
               this.setState({
                 answeredQuestions: this.state.answeredQuestions.concat({id: this.state.questions[this.state.question_number].id, answer: ''})
               });

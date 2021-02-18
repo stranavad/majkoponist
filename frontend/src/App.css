@@ -77,6 +77,7 @@ body {
 }
 
 .container-center {
+  width: 100%;
   background-color: transparent;
   padding: 4em;
   border-radius: 20px;
@@ -186,6 +187,12 @@ body {
   align-items: center;
 }
 
+.homepage-mix-div {
+  width: 65vw;
+  min-height: 50vh;
+  position: relative;
+}
+
 
 /*█░█ █▀▀ ▄▀█ █▀▄ █ █▄░█ █▀▀ █▀//
 //█▀█ ██▄ █▀█ █▄▀ █ █░▀█ █▄█ ▄█*/
@@ -202,6 +209,48 @@ body {
 .medium-heading {
   font-size: 1.5em;
   color: #d5ba5c;
+}
+
+
+/*█░█ █▀█ █▀▄▀█ █▀▀ █▀█ ▄▀█ █▀▀ █▀▀   █░█ █▀▀ ▄▀█ █▀▄ █ █▄░█ █▀▀ █▀//
+//█▀█ █▄█ █░▀░█ ██▄ █▀▀ █▀█ █▄█ ██▄   █▀█ ██▄ █▀█ █▄▀ █ █░▀█ █▄█ ▄█*/
+
+.homepage-first-heading, .homepage-second-heading, .homepage-third-heading, .homepage-forth-heading, .homepage-fifth-heading {
+  color: #d5ba5c;
+  text-transform: uppercase;
+  font-family: 'Alfa Slab One', cursive;
+  font-size: 1.6em;
+  letter-spacing: 2px;
+}
+
+.homepage-first-heading {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.homepage-second-heading {
+  position: absolute;
+  left: 50%;
+  top: 2.5em;
+}
+
+.homepage-third-heading {
+  position: absolute;
+  top: 5em;
+  left: 20%;
+}
+
+.homepage-forth-heading {
+  position: absolute;
+  left: 5%;
+  top: 7.5em;
+}
+
+.homepage-fifth-heading {
+  position: absolute;
+  bottom: 3em;
+  left: 0;
 }
 
 
@@ -235,7 +284,7 @@ body {
 //█▄█ █▄█ ░█░ ░█░ █▄█ █░▀█ ▄█*/
 
 
-.small-button, .medium-button, .large-button, .question-button {
+.small-button, .medium-button, .large-button, .question-button, .homepage-button {
   background-color:#d5ba5c;
   color: #0B152A;
   border: none;
@@ -263,10 +312,17 @@ body {
   font-size: 1em;
 }
 
-.large-button {
+.large-button, .homepage-button {
   padding: 0.5em 0.75em;
   margin: 1.5em;
   font-size: 1.2em;
+}
+
+.homepage-button {
+  margin: 0 !important;
+  position: absolute;
+  bottom: 2em;
+  right: 50%;
 }
 
 .danger{
@@ -274,7 +330,7 @@ body {
   color: white !important;
 }
 
-.small-button:hover, .medium-button:hover, .large-button:hover{
+.small-button:hover, .medium-button:hover, .large-button:hover, .question-button:hover, .homepage-button:hover{
   background-color: rgb(160, 160, 160);
 }
 

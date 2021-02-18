@@ -54,7 +54,4 @@ def create_api(app):
     from pkg.prize.routes import Prizes
     api.add_resource(Prizes, "/prizes")
 
-    from pkg.testfolder.routes import Test
-    api.add_resource(Test, "/test")
-
     return api
