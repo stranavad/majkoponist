@@ -29,6 +29,7 @@ def create_app():
     app.config['MAIL_PASSWORD'] = '8JxYXY^mDVfrN1'
     app.config['MAIL_USE_TLS'] = False
     app.config['MAIL_USE_SSL'] = True
+    app.config['SECRET_KEY'] = "MajkoPonistSecretKey"
     mail = Mail(app)
     global mail_global
     mail_global = mail
