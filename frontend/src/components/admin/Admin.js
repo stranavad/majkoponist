@@ -9,22 +9,23 @@ class Admin extends Component {
     state = {
         loggedIn: false,
         token: Config.token,
+        server_ip: Config.server_ip,
         res_questions: '',
         res_answered: '',
         res_prizes: ''
     };
 
     componentDidMount() {
-        axios.get("http://localhost:5000/admin", {params: {token: this.state.token}})
+        axios.get(this.state.server_ip + "admin", {params: {token: this.state.token}})
             .then(res => this.setState({res_questions: res.data.questions, res_answered: res.data.answered, res_prizes: res.data.prizes}));
     }
 
     updateState = () => {
-        axios.get("http://localhost:5000/admin", {params: {token: this.state.token}})
+        axios.get(this.state.server_ip + "admin", {params: {token: this.state.token}})
             .then(res => this.setState({res_questions: res.data.questions, res_answered: res.data.answered, res_prizes: res.data.prizes}));
     }
     login = (email, password) => {
-        axios.post("http://localhost:5000/validate_admin", {email: email, password: password, token: this.state.token})
+        axios.post(this.state.server_ip + "validate_admin", {email: email, password: password, token: this.state.token})
             .then(res => {
                 if (res.data.message === "login approved") {
                     this.setState({loggedIn: true});

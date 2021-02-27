@@ -11,6 +11,7 @@ class ShowResult extends Component {
         component_main: '',
         show_prizes: false,
         token: Config.token,
+        server_ip: Config.server_ip,
         prizes: '',
         select_prize: false,
         select_prize_id: '',
@@ -30,7 +31,7 @@ class ShowResult extends Component {
     }
 
     onSubmitPrize = (name, info) => {
-        axios.post("http://localhost:5000/prizes", {
+        axios.post(this.state.server_ip + "prizes", {
             token: this.state.token,
             prize_name: name,
             email: this.props.user.email,
@@ -46,7 +47,7 @@ class ShowResult extends Component {
 
     componentDidMount() {
         if (this.props.winner === "true") {
-            axios.get("http://localhost:5000/prizes", {params: {token: this.state.token, average: this.props.average_raw}})
+            axios.get(this.state.server_ip + "prizes", {params: {token: this.state.token, average: this.props.average_raw}})
                 .then((res) => {
                     this.setState({
                         prizes: res.data.prizes,
