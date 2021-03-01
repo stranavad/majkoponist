@@ -7,11 +7,17 @@ body, * {
   margin: 0;
   box-sizing: border-box;
   transition: 0.2s ease;
+  font-family: 'Raleway', sans-serif;
 }
 
 body {
   overflow-x: hidden;
   padding: 0 2.5vw;
+  background-image: url(./components/assets/hana_background.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-color: #0B152A;
 }
 
 .app {
@@ -21,19 +27,6 @@ body {
   align-items: center;
   min-height: 100vh;
 }
-
-
-/* Body styling */
-
-body {
-  background-image: url(./components/assets/hana_background.png);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
-  background-color: #0B152A;
-}
-
-/* END OF BODY STYLING */
 
 /*█▀▄▀█ █▀▀ █▄░█ █░█//
 //█░▀░█ ██▄ █░▀█ █▄█*/
@@ -439,6 +432,10 @@ body {
 .rules-list li{
   font-size: 1.1em;
   margin: 1em;
+}
+
+.prize-img {
+  max-width: 50vh;
 }
 
 

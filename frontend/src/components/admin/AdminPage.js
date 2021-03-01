@@ -15,6 +15,7 @@ class AdminPage extends Component {
     state = {
         errorMessage: '',
         token: Config.token,
+        server_ip: Config.server_ip,
         editComponent: '',
         showResult: false,
         showResultComponent: '',

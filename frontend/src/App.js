@@ -25,7 +25,7 @@ class App extends Component {
       <Router>
         <div className="app">
           <div className="menu">
-            <h1><a href="/">Quiz Hana</a></h1>
+            <h1><a href="/">Čo vieš o Hane ?</a></h1>
           </div>
           <Route
           exact

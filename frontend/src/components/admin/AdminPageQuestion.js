@@ -8,7 +8,7 @@ class AdminPageQuestion extends Component {
                 <h2 className="medium-heading">{this.props.question.question}</h2>
                 <p className="medium-text">Obtiznost: {this.props.question.difficulty}</p>
                 <ul className="rules-list">
-                    <li>Spravna Otazka: {this.props.question.correct_answer}</li>
+                    <li>Spravna odpoved: {this.props.question.correct_answer}</li>
                     <li>Odpoved 2: {this.props.question.a2}</li>
                     <li>Odpoved 3: {this.props.question.a3}</li>
                     <li>Odpoved 4: {this.props.question.a4}</li>

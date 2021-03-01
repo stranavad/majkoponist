@@ -29,7 +29,7 @@ class RegisterForm extends Component {
                     <h1 className="medium-heading">Pravidlá a postup hry</h1>
                     <ul className="rules-list">
                         <li>Zaregistrujte se.</li>
-                        <li>Po registrácii dostanete 21 otázok so 4 možnosťami na odpoveď. Na každú odpoveď máte stanovený čas 45 sekúnd.</li>
+                        <li>Po registrácii dostanete 21 otázok so 4 možnosťami na odpoveď. Na každú odpoveď máte stanovený čas 30 sekúnd.</li>
                         <li>Po skončení kvízu sa vám zobrazí váš výsledok,  všetky položené otázky aj správne odpovede.</li>
                         <li>Ak bude vaša úspešnosť vyššia ako 80% budete si môcť vybrať z troch vecných cien.</li>
                         <li>Pri 100% bilancii získate víkendový pobyt v dome Hany Hegerovej www.aprtmanyhana.sk.</li>
