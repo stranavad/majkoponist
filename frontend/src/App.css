@@ -312,12 +312,17 @@ body {
   font-size: 1.2em;
 }
 
-.homepage-button {
+/*.homepage-button {  For the mix homepage design
   margin: 0 !important;
   position: absolute;
   bottom: 2em;
   right: 50%;
+} */
+
+.homepage-button {
+  margin-top: 2em;
 }
+
 
 .danger{
   background-color: red !important;

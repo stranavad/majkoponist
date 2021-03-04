@@ -11,6 +11,7 @@ admin_password = config["password"]
 db_password = config["db_password"]
 mail_global = ""
 
+# Change the ip address to new mysql database
 mydb = mysql.connector.connect(
     host="192.46.233.86",
     user="root",

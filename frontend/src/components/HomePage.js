@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class HomePage extends Component {
     render() {
-        return(
+        /* return(
             <div className="container-center">
                 <div className="homepage-mix-div">
                     <h1 className="homepage-first-heading">Poznáte Hanu Hegerovú ?</h1>
@@ -12,6 +12,17 @@ class HomePage extends Component {
                     <h1 className="homepage-fifth-heading">Pripraveni?</h1>
                     <a href="/quiz" className="homepage-button">Hrat</a>
                 </div>
+            </div>
+        ); */
+        return (
+            <div className="container-center">
+                <h1 className="medium-heading">Čo vieš o Hane ?</h1>
+                <p className="homepage-text">
+                    Poznáte Hanu Hegerovú ? <br/>
+                    Ste si istý ? <br/>
+                    Vaše vedomosti si môžete overiť v kvíze o našej najznámejšej šansoniérke.
+                </p>
+                <a href="/quiz" className="homepage-button">Hrat</a>
             </div>
         );
     }

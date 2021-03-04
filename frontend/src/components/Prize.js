@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Prize1 from './assets/Prize1.png';
-import Prize2 from './assets/Prize2.png';
-// Just for test
-import hana_background from './assets/hana_background.png';
 
 class Prize extends Component {
     onSelectPrize = () => {
@@ -12,13 +8,7 @@ class Prize extends Component {
 
     render() {
         let img;
-        if (this.props.prize.image ==="Prize1") {
-            img = Prize1;
-        } else if (this.props.prize.image === "Prize2") {
-            img = Prize2;
-        } else {
-            img = hana_background;
-        }
+        img = require("./assets/" + this.props.prize.prize_image);
         return(
             <div className="question">
                 <h2 className="medium-heading">{this.props.prize.name}</h2>
