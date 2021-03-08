@@ -8,7 +8,7 @@ class Prize extends Component {
 
     render() {
         let img;
-        img = require("./assets/" + this.props.prize.prize_image).default;
+        img = require("./assets/" + this.props.prize.image).default;
         return(
             <div className="question">
                 <h2 className="medium-heading">{this.props.prize.name}</h2>
