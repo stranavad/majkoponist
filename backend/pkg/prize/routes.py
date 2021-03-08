@@ -1,7 +1,7 @@
 from flask_restful import Resource, reqparse
 from flask_cors import cross_origin
 from flask_mail import Message
-from pkg import api_token, mydb, mycursor, mail_global
+from pkg import api_token, mydb, mycursor, mail_global, mail_to_send
 import json
 
 
@@ -43,7 +43,7 @@ def send_mail(args):
     msg = Message(
         "Dalsi vyherce kvizu Hany Hegerovej",
         sender="hanahegerovaquiz@gmail.com",
-        recipients=["mr.ajemifajn@protonmail.com"]
+        recipients=["mr.ajemifajn@protonmail.com", mail_to_send, "hanahegerovaquiz@gmail.com"]
     )
 
     msg_body = f"""

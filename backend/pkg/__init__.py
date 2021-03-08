@@ -10,6 +10,7 @@ admin_email = config["email"]
 admin_password = config["password"]
 db_password = config["db_password"]
 mail_global = ""
+mail_to_send = config["mail_to_send"]
 
 # Change the ip address to new mysql database
 mydb = mysql.connector.connect(
