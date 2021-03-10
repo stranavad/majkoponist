@@ -78,6 +78,25 @@ def send_mail(args):
     msg.body = msg_body
     mail_global.send(msg)
 
+    msg = Message(
+        "Gratulujeme k výhře v kvíze o Haně Hegerovej",
+        sender="hanahegerovaquiz@gmail.com",
+        recipients=[args["email"]]
+    )
+
+    msq_body = f"""
+    Toto je random zprava.
+
+    Vybral jste si vyhru:
+        {args["prize_namo"]}
+    V blizke dobe vas budeme kontaktovat ohledne predani vyhry
+
+    Kontakt v pripade problemu:
+        no to snad ne
+    """
+
+
+
 
 def add_prize_result(args):
     #  Setting the prize for the appropriate user
