@@ -19,7 +19,7 @@ class SelectPrize extends Component {
                 <form onSubmit={this.onSubmit} className="form">
                     <h2 className="small-heading">{this.props.prize.name}</h2>
                     <p className="medium-text">{this.props.prize.description}</p>
-                    <input type="text" placeholder="Adresa" className="textarea" value={this.state.address} onChange={this.onChangeAddress}/>
+                    <input type="text" placeholder="Adresa" className="text-input" value={this.state.address} onChange={this.onChangeAddress}/>
                     <input type="submit" value="Odoslat" className="medium-button"/>
                 </form>
             </div>

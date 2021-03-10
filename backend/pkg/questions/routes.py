@@ -100,16 +100,16 @@ def add_result(email, name, phone_number, answers_scheme, average):
         )
         sql = "INSERT INTO answered (email, name, phone_number, score, answers, answered, prize) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         mycursor.execute(sql, data)
-        mydb.commit()
+        mydb.connect().commit()
     else:
         if res[0][6] == 1:
             sql = "UPDATE answered SET score = JSON_SET(score, '$.score2', %s) AND answers = JSON_SET(answers, '$.questions2', %s) AND answered = 2 WHERE email = %s"
             mycursor.execute(sql, (average, questions_dict, email))
-            mydb.commit()
+            mydb.connect().commit()
         elif res[0][6] == 2:
             sql = "UPDATE answered SET score = JSON_SET(score, '$.score3', %s) AND answers = JSON_SET(answers, '$.questions3', %s) AND answered = 2 WHERE email = %s"
             mycursor.execute(sql, (average, questions_dict, email))
-            mydb.commit()
+            mydb.connect().commit()
         else:
             print("You are stupid mate")
 

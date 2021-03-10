@@ -103,7 +103,7 @@ def add_prize_result(args):
     prize = {"prize_name": args["prize_name"], "information": args["information"]}
     sql = "UPDATE answered SET prize = JSON_SET(prize, '$.prize', %s) WHERE email = %s"
     mycursor.execute(sql, (json.dumps(prize), args["email"]))
-    mydb.commit()
+    mydb.connect().commit()
 
 
 class Prizes(Resource):
@@ -148,7 +148,7 @@ class Prizes(Resource):
         if args["token"] == api_token:
             mycursor.execute("INSERT INTO prizes (name, description, image) VALUES (%s, %s, %s)",
                              (args["name"], args["information"], args['image']))
-            mydb.commit()
+            mydb.connect().commit()
             return {"message": "Prize was added"}
         else:
             return {"message": "Wrong api token"}
@@ -159,10 +159,10 @@ class Prizes(Resource):
         args = update_prize.parse_args()
         if args["token"] == api_token:
             mycursor.execute("DELETE FROM prizes WHERE id = %s", (args["id"],))
-            mydb.commit()
+            mydb.connect().commit()
             mycursor.execute("INSERT INTO prizes (name, description, image) VALUES (%s, %s, %s)",
                              (args["name"], args["information"], args['image']))
-            mydb.commit()
+            mydb.connect().commit()
             return {"message": "Prize was edited"}
         else:
             return {"message": "Wrong api token"}
@@ -174,7 +174,7 @@ class Prizes(Resource):
         if args["token"] == api_token:
             mycursor.execute("DELETE FROM prizes WHERE id = %s",
                              (args["id"],))
-            mydb.commit()
+            mydb.connect().commit()
             return {"message": "Prize was edited"}
         else:
             return {"message": "Wrong api token"}
