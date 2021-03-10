@@ -30,7 +30,7 @@ delete_prize.add_argument("id", type=str, help="Prize ID")
 get_prize_args = reqparse.RequestParser()
 get_prize_args.add_argument("token", type=str, help="API token")
 get_prize_args.add_argument("prize_name", type=str, help="Name of the prize")
-get_prize_args.add_argument("information", type=str, help="Information from winner")
+get_prize_args.add_argument("address", type=str, help="Information from winner")
 get_prize_args.add_argument("answers", action="append")
 get_prize_args.add_argument("email", type=str)
 get_prize_args.add_argument("first_name", type=str)
@@ -54,7 +54,7 @@ def send_mail(args):
     Skore: {args["average"]}
 
     Zvolil vyhru "{args['prize_name']}".
-    Dodal informacie "{args['information']}".
+    Adresa "{args['address']}".
 
     """
 

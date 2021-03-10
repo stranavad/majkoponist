@@ -30,14 +30,14 @@ class ShowResult extends Component {
         });
     }
 
-    onSubmitPrize = (name, info) => {
+    onSubmitPrize = (name, address) => {
         axios.post(this.state.server_ip + "prizes", {
             token: this.state.token,
             prize_name: name,
             email: this.props.user.email,
             first_name: this.props.user.first_name,
             last_name: this.props.user.last_name,
-            information: info,
+            address: address,
             average: this.props.average,
             answers: this.props.questions,
             phone_number: this.props.user.phone_number,

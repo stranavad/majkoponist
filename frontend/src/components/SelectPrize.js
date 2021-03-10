@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 class SelectPrize extends Component {
     state = {
-        information: '',
+        address: '',
     }
 
-    onChangeInformation = (e) => this.setState({ information: e.target.value});
+    onChangeAddress = (e) => this.setState({ address: e.target.value});
     onSubmit = (e) => {
         e.preventDefault();
-        this.props.onSubmit(this.props.prize.name, this.state.information);
+        this.props.onSubmit(this.props.prize.name, this.state.address);
         this.setState({information: '',});
     }
 
@@ -19,7 +19,7 @@ class SelectPrize extends Component {
                 <form onSubmit={this.onSubmit} className="form">
                     <h2 className="small-heading">{this.props.prize.name}</h2>
                     <p className="medium-text">{this.props.prize.description}</p>
-                    <textarea type="text" placeholder="Sem napiste veskere poznamky jako idealni termin a adresi" className="textarea" value={this.state.information} onChange={this.onChangeInformation}/>
+                    <input type="text" placeholder="Adresa" className="textarea" value={this.state.address} onChange={this.onChangeAddress}/>
                     <input type="submit" value="Odoslat" className="medium-button"/>
                 </form>
             </div>
