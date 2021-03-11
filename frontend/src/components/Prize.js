@@ -12,7 +12,7 @@ class Prize extends Component {
         return(
             <div className="question">
                 <h2 className="medium-heading">{this.props.prize.name}</h2>
-                <p className="medium-text">Obtiznost: {this.props.prize.description}</p>
+                <p className="medium-text">{this.props.prize.description}</p>
                 <button className="large-button" onClick={this.onSelectPrize}>Vybrat tuto vyhru</button>
                 <img src={img} className="prize-img" alt="Prize"/>
             </div>
