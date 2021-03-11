@@ -51,9 +51,10 @@ def create_app():
     # Added
     global mydb
     global mycursor
-    mydb = MySQL()
-    mydb.init_app(app)
-    mycursor = mydb.connect().cursor()
+    mysql = MySQL()
+    mysql.init_app(app)
+    mydb = mysql.connect()
+    mycursor = mydb.cursor()
 
     return app
 

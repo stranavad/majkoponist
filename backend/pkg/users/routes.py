@@ -51,7 +51,7 @@ class Users(Resource):
                 return {"message": "This email already exist"}
             mycursor.execute("INSERT INTO users (email, first_name, last_name, phone_number) VALUES (%s, %s, %s, %s)",
                              (args["user_email"], args["first_name"], args["last_name"], args["user_phone_number"]))
-            mydb.connect().commit()
+            mydb.commit()
             return {
                 "email": args["user_email"],
                 "first_name": args["first_name"],

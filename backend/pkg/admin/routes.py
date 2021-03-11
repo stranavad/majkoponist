@@ -128,7 +128,7 @@ class Admin(Resource):
             question_replaced = args["question"].replace("\"", "\'")
             mycursor.execute("INSERT INTO questions (question, a_right, a2, a3, a4, difficulty) VALUES (%s, %s, %s, %s, %s, %s)",
                              (question_replaced, args["correct_answer"], args["a2"], args["a3"], args["a4"], args["difficulty"]))
-            mydb.connect().commit()
+            mydb.commit()
             return {
                 "question": args["question"],
                 "correct_answer": args["correct_answer"]
@@ -145,11 +145,11 @@ class Admin(Resource):
             print(args)
             sql = "DELETE FROM questions WHERE id = %s"
             mycursor.execute(sql, (int(args["id"]),))
-            mydb.connect().commit()
+            mydb.commit()
             mycursor.execute(
                 "INSERT INTO questions (question, a_right, a2, a3, a4, difficulty) VALUES (%s, %s, %s, %s, %s, %s)",
                 (args["question"], args["correct_answer"], args["a2"], args["a3"], args["a4"], args["difficulty"]))
-            mydb.connect().commit()
+            mydb.commit()
             return {
                 "message": "Question was updated",
                 "question": args["question"],
@@ -166,7 +166,7 @@ class Admin(Resource):
         args = delete_question_args.parse_args()
         if args["token"] == api_token:
             mycursor.execute("DELETE FROM questions WHERE id = %s", (args["id"],))
-            mydb.connect().commit()
+            mydb.commit()
             return {
                 "message": "Question was deleted"
             }
