@@ -1,6 +1,6 @@
 from flask_restful import Resource, reqparse
 from flask_cors import cross_origin
-from pkg import mycursor, mydb, api_token
+from pkg import api_token, get_connection
 import json
 
 create_question_args = reqparse.RequestParser()
@@ -35,6 +35,7 @@ class Admin(Resource):
     def get(self):
         token_arg = token_parser.parse_args()
         if token_arg["token"] == api_token:
+            mydb, mycursor = get_connection()
             mycursor.execute("SELECT * FROM questions")
             questions_db = mycursor.fetchall()
             mycursor.execute("SELECT * FROM answered")
@@ -79,7 +80,6 @@ class Admin(Resource):
                         questions_list_2.append("")
                 else:
                     questions_list_1.append("")
-
                 answered.append({
                     "email": answer[1],
                     "name": answer[2],
@@ -106,6 +106,7 @@ class Admin(Resource):
             # Prizes
             mycursor.execute("SELECT * FROM prizes")
             result = mycursor.fetchall()
+            mycursor.close()
             prizes = list()
             for res in result:
                 prizes.append({"id": res[0], "prize_name": res[1], "prize_information": res[2], "prize_image": res[4]})
@@ -120,6 +121,7 @@ class Admin(Resource):
     def post(self):
         args = create_question_args.parse_args()
         if args["token"] == api_token:
+            mydb, mycursor = get_connection()
             mycursor.execute("SELECT question FROM questions")
             question_names_db = mycursor.fetchall()
             for question in question_names_db:
@@ -129,6 +131,7 @@ class Admin(Resource):
             mycursor.execute("INSERT INTO questions (question, a_right, a2, a3, a4, difficulty) VALUES (%s, %s, %s, %s, %s, %s)",
                              (question_replaced, args["correct_answer"], args["a2"], args["a3"], args["a4"], args["difficulty"]))
             mydb.commit()
+            mycursor.close()
             return {
                 "question": args["question"],
                 "correct_answer": args["correct_answer"]
@@ -142,7 +145,7 @@ class Admin(Resource):
     def put(self):
         args = update_question_args.parse_args()
         if args["token"] == api_token:
-            print(args)
+            mydb, mycursor = get_connection()
             sql = "DELETE FROM questions WHERE id = %s"
             mycursor.execute(sql, (int(args["id"]),))
             mydb.commit()
@@ -150,6 +153,7 @@ class Admin(Resource):
                 "INSERT INTO questions (question, a_right, a2, a3, a4, difficulty) VALUES (%s, %s, %s, %s, %s, %s)",
                 (args["question"], args["correct_answer"], args["a2"], args["a3"], args["a4"], args["difficulty"]))
             mydb.commit()
+            mycursor.close()
             return {
                 "message": "Question was updated",
                 "question": args["question"],
@@ -165,8 +169,10 @@ class Admin(Resource):
     def delete(self):
         args = delete_question_args.parse_args()
         if args["token"] == api_token:
+            mydb, mycursor = get_connection()
             mycursor.execute("DELETE FROM questions WHERE id = %s", (args["id"],))
             mydb.commit()
+            mycursor.close()
             return {
                 "message": "Question was deleted"
             }

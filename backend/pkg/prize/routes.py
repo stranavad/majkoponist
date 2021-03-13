@@ -1,7 +1,7 @@
 from flask_restful import Resource, reqparse
 from flask_cors import cross_origin
 from flask_mail import Message
-from pkg import api_token, mydb, mycursor, mail_global, mail_to_send
+from pkg import api_token, mail_global, mail_to_send, get_connection
 import json
 
 
@@ -99,11 +99,13 @@ def send_mail(args):
 
 
 def add_prize_result(args):
+    mydb, mycursor = get_connection()
     #  Setting the prize for the appropriate user
     prize = {"prize_name": args["prize_name"], "information": args["information"]}
     sql = "UPDATE answered SET prize = JSON_SET(prize, '$.prize', %s) WHERE email = %s"
     mycursor.execute(sql, (json.dumps(prize), args["email"]))
     mydb.commit()
+    mycursor.close()
 
 
 class Prizes(Resource):
@@ -112,11 +114,13 @@ class Prizes(Resource):
     def get(self):
         args = get_prizes.parse_args()
         if args["token"] == api_token:
+            mydb, mycursor = get_connection()
             if args["average"] == 1:
                 mycursor.execute("SELECT * FROM prizes")
             else:
                 mycursor.execute("SELECT * FROM prizes WHERE special = False")
             result = mycursor.fetchall()
+            mycursor.close()
             prizes_return = list()
             for res in result:
                 res_dict = {
@@ -146,9 +150,11 @@ class Prizes(Resource):
     def put(self):
         args = create_prize.parse_args()
         if args["token"] == api_token:
+            mydb, mycursor = get_connection()
             mycursor.execute("INSERT INTO prizes (name, description, image) VALUES (%s, %s, %s)",
                              (args["name"], args["information"], args['image']))
             mydb.commit()
+            mycursor.close()
             return {"message": "Prize was added"}
         else:
             return {"message": "Wrong api token"}
@@ -158,11 +164,13 @@ class Prizes(Resource):
     def patch(self):
         args = update_prize.parse_args()
         if args["token"] == api_token:
+            mydb, mycursor = get_connection()
             mycursor.execute("DELETE FROM prizes WHERE id = %s", (args["id"],))
             mydb.commit()
             mycursor.execute("INSERT INTO prizes (name, description, image) VALUES (%s, %s, %s)",
                              (args["name"], args["information"], args['image']))
             mydb.commit()
+            mycursor.close()
             return {"message": "Prize was edited"}
         else:
             return {"message": "Wrong api token"}
@@ -172,9 +180,11 @@ class Prizes(Resource):
     def delete(self):
         args = delete_prize.parse_args()
         if args["token"] == api_token:
+            mydb, mycursor = get_connection()
             mycursor.execute("DELETE FROM prizes WHERE id = %s",
                              (args["id"],))
             mydb.commit()
+            mycursor.close()
             return {"message": "Prize was edited"}
         else:
             return {"message": "Wrong api token"}

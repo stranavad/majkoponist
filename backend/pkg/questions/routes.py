@@ -1,7 +1,7 @@
 from flask_restful import Resource, reqparse
 from flask_cors import cross_origin
 from flask_mail import Message
-from pkg import mycursor, mydb, api_token, mail_global
+from pkg import api_token, mail_global, get_connection
 import random
 import json
 
@@ -32,10 +32,12 @@ def sort_questions(all_questions):
 
 def get_correct_answers(question_ids):
     # Getting correct_answers from database and creating datatype that we can work with
+    mydb, mycursor = get_connection()
     correct_answers = dict()
     for question_id in question_ids:
         mycursor.execute("SELECT * FROM questions WHERE id = %s", (int(question_id),))
         res = mycursor.fetchone()
+        mycursor.close()
         correct_answers[question_id] = {
             "id": question_id,
             "question": res[1],
@@ -82,6 +84,7 @@ def send_email(email_scheme, email, first_name, last_name, phone_number):
 
 
 def add_result(email, name, phone_number, answers_scheme, average):
+    mydb, mycursor = get_connection()
     mycursor.execute("SELECT * FROM answered WHERE email = %s", (email,))
     res = mycursor.fetchall()
     questions_dict = dict()
@@ -112,6 +115,7 @@ def add_result(email, name, phone_number, answers_scheme, average):
             mydb.commit()
         else:
             print("You are stupid mate")
+    mycursor.close()
 
 
 def make_average(scheme):
@@ -159,8 +163,11 @@ class Questions(Resource):
     def get(self):
         token_arg = token_parser.parse_args()
         if token_arg["token"] == api_token:
+            mydb, mycursor = get_connection()
             mycursor.execute("SELECT * FROM questions")  # Getting all questions from DB
             result = mycursor.fetchall()
+            mycursor.close()
+
             df_one, df_two, df_three = [], [], []
             # Converting db result to lists by difficulty
             for question in result:

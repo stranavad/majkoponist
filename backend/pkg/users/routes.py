@@ -1,6 +1,6 @@
 from flask_restful import Resource, reqparse
 from flask_cors import cross_origin
-from pkg import mycursor, mydb, api_token
+from pkg import api_token, get_connection
 
 add_user_args = reqparse.RequestParser()
 add_user_args.add_argument("user_email", type=str, help="User email")
@@ -19,8 +19,10 @@ class Users(Resource):
     def get(self):
         token_arg = token_parser.parse_args()
         if token_arg["token"] == api_token:
+            mydb, mycursor = get_connection()
             mycursor.execute("SELECT * FROM users")
             users_db = mycursor.fetchall()
+            mycursor.close()
             users = dict()
             for user in users_db:
                 users[user[0]] = {
@@ -42,6 +44,7 @@ class Users(Resource):
     def post(self):
         args = add_user_args.parse_args()
         if args["token"] == api_token:
+            mydb, mycursor = get_connection()
             mycursor.execute("SELECT email FROM users")
             existing_emails_db = mycursor.fetchall()
             existing_emails = []
@@ -52,6 +55,7 @@ class Users(Resource):
             mycursor.execute("INSERT INTO users (email, first_name, last_name, phone_number) VALUES (%s, %s, %s, %s)",
                              (args["user_email"], args["first_name"], args["last_name"], args["user_phone_number"]))
             mydb.commit()
+            mycursor.close()
             return {
                 "email": args["user_email"],
                 "first_name": args["first_name"],
