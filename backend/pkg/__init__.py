@@ -4,8 +4,8 @@ import mysql.connector
 from pkg.config import config
 from flask_cors import CORS
 from flask_mail import Mail
-from flaskext.mysql import MySQL
-from flask_mysqlpool import MySQLPool
+# from flaskext.mysql import MySQL
+# from flask_mysqlpool import MySQLPool
 
 api_token = config["api_token"]
 admin_email = config["email"]
@@ -24,7 +24,7 @@ mydb = mysql.connector.connect(
     passwd="<Code><Tech> 127521",
     database="majkoponist",
     pool_name="batman",
-    pool_size=3
+    pool_size=5
 )
 
 

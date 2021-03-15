@@ -38,6 +38,7 @@ def get_correct_answers(question_ids):
         mycursor.execute("SELECT * FROM questions WHERE id = %s", (int(question_id),))
         res = mycursor.fetchone()
         mycursor.close()
+        mydb.close()
         correct_answers[question_id] = {
             "id": question_id,
             "question": res[1],
@@ -116,6 +117,7 @@ def add_result(email, name, phone_number, answers_scheme, average):
         else:
             print("You are stupid mate")
     mycursor.close()
+    mydb.close()
 
 
 def make_average(scheme):
@@ -166,7 +168,8 @@ class Questions(Resource):
             mydb, mycursor = get_connection()
             mycursor.execute("SELECT * FROM questions")  # Getting all questions from DB
             result = mycursor.fetchall()
-            mycursor.close()
+            # mycursor.close()
+            mydb.close()
 
             df_one, df_two, df_three = [], [], []
             # Converting db result to lists by difficulty
