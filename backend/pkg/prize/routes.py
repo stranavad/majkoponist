@@ -85,14 +85,25 @@ def send_mail(args):
     )
 
     msq_body = f"""
-    Toto je random zprava.
+    Vážený pán/pani {args["first_name"]} {args["last_name"]},
 
-    Vybral jste si vyhru:
-        {args["prize_namo"]}
-    V blizke dobe vas budeme kontaktovat ohledne predani vyhry
+    prijmite od nás úprimnú gratuláciu k vašej výhre. V kvíze „Čo vieš o Hane“ ste dokázali, že o Hane Hegerovej máte naozaj skvelé vedomosti. Zostaňte naďalej jej fanúšikom.
 
-    Kontakt v pripade problemu:
-        no to snad ne
+    Skontrolujte si prosím, či údaje ktoré ste zadali pri registrácii sú korektné a či vám výhru môžeme poslať na dole uvedenú adresu ?
+
+    Vaša výhra :   	{args["prize_name"]}
+
+    Dodacia adresa : 	{args["first_name"]} {args["last_name"]}
+	                    {args["address"]}
+    Tel. kontakt :		{args["phone_number"]}
+
+
+    Ak čokoľvek potrebujete upraviť, kontaktujete nás prosím na adrese : info@apartmanyhana.sk
+
+
+    S pozdravom Maroš Poništ
+    www.apartmanyhana.sk
+    FB: https://www.facebook.com/apartmanyhana
     """
 
 
