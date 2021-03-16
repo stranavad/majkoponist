@@ -81,7 +81,7 @@ class CreateQuestion extends Component {
                         </div>
                     </div>
                     <div className="answers">
-                        <textarea type="text" placeholder="Spravna odpoved" className="textarea-half" id="correct_answer" name="correct_answer" value={this.state.correct_answer} onChange={this.onChangeAnswer}/>
+                        <textarea type="text" placeholder="Spravna odpoved" className="textarea-half" id="correct_answer" name="correct_answer" value={this.state.correct_answer} onChange={this.onChangeValue}/>
                         <textarea type="text" placeholder="Odpoved 2" className="textarea-half" id="a2" name="a2" value={this.state.a2} onChange={this.onChangeValue}/>
                         <textarea type="text" placeholder="Odpoved 3" className="textarea-half" id="a3" name="a3" value={this.state.a3} onChange={this.onChangeValue}/>
                         <textarea type="text" placeholder="Odpoved 4" className="textarea-half" id="a4" name="a4" value={this.state.a4} onChange={this.onChangeValue}/>

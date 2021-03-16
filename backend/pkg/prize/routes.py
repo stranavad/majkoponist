@@ -112,7 +112,7 @@ def send_mail(args):
 def add_prize_result(args):
     mydb, mycursor = get_connection()
     #  Setting the prize for the appropriate user
-    prize = {"prize_name": args["prize_name"], "information": args["information"]}
+    prize = {"prize_name": args["prize_name"], "information": args["address"]}
     sql = "UPDATE answered SET prize = JSON_SET(prize, '$.prize', %s) WHERE email = %s"
     mycursor.execute(sql, (json.dumps(prize), args["email"]))
     mydb.commit()

@@ -379,7 +379,7 @@ body {
   align-items: center;
 }
 
-.input-line input {
+.input-line input{
   padding: 0.6em;
   background-color: #d5ba5c;
   color: black;
@@ -387,7 +387,20 @@ body {
   border-radius: 5px;
 }
 
-.input-line input::placeholder{
+.textarea-half {
+  padding: 0.6em;
+  background-color: #d5ba5c;
+  color: black;
+  font-size: 1em;
+  border-radius: 5px;
+  width: 45%;
+  max-height: 100px;
+  min-width: 45%;
+  max-width: 45%;
+  margin: 1%;
+}
+
+.input-line input::placeholder, .text-input::placeholder, .textarea-half::placeholder{
   color: rgb(80, 80, 80);
 }
 
@@ -401,6 +414,7 @@ body {
   height: 100%;
   padding: 0.5em;
   border: none;
+  background-color: #d5ba5c;
 }
 
 .textarea {
@@ -408,13 +422,7 @@ body {
   max-width: 100%;
   min-height: 3em;
   font-size: 1.2em;
-}
-
-.textarea-half {
-  width: 50%;
-  max-height: 100px;
-  min-width: 50%;
-  max-width: 50%;
+  background-color: #d5ba5c;
 }
 
 

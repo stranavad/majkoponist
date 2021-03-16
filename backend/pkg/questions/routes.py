@@ -37,14 +37,14 @@ def get_correct_answers(question_ids):
     for question_id in question_ids:
         mycursor.execute("SELECT * FROM questions WHERE id = %s", (int(question_id),))
         res = mycursor.fetchone()
-        mycursor.close()
-        mydb.close()
         correct_answers[question_id] = {
             "id": question_id,
             "question": res[1],
             "correct_answer": res[2],
             "difficulty": res[6]
         }
+    mycursor.close()
+    mydb.close()
 
     return correct_answers
 
