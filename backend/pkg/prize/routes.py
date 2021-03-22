@@ -79,7 +79,7 @@ def send_mail(args):
     mail_global.send(msg)
 
     msg = Message(
-        "Gratulujeme k výhře v kvíze o Haně Hegerovej",
+        "Gratulujeme k výhre v kvíze o Hane Hegerovej",
         sender="hanahegerovaquiz@gmail.com",
         recipients=[args["email"]]
     )
@@ -105,8 +105,8 @@ def send_mail(args):
     www.apartmanyhana.sk
     FB: https://www.facebook.com/apartmanyhana
     """
-
-
+    msq.body = msq_body
+    mail_global.send(msq)
 
 
 def add_prize_result(args):
