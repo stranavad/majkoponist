@@ -151,7 +151,7 @@ class Prizes(Resource):
         args = get_prize_args.parse_args()
         if args['token'] == api_token:
             add_prize_result(args)  # Add prize to user
-            send_mail(args)  # Send mail to admin
+            send_mail(args)  # Send mail to admin and user
             return {"message": "Prize"}
         else:
             return {"message": "Wrong API token"}

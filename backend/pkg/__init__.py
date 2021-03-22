@@ -39,43 +39,9 @@ def create_app():
     app.config['MAIL_USE_SSL'] = True
     app.config['SECRET_KEY'] = "MajkoPonistSecretKey"
 
-    # Added
-    """ # Flask-MySQL configs
-    app.config["MYSQL_DATABASE_HOST"] = "139.162.161.156"
-    app.config["MYSQL_DATABASE_USER"] = "root"
-    app.config["MYSQL_DATABASE_PASSWORD"] = "<Code><Tech> 127521"
-    app.config["MYSQL_DATABASE_DB"] = "majkoponist"
-    """
-    """
-    app.config['MYSQL_HOST'] = '139.162.161.156'
-    app.config['MYSQL_PORT'] = 3306
-    app.config['MYSQL_USER'] = 'root'
-    app.config['MYSQL_PASS'] = '<Code><Tech> 127521'
-    app.config['MYSQL_DB'] = 'majkoponist'
-    app.config['MYSQL_POOL_NAME'] = 'mysql_pool'
-    app.config['MYSQL_POOL_SIZE'] = 5
-    # app.config['MYSQL_AUTOCOMMIT'] = True
-    """
-
-
     mail = Mail(app)
     global mail_global
     mail_global = mail
-
-    """
-    global mydb
-    global mycursor
-    mysql = MySQL()
-    mysql.init_app(app)
-    mydb = mysql.connect()
-    mycursor = mydb.cursor()
-    """
-    """
-    global mysql
-    mysql = MySQLPool(app)
-    # mydb = mysql.connection.get_connection()
-    # mycursor = mydb.cursor(dictionary=true)
-    """
 
     return app
 
