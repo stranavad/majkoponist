@@ -106,7 +106,8 @@ class Admin(Resource):
             # Prizes
             mycursor.execute("SELECT * FROM prizes")
             result = mycursor.fetchall()
-            mycursor.close()
+            # mycursor.close()
+            mydb.close()
             prizes = list()
             for res in result:
                 prizes.append({"id": res[0], "prize_name": res[1], "prize_information": res[2], "prize_image": res[4]})
@@ -131,7 +132,8 @@ class Admin(Resource):
             mycursor.execute("INSERT INTO questions (question, a_right, a2, a3, a4, difficulty) VALUES (%s, %s, %s, %s, %s, %s)",
                              (question_replaced, args["correct_answer"], args["a2"], args["a3"], args["a4"], args["difficulty"]))
             mydb.commit()
-            mycursor.close()
+            # mycursor.close()
+            mydb.close()
             return {
                 "question": args["question"],
                 "correct_answer": args["correct_answer"]
@@ -153,7 +155,8 @@ class Admin(Resource):
                 "INSERT INTO questions (question, a_right, a2, a3, a4, difficulty) VALUES (%s, %s, %s, %s, %s, %s)",
                 (args["question"], args["correct_answer"], args["a2"], args["a3"], args["a4"], args["difficulty"]))
             mydb.commit()
-            mycursor.close()
+            # mycursor.close()
+            mydb.close()
             return {
                 "message": "Question was updated",
                 "question": args["question"],
@@ -172,7 +175,8 @@ class Admin(Resource):
             mydb, mycursor = get_connection()
             mycursor.execute("DELETE FROM questions WHERE id = %s", (args["id"],))
             mydb.commit()
-            mycursor.close()
+            # mycursor.close()
+            mdyb.close()
             return {
                 "message": "Question was deleted"
             }

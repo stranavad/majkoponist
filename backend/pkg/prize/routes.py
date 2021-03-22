@@ -84,7 +84,7 @@ def send_mail(args):
         recipients=[args["email"]]
     )
 
-    msq_body = f"""
+    msg_body = f"""
     Vážený pán/pani {args["first_name"]} {args["last_name"]},
 
     prijmite od nás úprimnú gratuláciu k vašej výhre. V kvíze „Čo vieš o Hane“ ste dokázali, že o Hane Hegerovej máte naozaj skvelé vedomosti. Zostaňte naďalej jej fanúšikom.
@@ -105,8 +105,8 @@ def send_mail(args):
     www.apartmanyhana.sk
     FB: https://www.facebook.com/apartmanyhana
     """
-    msq.body = msq_body
-    mail_global.send(msq)
+    msg.body = msg_body
+    mail_global.send(msg)
 
 
 def add_prize_result(args):
@@ -116,7 +116,8 @@ def add_prize_result(args):
     sql = "UPDATE answered SET prize = JSON_SET(prize, '$.prize', %s) WHERE email = %s"
     mycursor.execute(sql, (json.dumps(prize), args["email"]))
     mydb.commit()
-    mycursor.close()
+    # mycursor.close()
+    mydb.close()
 
 
 class Prizes(Resource):
@@ -131,7 +132,8 @@ class Prizes(Resource):
             else:
                 mycursor.execute("SELECT * FROM prizes WHERE special = False")
             result = mycursor.fetchall()
-            mycursor.close()
+            # mycursor.close()
+            mydb.close()
             prizes_return = list()
             for res in result:
                 res_dict = {
@@ -165,7 +167,8 @@ class Prizes(Resource):
             mycursor.execute("INSERT INTO prizes (name, description, image) VALUES (%s, %s, %s)",
                              (args["name"], args["information"], args['image']))
             mydb.commit()
-            mycursor.close()
+            # mycursor.close()
+            mydb.close()
             return {"message": "Prize was added"}
         else:
             return {"message": "Wrong api token"}
@@ -181,7 +184,8 @@ class Prizes(Resource):
             mycursor.execute("INSERT INTO prizes (name, description, image) VALUES (%s, %s, %s)",
                              (args["name"], args["information"], args['image']))
             mydb.commit()
-            mycursor.close()
+            # mycursor.close()
+            mydb.close()
             return {"message": "Prize was edited"}
         else:
             return {"message": "Wrong api token"}
@@ -195,7 +199,8 @@ class Prizes(Resource):
             mycursor.execute("DELETE FROM prizes WHERE id = %s",
                              (args["id"],))
             mydb.commit()
-            mycursor.close()
+            # mycursor.close()
+            mydb.close()
             return {"message": "Prize was edited"}
         else:
             return {"message": "Wrong api token"}

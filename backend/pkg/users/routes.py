@@ -22,7 +22,8 @@ class Users(Resource):
             mydb, mycursor = get_connection()
             mycursor.execute("SELECT * FROM users")
             users_db = mycursor.fetchall()
-            mycursor.close()
+            # mycursor.close()
+            mydb.close()
             users = dict()
             for user in users_db:
                 users[user[0]] = {
@@ -55,7 +56,8 @@ class Users(Resource):
             mycursor.execute("INSERT INTO users (email, first_name, last_name, phone_number) VALUES (%s, %s, %s, %s)",
                              (args["user_email"], args["first_name"], args["last_name"], args["user_phone_number"]))
             mydb.commit()
-            mycursor.close()
+            # mycursor.close()
+            mydb.close()
             return {
                 "email": args["user_email"],
                 "first_name": args["first_name"],
