@@ -76,7 +76,10 @@ def send_mail(args):
         Odpovedal spravne: {obj["correct"]}
         """)
     msg.body = msg_body
-    mail_global.send(msg)
+    try:
+        mail_global.send(msg)
+     except SMTPException, e:
+        print(e)
 
     msg = Message(
         "Gratulujeme k výhre v kvíze o Hane Hegerovej",
@@ -106,7 +109,10 @@ def send_mail(args):
     FB: https://www.facebook.com/apartmanyhana
     """
     msg.body = msg_body
-    mail_global.send(msg)
+    try:
+        mail_global.send(msg)
+     except SMTPException, e:
+        print(e)
 
 
 def add_prize_result(args):
