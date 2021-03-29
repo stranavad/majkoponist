@@ -78,8 +78,8 @@ def send_mail(args):
     msg.body = msg_body
     try:
         mail_global.send(msg)
-     except SMTPException, e:
-        print(e)
+    except SMTPException:
+        print("Some error when sending email")
 
     msg = Message(
         "Gratulujeme k výhre v kvíze o Hane Hegerovej",
@@ -111,8 +111,8 @@ def send_mail(args):
     msg.body = msg_body
     try:
         mail_global.send(msg)
-     except SMTPException, e:
-        print(e)
+    except SMTPException:
+        print("Some error when sending email")
 
 
 def add_prize_result(args):
