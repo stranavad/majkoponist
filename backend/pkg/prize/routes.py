@@ -80,6 +80,15 @@ def send_mail(args):
         mail_global.send(msg)
     except SMTPException:
         print("Some error when sending email")
+        try:
+            msg = Message(
+                "Quiz, Hana Hegerova. Error.",
+                sender="hanahegerovaquiz@gmail.com",
+                recipients=["stranava.david@gmail.com"]
+            )
+            mail_global.send(msg)
+        except SMTPException:
+            print("You are screwed, the email aren't working")
 
     msg = Message(
         "Gratulujeme k výhre v kvíze o Hane Hegerovej",
@@ -113,6 +122,15 @@ def send_mail(args):
         mail_global.send(msg)
     except SMTPException:
         print("Some error when sending email")
+        try:
+            msg = Message(
+                "Quiz, Hana Hegerova. Error.",
+                sender="hanahegerovaquiz@gmail.com",
+                recipients=["stranava.david@gmail.com"]
+            )
+            mail_global.send(msg)
+        except SMTPException:
+            print("You are screwed, the email aren't working")
 
 
 def add_prize_result(args):
@@ -120,10 +138,22 @@ def add_prize_result(args):
     #  Setting the prize for the appropriate user
     prize = {"prize_name": args["prize_name"], "information": args["address"]}
     sql = "UPDATE answered SET prize = JSON_SET(prize, '$.prize', %s) WHERE email = %s"
-    mycursor.execute(sql, (json.dumps(prize), args["email"]))
-    mydb.commit()
-    # mycursor.close()
-    mydb.close()
+    try:
+        mycursor.execute(sql, (json.dumps(prize), args["email"]))
+        mydb.commit()
+        # mycursor.close()
+        mydb.close()
+    except mysql.connector.Error:
+        print("MySQL error")
+        try:
+            msg = Message(
+                "Quiz, Hana Hegerova. Error.",
+                sender="hanahegerovaquiz@gmail.com",
+                recipients=["stranava.david@gmail.com"]
+            )
+            mail_global.send(msg)
+        except SMTPException:
+            print("You are screwed, the email aren't working")
 
 
 class Prizes(Resource):
@@ -132,24 +162,37 @@ class Prizes(Resource):
     def get(self):
         args = get_prizes.parse_args()
         if args["token"] == api_token:
-            mydb, mycursor = get_connection()
-            if args["average"] == 1:
-                mycursor.execute("SELECT * FROM prizes")
-            else:
-                mycursor.execute("SELECT * FROM prizes WHERE special = False")
-            result = mycursor.fetchall()
-            # mycursor.close()
-            mydb.close()
-            prizes_return = list()
-            for res in result:
-                res_dict = {
-                    "id": res[0],
-                    "name": res[1],
-                    "description": res[2],
-                    "image": res[4],
-                }
-                prizes_return.append(res_dict)
-            return {"prizes": prizes_return}
+            try:
+                mydb, mycursor = get_connection()
+                if args["average"] == 1:
+                    mycursor.execute("SELECT * FROM prizes")
+                else:
+                    mycursor.execute("SELECT * FROM prizes WHERE special = False")
+                result = mycursor.fetchall()
+                # mycursor.close()
+                mydb.close()
+                prizes_return = list()
+                for res in result:
+                    res_dict = {
+                        "id": res[0],
+                        "name": res[1],
+                        "description": res[2],
+                        "image": res[4],
+                    }
+                    prizes_return.append(res_dict)
+                return {"prizes": prizes_return}
+            except mysql.connector.Error:
+                print("MySQL error")
+                try:
+                    msg = Message(
+                        "Quiz, Hana Hegerova. Error.",
+                        sender="hanahegerovaquiz@gmail.com",
+                        recipients=["stranava.david@gmail.com"]
+                    )
+                    mail_global.send(msg)
+                except SMTPException:
+                    print("You are screwed, the email aren't working")
+                return {"message": "Error"}
         else:
             return {"message": "Wrong api token"}
 
@@ -169,13 +212,26 @@ class Prizes(Resource):
     def put(self):
         args = create_prize.parse_args()
         if args["token"] == api_token:
-            mydb, mycursor = get_connection()
-            mycursor.execute("INSERT INTO prizes (name, description, image) VALUES (%s, %s, %s)",
-                             (args["name"], args["information"], args['image']))
-            mydb.commit()
-            # mycursor.close()
-            mydb.close()
-            return {"message": "Prize was added"}
+            try:
+                mydb, mycursor = get_connection()
+                mycursor.execute("INSERT INTO prizes (name, description, image) VALUES (%s, %s, %s)",
+                                 (args["name"], args["information"], args['image']))
+                mydb.commit()
+                # mycursor.close()
+                mydb.close()
+                return {"message": "Prize was added"}
+            except mysql.connector.Error:
+                print("MySQL error")
+                try:
+                    msg = Message(
+                        "Quiz, Hana Hegerova. Error.",
+                        sender="hanahegerovaquiz@gmail.com",
+                        recipients=["stranava.david@gmail.com"]
+                    )
+                    mail_global.send(msg)
+                except SMTPException:
+                    print("You are screwed, the email aren't working")
+                return {"message": "Error"}
         else:
             return {"message": "Wrong api token"}
 
@@ -184,15 +240,28 @@ class Prizes(Resource):
     def patch(self):
         args = update_prize.parse_args()
         if args["token"] == api_token:
-            mydb, mycursor = get_connection()
-            mycursor.execute("DELETE FROM prizes WHERE id = %s", (args["id"],))
-            mydb.commit()
-            mycursor.execute("INSERT INTO prizes (name, description, image) VALUES (%s, %s, %s)",
-                             (args["name"], args["information"], args['image']))
-            mydb.commit()
-            # mycursor.close()
-            mydb.close()
-            return {"message": "Prize was edited"}
+            try:
+                mydb, mycursor = get_connection()
+                mycursor.execute("DELETE FROM prizes WHERE id = %s", (args["id"],))
+                mydb.commit()
+                mycursor.execute("INSERT INTO prizes (name, description, image) VALUES (%s, %s, %s)",
+                                 (args["name"], args["information"], args['image']))
+                mydb.commit()
+                # mycursor.close()
+                mydb.close()
+                return {"message": "Prize was edited"}
+            except mysql.connector.Error:
+                print("MySQL error")
+                try:
+                    msg = Message(
+                        "Quiz, Hana Hegerova. Error.",
+                        sender="hanahegerovaquiz@gmail.com",
+                        recipients=["stranava.david@gmail.com"]
+                    )
+                    mail_global.send(msg)
+                except SMTPException:
+                    print("You are screwed, the email aren't working")
+                return {"message": "Error"}
         else:
             return {"message": "Wrong api token"}
 
@@ -201,12 +270,25 @@ class Prizes(Resource):
     def delete(self):
         args = delete_prize.parse_args()
         if args["token"] == api_token:
-            mydb, mycursor = get_connection()
-            mycursor.execute("DELETE FROM prizes WHERE id = %s",
-                             (args["id"],))
-            mydb.commit()
-            # mycursor.close()
-            mydb.close()
-            return {"message": "Prize was edited"}
+            try:
+                mydb, mycursor = get_connection()
+                mycursor.execute("DELETE FROM prizes WHERE id = %s",
+                                 (args["id"],))
+                mydb.commit()
+                # mycursor.close()
+                mydb.close()
+                return {"message": "Prize was edited"}
+            except mysql.connector.Error:
+                print("MySQL error")
+                try:
+                    msg = Message(
+                        "Quiz, Hana Hegerova. Error.",
+                        sender="hanahegerovaquiz@gmail.com",
+                        recipients=["stranava.david@gmail.com"]
+                    )
+                    mail_global.send(msg)
+                except SMTPException:
+                    print("You are screwed, the email aren't working")
+                return {"message": "Error"}
         else:
             return {"message": "Wrong api token"}

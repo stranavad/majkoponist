@@ -32,22 +32,34 @@ def sort_questions(all_questions):
 
 def get_correct_answers(question_ids):
     # Getting correct_answers from database and creating datatype that we can work with
-    mydb, mycursor = get_connection()
-    correct_answers = dict()
-    for question_id in question_ids:
-        mycursor.execute("SELECT * FROM questions WHERE id = %s", (int(question_id),))
-        res = mycursor.fetchone()
-        correct_answers[question_id] = {
-            "id": question_id,
-            "question": res[1],
-            "correct_answer": res[2],
-            "difficulty": res[6]
-        }
-    mycursor.close()
-    mydb.close()
+    try:
+        mydb, mycursor = get_connection()
+        correct_answers = dict()
+        for question_id in question_ids:  # TODO extremly slow to make that number of selects from DB, rewrite
+            mycursor.execute("SELECT * FROM questions WHERE id = %s", (int(question_id),))
+            res = mycursor.fetchone()
+            correct_answers[question_id] = {
+                "id": question_id,
+                "question": res[1],
+                "correct_answer": res[2],
+                "difficulty": res[6]
+            }
 
-    return correct_answers
-
+        return correct_answers
+        mycursor.close()
+        mydb.close()
+    except mysql.connector.Error:
+        print("MySQL error")
+        try:
+            msg = Message(
+                "Quiz, Hana Hegerova. Error.",
+                sender="hanahegerovaquiz@gmail.com",
+                recipients=["stranava.david@gmail.com"]
+            )
+            mail_global.send(msg)
+        except SMTPException:
+            print("You are screwed, the email aren't working")
+        return {"message": "Error"}
 
 def sum_of_list(num_list):
     # Total sum of numbers in a list
@@ -62,7 +74,7 @@ def send_email(email_scheme, email, first_name, last_name, phone_number):
     msg = Message(
         "Dalsi vyherce kvizu Hany Hegerovej",
         sender="hanahegerovaquiz@gmail.com",
-        recipients=["mr.ajemifajn@protonmail.com"]
+        recipients=["mr.ajemifajn@protonmail.com, stranava.david@gmail.com"]
     )
 
     msg_body = f"""
@@ -81,43 +93,67 @@ def send_email(email_scheme, email, first_name, last_name, phone_number):
             Odpovedal spravne: {answer["correct"]}
             """)
     msg.body = msg_body
-    mail_global.send(msg)
+    try:
+        mail_global.send(msg)
+    except SMTPException:
+        print("Some error when sending email")
+        try:
+            msg = Message(
+                "Quiz, Hana Hegerova. Error.",
+                sender="hanahegerovaquiz@gmail.com",
+                recipients=["stranava.david@gmail.com"]
+            )
+            mail_global.send(msg)
+        except SMTPException:
+            print("You are screwed, the email aren't working")
 
 
 def add_result(email, name, phone_number, answers_scheme, average):
-    mydb, mycursor = get_connection()
-    mycursor.execute("SELECT * FROM answered WHERE email = %s", (email,))
-    res = mycursor.fetchall()
-    questions_dict = dict()
-    for question in answers_scheme:
-        questions_dict[question["question"]] = {"difficulty": question["difficulty"], "user_answer": question["user_answer"], "correct_answer": question["correct_answer"], "correct": question["correct"]}
+    try:
+        mydb, mycursor = get_connection()
+        mycursor.execute("SELECT * FROM answered WHERE email = %s", (email,))
+        res = mycursor.fetchall()
+        questions_dict = dict()
+        for question in answers_scheme:
+            questions_dict[question["question"]] = {"difficulty": question["difficulty"], "user_answer": question["user_answer"], "correct_answer": question["correct_answer"], "correct": question["correct"]}
 
-    if not res:
-        data = (
-            email,
-            name,
-            phone_number,
-            json.dumps({"score1": average, "score2": 0, "score3": 0}),
-            json.dumps({"questions1": questions_dict, "questions2": "", "questions3": ""}),
-            1,
-            json.dumps({"prize": "none"})
-        )
-        sql = "INSERT INTO answered (email, name, phone_number, score, answers, answered, prize) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-        mycursor.execute(sql, data)
-        mydb.commit()
-    else:
-        if res[0][6] == 1:
-            sql = "UPDATE answered SET score = JSON_SET(score, '$.score2', %s) AND answers = JSON_SET(answers, '$.questions2', %s) AND answered = 2 WHERE email = %s"
-            mycursor.execute(sql, (average, questions_dict, email))
-            mydb.commit()
-        elif res[0][6] == 2:
-            sql = "UPDATE answered SET score = JSON_SET(score, '$.score3', %s) AND answers = JSON_SET(answers, '$.questions3', %s) AND answered = 2 WHERE email = %s"
-            mycursor.execute(sql, (average, questions_dict, email))
+        if not res:
+            data = (
+                email,
+                name,
+                phone_number,
+                json.dumps({"score1": average, "score2": 0, "score3": 0}),
+                json.dumps({"questions1": questions_dict, "questions2": "", "questions3": ""}),
+                1,
+                json.dumps({"prize": "none"})
+            )
+            sql = "INSERT INTO answered (email, name, phone_number, score, answers, answered, prize) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+            mycursor.execute(sql, data)
             mydb.commit()
         else:
-            print("You are stupid mate")
-    mycursor.close()
-    mydb.close()
+            if res[0][6] == 1:
+                sql = "UPDATE answered SET score = JSON_SET(score, '$.score2', %s) AND answers = JSON_SET(answers, '$.questions2', %s) AND answered = 2 WHERE email = %s"
+                mycursor.execute(sql, (average, questions_dict, email))
+                mydb.commit()
+            elif res[0][6] == 2:
+                sql = "UPDATE answered SET score = JSON_SET(score, '$.score3', %s) AND answers = JSON_SET(answers, '$.questions3', %s) AND answered = 2 WHERE email = %s"
+                mycursor.execute(sql, (average, questions_dict, email))
+                mydb.commit()
+            else:
+                print("You are stupid mate")
+        mycursor.close()
+        mydb.close()
+    except mysql.connector.Error:
+        print("MySQL error")
+        try:
+            msg = Message(
+                "Quiz, Hana Hegerova. Error.",
+                sender="hanahegerovaquiz@gmail.com",
+                recipients=["stranava.david@gmail.com"]
+            )
+            mail_global.send(msg)
+        except SMTPException:
+            print("You are screwed, the email aren't working")
 
 
 def make_average(scheme):
@@ -165,26 +201,39 @@ class Questions(Resource):
     def get(self):
         token_arg = token_parser.parse_args()
         if token_arg["token"] == api_token:
-            mydb, mycursor = get_connection()
-            mycursor.execute("SELECT * FROM questions")  # Getting all questions from DB
-            result = mycursor.fetchall()
-            # mycursor.close()
-            mydb.close()
+            try:
+                mydb, mycursor = get_connection()
+                mycursor.execute("SELECT * FROM questions")  # Getting all questions from DB
+                result = mycursor.fetchall()
+                # mycursor.close()
+                mydb.close()
 
-            df_one, df_two, df_three = [], [], []
-            # Converting db result to lists by difficulty
-            for question in result:
-                if question[6] == 1:
-                    df_one.append(question)
-                elif question[6] == 2:
-                    df_two.append(question)
-                elif question[6] == 3:
-                    df_three.append(question)
-                else:
-                    print("You are stupid")
+                df_one, df_two, df_three = [], [], []
+                # Converting db result to lists by difficulty
+                for question in result:
+                    if question[6] == 1:
+                        df_one.append(question)
+                    elif question[6] == 2:
+                        df_two.append(question)
+                    elif question[6] == 3:
+                        df_three.append(question)
+                    else:
+                        print("You are stupid")
 
-            questions_list = sort_questions([df_one, df_two, df_three])  # Choosing 7 random question from each difficulty
-            return {"questions": questions_list}
+                questions_list = sort_questions([df_one, df_two, df_three])  # Choosing 7 random question from each difficulty
+                return {"questions": questions_list}
+            except mysql.connector.Error:
+                print("MySQL error")
+                try:
+                    msg = Message(
+                        "Quiz, Hana Hegerova. Error.",
+                        sender="hanahegerovaquiz@gmail.com",
+                        recipients=["stranava.david@gmail.com"]
+                    )
+                    mail_global.send(msg)
+                except SMTPException:
+                    print("You are screwed, the email aren't working")
+                return {"message": "Error"}
         else:
             return {
                 "message": "Wrong token"
@@ -207,6 +256,8 @@ class Questions(Resource):
                 question_ids.append(question_id)
 
             correct_answers = get_correct_answers(question_ids)
+            if correct_answers = "error":
+                return {"message": "Error"}
 
             # Converting data to display on web, with all of the items in question
             for answer in answers:

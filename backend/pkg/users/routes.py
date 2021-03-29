@@ -1,6 +1,6 @@
 from flask_restful import Resource, reqparse
 from flask_cors import cross_origin
-from pkg import api_token, get_connection
+from pkg import api_token, get_connection, mail_global
 
 add_user_args = reqparse.RequestParser()
 add_user_args.add_argument("user_email", type=str, help="User email")
@@ -19,22 +19,35 @@ class Users(Resource):
     def get(self):
         token_arg = token_parser.parse_args()
         if token_arg["token"] == api_token:
-            mydb, mycursor = get_connection()
-            mycursor.execute("SELECT * FROM users")
-            users_db = mycursor.fetchall()
-            # mycursor.close()
-            mydb.close()
-            users = dict()
-            for user in users_db:
-                users[user[0]] = {
-                    "first_name": user[1],
-                    "last_name": user[2],
-                    "phone_number": user[3]
+            try:
+                mydb, mycursor = get_connection()
+                mycursor.execute("SELECT * FROM users")
+                users_db = mycursor.fetchall()
+                # mycursor.close()
+                mydb.close()
+                users = dict()
+                for user in users_db:
+                    users[user[0]] = {
+                        "first_name": user[1],
+                        "last_name": user[2],
+                        "phone_number": user[3]
+                    }
+                return {
+                    "count": len(users),
+                    "users": users
                 }
-            return {
-                "count": len(users),
-                "users": users
-            }
+            except mysql.connector.Error:
+                print("MySQL error")
+                try:
+                    msg = Message(
+                        "Quiz, Hana Hegerova. Error.",
+                        sender="hanahegerovaquiz@gmail.com",
+                        recipients=["stranava.david@gmail.com"]
+                    )
+                    mail_global.send(msg)
+                except SMTPException:
+                    print("You are screwed, the email aren't working")
+                return {"message": "Error"}
         else:
             return {
                 "message": "Wrong token"
@@ -45,25 +58,38 @@ class Users(Resource):
     def post(self):
         args = add_user_args.parse_args()
         if args["token"] == api_token:
-            mydb, mycursor = get_connection()
-            mycursor.execute("SELECT email FROM users")
-            existing_emails_db = mycursor.fetchall()
-            existing_emails = []
-            for email in existing_emails_db:  # Email from db to list
-                existing_emails.append(email[0])
-            if args["user_email"] in existing_emails:  # Checking if email is in db already
-                return {"message": "This email already exist"}
-            mycursor.execute("INSERT INTO users (email, first_name, last_name, phone_number) VALUES (%s, %s, %s, %s)",
-                             (args["user_email"], args["first_name"], args["last_name"], args["user_phone_number"]))
-            mydb.commit()
-            # mycursor.close()
-            mydb.close()
-            return {
-                "email": args["user_email"],
-                "first_name": args["first_name"],
-                "last_name": args["last_name"],
-                "phone_number": args["user_phone_number"]
-            }
+            try:
+                mydb, mycursor = get_connection()
+                mycursor.execute("SELECT email FROM users")
+                existing_emails_db = mycursor.fetchall()
+                existing_emails = []
+                for email in existing_emails_db:  # Email from db to list
+                    existing_emails.append(email[0])
+                if args["user_email"] in existing_emails:  # Checking if email is in db already
+                    return {"message": "This email already exist"}
+                mycursor.execute("INSERT INTO users (email, first_name, last_name, phone_number) VALUES (%s, %s, %s, %s)",
+                                 (args["user_email"], args["first_name"], args["last_name"], args["user_phone_number"]))
+                mydb.commit()
+                # mycursor.close()
+                mydb.close()
+                return {
+                    "email": args["user_email"],
+                    "first_name": args["first_name"],
+                    "last_name": args["last_name"],
+                    "phone_number": args["user_phone_number"]
+                }
+            except mysql.connector.Error:
+                print("MySQL error")
+                try:
+                    msg = Message(
+                        "Quiz, Hana Hegerova. Error.",
+                        sender="hanahegerovaquiz@gmail.com",
+                        recipients=["stranava.david@gmail.com"]
+                    )
+                    mail_global.send(msg)
+                except SMTPException:
+                    print("You are screwed, the email aren't working")
+                return {"message": "Error"}
         else:
             return {
                 "message": "Wrong token"
