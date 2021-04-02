@@ -165,7 +165,7 @@ class Prizes(Resource):
         if args["token"] == api_token:
             try:
                 mydb, mycursor = get_connection()
-                if args["average"] == 1:
+                if int(args["average"]) == 1:
                     mycursor.execute("SELECT * FROM prizes")
                 else:
                     mycursor.execute("SELECT * FROM prizes WHERE special = False")
