@@ -4,6 +4,7 @@ from flask_mail import Message
 from pkg import api_token, mail_global, get_connection
 import random
 import json
+import mysql.connector
 
 
 def sort_questions(all_questions):
@@ -256,7 +257,7 @@ class Questions(Resource):
                 question_ids.append(question_id)
 
             correct_answers = get_correct_answers(question_ids)
-            if correct_answers = "error":
+            if correct_answers == "error":
                 return {"message": "Error"}
 
             # Converting data to display on web, with all of the items in question

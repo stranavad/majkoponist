@@ -1,6 +1,7 @@
 from flask_restful import Resource, reqparse
 from flask_cors import cross_origin
 from pkg import api_token, get_connection, mail_global
+import mysql.connector
 
 add_user_args = reqparse.RequestParser()
 add_user_args.add_argument("user_email", type=str, help="User email")

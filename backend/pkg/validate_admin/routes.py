@@ -1,6 +1,7 @@
 from flask_restful import Resource, reqparse
 from flask_cors import cross_origin
 from pkg import api_token, admin_email, admin_password
+import mysql.connector
 
 validate_admin = reqparse.RequestParser()
 validate_admin.add_argument("email", type=str, help="Admin email")

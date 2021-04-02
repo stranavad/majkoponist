@@ -3,6 +3,7 @@ from flask_cors import cross_origin
 from flask_mail import Message
 from pkg import api_token, mail_global, mail_to_send, get_connection
 import json
+import mysql.connector
 
 
 

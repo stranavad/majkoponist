@@ -2,6 +2,7 @@ from flask_restful import Resource, reqparse
 from flask_cors import cross_origin
 from pkg import api_token, get_connection, mail_global
 import json
+import mysql.connector
 
 create_question_args = reqparse.RequestParser()
 create_question_args.add_argument("question", type=str, help="Question")

@@ -47,24 +47,8 @@ def create_app():
 
 
 def get_connection():
-    for i in range(0, 3):
-        try:
-            db = mysql.connector.connect(pool_name = "batman")
-            return db, db.cursor()
-        except mysql.connector.Error:
-            print("MySQL error in getting pool connection")
-            try:
-                msg = Message(
-                    "Quiz, Hana Hegerova. Error.",
-                    sender="hanahegerovaquiz@gmail.com",
-                    recipients=["stranava.david@gmail.com"]
-                )
-                mail_global.send(msg)
-            except SMTPException:
-                print("You are screwed, the email aren't working")
-            return {"message": "Error"}
-        finally:
-            return {"message": "error"}
+    db = mysql.connector.connect(pool_name = "batman")
+    return db, db.cursor()
 
 
 def create_api(app):
