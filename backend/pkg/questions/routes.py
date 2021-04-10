@@ -49,7 +49,7 @@ def get_correct_answers(question_ids):
                         "correct_answer": question[2],
                         "difficulty": question[6]
                     }
-                    break
+                    continue
 
         return correct_answers
         mycursor.close()
