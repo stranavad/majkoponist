@@ -36,15 +36,20 @@ def get_correct_answers(question_ids):
     try:
         mydb, mycursor = get_connection()
         correct_answers = dict()
-        for question_id in question_ids:  # TODO extremly slow to make that number of selects from DB, rewrite
-            mycursor.execute("SELECT * FROM questions WHERE id = %s", (int(question_id),))
-            res = mycursor.fetchone()
-            correct_answers[question_id] = {
-                "id": question_id,
-                "question": res[1],
-                "correct_answer": res[2],
-                "difficulty": res[6]
-            }
+        mycursor.execute("SELECT * FROM questions")
+        correct_from_db = mycursor.fetchall()
+        for question_id in question_ids:  # extremly slow to make that number of selects from DB, rewrite
+            # mycursor.execute("SELECT * FROM questions WHERE id = %s", (int(question_id),))
+            # res = mycursor.fetchone()
+            for question in correct_from_db:
+                if questions_id == question[0]:
+                    correct_answers[question_id] = {
+                        "id": question_id,
+                        "question": question[1],
+                        "correct_answer": question[2],
+                        "difficulty": question[6]
+                    }
+                    break
 
         return correct_answers
         mycursor.close()
