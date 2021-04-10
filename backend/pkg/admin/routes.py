@@ -45,9 +45,7 @@ class Admin(Resource):
                 answered = list()
                 for answer in answered_db:
                     questions_db_json = json.loads(answer[5])
-                    questions_list_1 = list()
-                    questions_list_2 = list()
-                    questions_list_3 = list()
+                    questions_list_1, question_list_2, question_list_3 = list(), list(), list()
                     if questions_db_json["questions1"]:
                         for question in questions_db_json["questions1"]:
                             questions_list_1.append({

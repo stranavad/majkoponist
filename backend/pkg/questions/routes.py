@@ -181,12 +181,10 @@ def make_average(scheme):
                 diff3.append(0)
             else:
                 diff3.append(1)
-        else:
-            print("There was some error in the average section")
     diff1_avg = sum_of_list(diff1) / len(diff1)
     diff2_avg = sum_of_list(diff2) / len(diff2)
     diff3_avg = sum_of_list(diff3) / len(diff3)
-    avg = (diff1_avg + diff2_avg * 2 + diff3_avg * 3) / 6  # 10 is the number of nums, 1+2+3+4
+    avg = (diff1_avg + diff2_avg * 2 + diff3_avg * 3) / 6
     return avg
 
 
@@ -211,7 +209,6 @@ class Questions(Resource):
                 mydb, mycursor = get_connection()
                 mycursor.execute("SELECT * FROM questions")  # Getting all questions from DB
                 result = mycursor.fetchall()
-                # mycursor.close()
                 mydb.close()
 
                 df_one, df_two, df_three = [], [], []
@@ -223,8 +220,6 @@ class Questions(Resource):
                         df_two.append(question)
                     elif question[6] == 3:
                         df_three.append(question)
-                    else:
-                        print("You are stupid")
 
                 questions_list = sort_questions([df_one, df_two, df_three])  # Choosing 7 random question from each difficulty
                 return {"questions": questions_list}
