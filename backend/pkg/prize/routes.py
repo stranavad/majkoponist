@@ -78,7 +78,9 @@ def send_mail(args):
         """)
     msg.body = msg_body
     try:
+        # print("Sending mail")
         mail_global.send(msg)
+        # print("Mail send")
     except SMTPException:
         print("Some error when sending email")
         try:
@@ -89,7 +91,7 @@ def send_mail(args):
             )
             mail_global.send(msg)
         except SMTPException:
-            print("You are screwed, the email aren't working")
+            print("You are screwed, the emails aren't working")
 
     msg = Message(
         "Gratulujeme k výhre v kvíze o Hane Hegerovej",
@@ -120,7 +122,9 @@ def send_mail(args):
     """
     msg.body = msg_body
     try:
+        # print("Sending mail")
         mail_global.send(msg)
+        # print("Mail send")
     except SMTPException:
         print("Some error when sending email")
         try:
@@ -131,7 +135,7 @@ def send_mail(args):
             )
             mail_global.send(msg)
         except SMTPException:
-            print("You are screwed, the email aren't working")
+            print("You are screwed, the emails aren't working")
 
 
 def add_prize_result(args):
