@@ -10,7 +10,7 @@ class Prize extends Component {
         let img;
         img = require("./assets/" + this.props.prize.image).default;
         let component;
-        if (this.props.average == 1 && this.props.prize.special == true){
+        if (this.props.average === 1 && this.props.prize.special === 1){
             component = <button className="large-button" onClick={this.onSelectPrize}>Vybrat tuto vyhru</button>;
         } else {
             component = "";
