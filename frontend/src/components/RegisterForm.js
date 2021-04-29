@@ -28,12 +28,13 @@ class RegisterForm extends Component {
                 <div className="column-container">
                     <h1 className="medium-heading">Pravidlá a postup hry</h1>
                     <ul className="rules-list">
-                        <li>Zaregistrujte se.</li>
-                        <li>Po registrácii dostanete 21 otázok so 4 možnosťami na odpoveď. Na každú odpoveď máte stanovený čas 30 sekúnd.</li>
-                        <li>Po skončení kvízu sa vám zobrazí váš výsledok,  všetky položené otázky aj správne odpovede.</li>
-                        <li>Ak bude vaša úspešnosť vyššia ako 80% budete si môcť vybrať z troch vecných cien.</li>
+                        <li>Zaregistrujte sa.</li>
+                        <li>Po registrácii dostanete 21 otázok a 4 možnosti na odpoveď. Na každú z nich máte stanovený časový limit 30 sekúnd.</li>
+                        <li>Po skončení kvízu sa zobrazí váš výsledok, všetky položené otázky aj správne odpovede.</li>
+                        <li>Ak bude vaša úspešnosť vyššia ako 80% máte možnosť výberu z troch vecných cien.</li>
                         <li>Pri 100% bilancii získate víkendový pobyt v dome Hany Hegerovej www.aprtmanyhana.sk.</li>
-                        <li>Ak váš výsledok bude nižší ako 80% nezúfajte. Dozvedeli ste sa aspoň niečo o pani Hanke, čo ste do teraz nevedeli a dáme Vám ešte 3 pokusy na to aby ste to mohli napraviť.</li>
+                        <li>Ak váš výsledok bude nižší ako 80% nezúfajte. Dozvedeli ste sa predsa veľa nového o Vašej obľúbenej speváčke a dáme Vám ako bonus ešte 3 opravné pokusy.</li>
+                        <li>Príjemnú zábavu.</li>
                     </ul>
                 </div>
                 <div className="column-container">
@@ -55,7 +56,7 @@ class RegisterForm extends Component {
                             type="text"
                             name="first_name"
                             className="text-input"
-                            placeholder="Křestní jméno"
+                            placeholder="Krstné meno"
                             value={this.state.first_name}
                             onChange={this.onChangeValue}
                             required
@@ -66,7 +67,7 @@ class RegisterForm extends Component {
                             type="text"
                             name="last_name"
                             className="text-input"
-                            placeholder="Příjmení"
+                            placeholder="Priezvisko"
                             value={this.state.last_name}
                             onChange={this.onChangeValue}
                             required

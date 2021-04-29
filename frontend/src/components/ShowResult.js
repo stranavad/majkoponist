@@ -64,7 +64,7 @@ class ShowResult extends Component {
         } else {
             if (this.state.show_prizes === true) {
                 //component_main =  <Prizes onSelect={this.onSelectPrize} prizes={this.state.prizes}/>;
-                component_main = <ShowPrizes prizes={this.state.prizes} onSelect={this.onSelectPrize}/>;
+                component_main = <ShowPrizes prizes={this.state.prizes} onSelect={this.onSelectPrize} average={this.props.average_raw}/>;
             } else {
                 component_main = <ShowQuestions questions={this.props.questions}/>
                 if (this.props.winner === "true") {
@@ -78,7 +78,7 @@ class ShowResult extends Component {
         }
         return(
             <div className="container">
-                <h1 className="medium-heading">Vas vysledek: {this.props.average} spravne</h1>
+                <h1 className="medium-heading">Váš výsledok : {this.props.average}</h1>
                 {component}
                 {component_main}
             </div>

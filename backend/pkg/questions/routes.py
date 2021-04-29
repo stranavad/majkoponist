@@ -276,7 +276,7 @@ class Questions(Resource):
             add_result(args["email"], args["name"], args["phone_number"], answers_scheme, average)
             result = {
                 "average": str(int(average * 100)) + "%",
-                "average_raw": int(average),
+                "average_raw": float(average),
                 "scheme": answers_scheme,
                 "winner": "false",
             }

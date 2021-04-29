@@ -9,8 +9,8 @@ class PlayScreen extends Component {
     render() {
         return(
             <div className="container-center">
-                <h2 className="medium-heading">Zacit kviz</h2>
-                <p className="medium-text">Ve kvizu je 21 otazkem, pricemz na kazdou otazku mate 30s. Kazda otazka ma 4 odpovedi, z toho pouze jedna je spravna</p>
+                <h2 className="medium-heading">Začať kvíz</h2>
+                <p className="medium-text">Kvíz obsahuje 21 otázok a 4 možné odpovede. Na každú z nich máte časový limit 30 sekúnd.</p>
                 <button className="large-button" onClick={this.props.playButton}>Hrat!</button>
             </div>
         );

@@ -15,13 +15,29 @@ class ShowQuestion extends Component {
     }
 
     render() {
+        let questionCategory;
+        if(this.props.question.difficulty == 1) {
+            questionCategory = "A";
+        } else if(this.props.question.difficulty == 2){
+            questionCategory = "B";
+        } else {
+            questionCategory = "C";
+        }
+        
+        let correct;
+        if(this.props.question.correct == "Ano") {
+            correct = "Správne";
+        } else {
+            correct = "Nesprávne";
+        }
+
         return(
             <div className="show-result-question">
-                <p className="small-text">Obtiznost: {this.props.question.difficulty}</p>
                 <h2 className="show-result-question-heading">{this.props.question.question}</h2>
-                <p className="small-text">Vase odpoved: {this.state.user_answer}</p>
-                <p className="small-text">Spravna odpoved: {this.props.question.correct_answer}</p>
-                <p className="medium-text">Spravne: {this.props.question.correct}</p>
+                <p className="small-text">Kategória otázky: {questionCategory}</p>
+                <p className="small-text">Vaša odpoveď: {this.state.user_answer}</p>
+                <p className="small-text">Správna odpoveď: {this.props.question.correct_answer}</p>
+                <p className="small-text">Vyhodnotenie: {correct}</p>
             </div>
         );
     }

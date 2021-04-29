@@ -169,10 +169,11 @@ class Prizes(Resource):
         if args["token"] == api_token:
             try:
                 mydb, mycursor = get_connection()
-                if int(args["average"]) == 1:
-                    mycursor.execute("SELECT * FROM prizes")
-                else:
-                    mycursor.execute("SELECT * FROM prizes WHERE special = False")
+                # if int(args["average"]) == 1:
+                    # mycursor.execute("SELECT * FROM prizes")
+                # else:
+                    # mycursor.execute("SELECT * FROM prizes WHERE special = False")
+                mycursor.execute("SELECT * FROM prizes")
                 result = mycursor.fetchall()
                 # mycursor.close()
                 mydb.close()
@@ -182,6 +183,7 @@ class Prizes(Resource):
                         "id": res[0],
                         "name": res[1],
                         "description": res[2],
+                        "special": res[3],
                         "image": res[4],
                     }
                     prizes_return.append(res_dict)

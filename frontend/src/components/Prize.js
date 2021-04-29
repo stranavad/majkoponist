@@ -9,11 +9,17 @@ class Prize extends Component {
     render() {
         let img;
         img = require("./assets/" + this.props.prize.image).default;
+        let component;
+        if (this.props.average == 1 && this.props.prize.special == true){
+            component = <button className="large-button" onClick={this.onSelectPrize}>Vybrat tuto vyhru</button>;
+        } else {
+            component = "";
+        }
         return(
             <div className="question">
                 <h2 className="medium-heading">{this.props.prize.name}</h2>
                 <p className="medium-text">{this.props.prize.description}</p>
-                <button className="large-button" onClick={this.onSelectPrize}>Vybrat tuto vyhru</button>
+                {component}
                 <img src={img} className="prize-img" alt="Prize"/>
             </div>
         );
@@ -22,7 +28,8 @@ class Prize extends Component {
 
 Prize.propTypes = {
     prize: PropTypes.object.isRequired,
-    onSelect: PropTypes.func.isRequired
+    onSelect: PropTypes.func.isRequired,
+    average: PropTypes.string.isRequired
 }
 
 export default Prize;
