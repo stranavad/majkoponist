@@ -12,8 +12,10 @@ class Prize extends Component {
         let component;
         if (this.props.average === 1 && this.props.prize.special === 1){
             component = <button className="large-button" onClick={this.onSelectPrize}>Vybrat tuto vyhru</button>;
-        } else {
+        } else if (this.props.prize.special === 1){
             component = "";
+        } else {
+            component = <button className="large-button" onClick={this.onSelectPrize}>Vybrat tuto vyhru</button>;
         }
         return(
             <div className="question">
