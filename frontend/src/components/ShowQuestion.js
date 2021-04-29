@@ -16,16 +16,16 @@ class ShowQuestion extends Component {
 
     render() {
         let questionCategory;
-        if(this.props.question.difficulty == 1) {
+        if(this.props.question.difficulty === 1) {
             questionCategory = "A";
-        } else if(this.props.question.difficulty == 2){
+        } else if(this.props.question.difficulty === 2){
             questionCategory = "B";
         } else {
             questionCategory = "C";
         }
-        
+
         let correct;
-        if(this.props.question.correct == "Ano") {
+        if(this.props.question.correct === "Ano") {
             correct = "Správne";
         } else {
             correct = "Nesprávne";

@@ -9,9 +9,9 @@ class Question extends Component {
 
     render() {
         let questionCategory;
-        if(this.props.question.difficulty == 1) {
+        if(this.props.question.difficulty === 1) {
             questionCategory = "A";
-        } else if(this.props.question.difficulty == 2){
+        } else if(this.props.question.difficulty === 2){
             questionCategory = "B";
         } else {
             questionCategory = "C";
