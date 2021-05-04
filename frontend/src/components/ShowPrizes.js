@@ -5,7 +5,7 @@ import Prize from './Prize';
 class ShowPrizes extends Component {
     render() {
         return this.props.prizes.map((prize) => (
-            <Prize prize={prize} key={prize.id} onSelect={this.props.onSelect} average={this.props.average}/>
+            <Prize prize={prize} key={prize.id} onSelect={this.props.onSelect} average={this.props.average} winner={this.props.winner}/>
         ));
     }
 }
@@ -13,7 +13,8 @@ class ShowPrizes extends Component {
 ShowPrizes.propTypes = {
     prizes: PropTypes.array.isRequired,
     onSelect: PropTypes.func.isRequired,
-    average: PropTypes.string.isRequired
+    average: PropTypes.number.isRequired,
+    winner: PropTypes.bool.isRequired,
 }
 
 export default ShowPrizes

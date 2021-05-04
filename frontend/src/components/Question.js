@@ -57,22 +57,3 @@ Question.propTypes = {
 };
 
 export default Question;
-
-/* 
-<div className="radio-group">
-                            <input className="radio-button" type="radio" id="answer" name="answer" value={this.props.question.a1} checked={this.state.answer === this.props.question.a1} onChange={this.onChangeAnswer}/>
-                            <label for={this.props.question.a1}>{this.props.question.a1}</label>
-                        </div>
-                        <div className="radio-group">
-                            <input className="radio-button" type="radio" id="answer" name="answer" value={this.props.question.a2} checked={this.state.answer === this.props.question.a2} onChange={this.onChangeAnswer}/>
-                            <label for={this.props.question.a2}>{this.props.question.a2}</label>
-                        </div>
-                        <div className="radio-group">
-                            <input className="radio-button" type="radio" id="answer" name="answer" value={this.props.question.a3} checked={this.state.answer === this.props.question.a3} onChange={this.onChangeAnswer}/>
-                            <label for={this.props.question.a3}>{this.props.question.a3}</label>
-                        </div>
-                        <div className="radio-group">
-                            <input className="radio-button" type="radio" id="answer" name="answer" value={this.props.question.a4} checked={this.state.answer === this.props.question.a4} onChange={this.onChangeAnswer}/>
-                            <label for={this.props.question.a4}>{this.props.question.a4}</label>
-                        </div>
-*/

@@ -69,4 +69,5 @@ def create_api(app):
     from pkg.prize.routes import Prizes
     api.add_resource(Prizes, "/prizes")
 
+
     return api

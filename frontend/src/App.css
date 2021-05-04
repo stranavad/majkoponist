@@ -138,6 +138,7 @@ body {
   width: 850px;
 }
 
+
 .horizontal-container {
   display: flex;
 }
@@ -448,7 +449,11 @@ body {
 }
 
 .prize-img {
-  max-width: 50vh;
+  max-width: 100%;
+}
+
+.margin-bottom {
+  margin-bottom: 1em;
 }
 
 
