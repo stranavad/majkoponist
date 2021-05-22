@@ -9,6 +9,7 @@ import Admin from './components/admin/Admin';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faVolumeUp } from '@fortawesome/free-solid-svg-icons'
 import HomePage from './components/HomePage';
+import Menu from './components/Menu';
 
 class App extends Component {
   playAudio = () => {
@@ -24,9 +25,7 @@ class App extends Component {
     return (
       <Router>
         <div className="app">
-          <div className="menu">
-            <h1><a href="/">Čo vieš o Hane ?</a></h1>
-          </div>
+          <Menu/>
           <Route
           exact
           path="/"

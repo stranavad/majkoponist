@@ -1,20 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.8e13d36c.chunk.css",
-    "main.js": "/static/js/main.95390ba9.chunk.js",
-    "main.js.map": "/static/js/main.95390ba9.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.af6b06ca.js",
-    "runtime-main.js.map": "/static/js/runtime-main.af6b06ca.js.map",
-    "static/js/2.0d6a5756.chunk.js": "/static/js/2.0d6a5756.chunk.js",
-    "static/js/2.0d6a5756.chunk.js.map": "/static/js/2.0d6a5756.chunk.js.map",
-    "static/js/3.ee97d2e7.chunk.js": "/static/js/3.ee97d2e7.chunk.js",
-    "static/js/3.ee97d2e7.chunk.js.map": "/static/js/3.ee97d2e7.chunk.js.map",
+    "main.css": "/static/css/main.0e5248ca.chunk.css",
+    "main.js": "/static/js/main.4c919946.chunk.js",
+    "main.js.map": "/static/js/main.4c919946.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.48b0941a.js",
+    "runtime-main.js.map": "/static/js/runtime-main.48b0941a.js.map",
+    "static/js/2.d8c88ea2.chunk.js": "/static/js/2.d8c88ea2.chunk.js",
+    "static/js/2.d8c88ea2.chunk.js.map": "/static/js/2.d8c88ea2.chunk.js.map",
+    "static/js/3.e1e1206f.chunk.js": "/static/js/3.e1e1206f.chunk.js",
+    "static/js/3.e1e1206f.chunk.js.map": "/static/js/3.e1e1206f.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.8e13d36c.chunk.css.map": "/static/css/main.8e13d36c.chunk.css.map",
-    "static/js/2.0d6a5756.chunk.js.LICENSE.txt": "/static/js/2.0d6a5756.chunk.js.LICENSE.txt",
+    "static/css/main.0e5248ca.chunk.css.map": "/static/css/main.0e5248ca.chunk.css.map",
+    "static/js/2.d8c88ea2.chunk.js.LICENSE.txt": "/static/js/2.d8c88ea2.chunk.js.LICENSE.txt",
     "static/media/HanaSong.mp3": "/static/media/HanaSong.8d3adcd4.mp3",
     "static/media/HanaSongOgg.ogg": "/static/media/HanaSongOgg.f36fdb62.ogg",
     "static/media/Prize1.png": "/static/media/Prize1.20023d3b.png",
+    "static/media/favicon500.png": "/static/media/favicon500.16159b48.png",
     "static/media/hana_background.png": "/static/media/hana_background.229c3d42.png",
     "static/media/hanaprize1.jpeg": "/static/media/hanaprize1.72df1be4.jpeg",
     "static/media/hanaprize2.jpeg": "/static/media/hanaprize2.b0ff1709.jpeg",
@@ -22,9 +23,9 @@
     "static/media/hanaprize_recital.jpg": "/static/media/hanaprize_recital.984a7fe4.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.af6b06ca.js",
-    "static/js/2.0d6a5756.chunk.js",
-    "static/css/main.8e13d36c.chunk.css",
-    "static/js/main.95390ba9.chunk.js"
+    "static/js/runtime-main.48b0941a.js",
+    "static/js/2.d8c88ea2.chunk.js",
+    "static/css/main.0e5248ca.chunk.css",
+    "static/js/main.4c919946.chunk.js"
   ]
 }
