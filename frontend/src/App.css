@@ -2,12 +2,13 @@
   text-align: center;
 }
 
-body, * {
+body,
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   transition: 0.2s ease;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 
 body {
@@ -17,7 +18,7 @@ body {
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
-  background-color: #0B152A;
+  background-color: #0b152a;
 }
 
 .app {
@@ -30,7 +31,6 @@ body {
 
 /*█▀▄▀█ █▀▀ █▄░█ █░█//
 //█░▀░█ ██▄ █░▀█ █▄█*/
-
 
 .menu {
   position: absolute;
@@ -64,10 +64,8 @@ body {
   max-width: 50px;
 }
 
-
 /*█▀▀ █▀█ █▄░█ ▀█▀ ▄▀█ █ █▄░█ █▀▀ █▀█ █▀//
 //█▄▄ █▄█ █░▀█ ░█░ █▀█ █ █░▀█ ██▄ █▀▄ ▄█*/
-
 
 .container {
   width: 100%;
@@ -116,7 +114,7 @@ body {
   margin: 2em 0;
 }
 
-.container-flex-end { 
+.container-flex-end {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -136,7 +134,7 @@ body {
 .question {
   border-radius: 10px;
   padding: 0.5em;
-  color:  #d5ba5c;
+  color: #d5ba5c;
   margin: 1.5em 0;
   display: flex;
   flex-direction: column;
@@ -144,7 +142,6 @@ body {
   align-items: center;
   width: 850px;
 }
-
 
 .horizontal-container {
   display: flex;
@@ -156,16 +153,16 @@ body {
 }
 
 .radio-group {
-  color:#d5ba5c;
+  color: #d5ba5c;
   margin: 0.5em;
   display: flex;
   justify-content: space-around;
   align-items: center;
   padding: 0.25em;
-  border-radius: 5px
+  border-radius: 5px;
 }
 
-.admin-component { 
+.admin-component {
   color: white;
   display: flex;
   flex-direction: column;
@@ -195,15 +192,17 @@ body {
   position: relative;
 }
 
-
 /*█░█ █▀▀ ▄▀█ █▀▄ █ █▄░█ █▀▀ █▀//
 //█▀█ ██▄ █▀█ █▄▀ █ █░▀█ █▄█ ▄█*/
 
-.small-heading, .medium-heading, .large-heading {
+.small-heading,
+.medium-heading,
+.large-heading {
   margin: 0.5em 0;
 }
 
-.small-heading, .show-result-question-heading {
+.small-heading,
+.show-result-question-heading {
   font-size: 1.3em;
   color: #d5ba5c;
 }
@@ -213,14 +212,17 @@ body {
   color: #d5ba5c;
 }
 
-
 /*█░█ █▀█ █▀▄▀█ █▀▀ █▀█ ▄▀█ █▀▀ █▀▀   █░█ █▀▀ ▄▀█ █▀▄ █ █▄░█ █▀▀ █▀//
 //█▀█ █▄█ █░▀░█ ██▄ █▀▀ █▀█ █▄█ ██▄   █▀█ ██▄ █▀█ █▄▀ █ █░▀█ █▄█ ▄█*/
 
-.homepage-first-heading, .homepage-second-heading, .homepage-third-heading, .homepage-forth-heading, .homepage-fifth-heading {
+.homepage-first-heading,
+.homepage-second-heading,
+.homepage-third-heading,
+.homepage-forth-heading,
+.homepage-fifth-heading {
   color: #d5ba5c;
   text-transform: uppercase;
-  font-family: 'Alfa Slab One', cursive;
+  font-family: "Alfa Slab One", cursive;
   font-size: 1.6em;
   letter-spacing: 2px;
 }
@@ -255,10 +257,8 @@ body {
   left: 0;
 }
 
-
 /*▀█▀ █▀▀ ▀▄▀ ▀█▀ █▀//
 //░█░ ██▄ █░█ ░█░ ▄█*/
-
 
 .small-text {
   font-size: 0.9em;
@@ -281,14 +281,16 @@ body {
   margin-top: 2em;
 }
 
-
 /*█▄▄ █░█ ▀█▀ ▀█▀ █▀█ █▄░█ █▀//
 //█▄█ █▄█ ░█░ ░█░ █▄█ █░▀█ ▄█*/
 
-
-.small-button, .medium-button, .large-button, .question-button, .homepage-button {
-  background-color:#d5ba5c;
-  color: #0B152A;
+.small-button,
+.medium-button,
+.large-button,
+.question-button,
+.homepage-button {
+  background-color: #d5ba5c;
+  color: #0b152a;
   border: none;
   border-radius: 15px;
   cursor: pointer;
@@ -314,7 +316,8 @@ body {
   font-size: 1em;
 }
 
-.large-button, .homepage-button {
+.large-button,
+.homepage-button {
   padding: 0.5em 0.75em;
   margin: 1.5em;
   font-size: 1.2em;
@@ -331,13 +334,16 @@ body {
   margin-top: 2em;
 }
 
-
-.danger{
+.danger {
   background-color: red !important;
   color: white !important;
 }
 
-.small-button:hover, .medium-button:hover, .large-button:hover, .question-button:hover, .homepage-button:hover{
+.small-button:hover,
+.medium-button:hover,
+.large-button:hover,
+.question-button:hover,
+.homepage-button:hover {
   background-color: rgb(160, 160, 160);
 }
 
@@ -350,7 +356,8 @@ body {
   right: 1em;
 }
 
-.close-button-line1, .close-button-line2{
+.close-button-line1,
+.close-button-line2 {
   width: 1.5em;
   height: 4px;
   background-color: black;
@@ -365,10 +372,8 @@ body {
   transform: rotate(-45deg);
 }
 
-
 /*█▀▀ █▀█ █▀█ █▀▄▀█ ▀ █▀   █▀ ▀█▀ █░█ █▀▀ █▀▀//
 //█▀░ █▄█ █▀▄ █░▀░█ ░ ▄█   ▄█ ░█░ █▄█ █▀░ █▀░*/
-
 
 .form {
   display: flex;
@@ -387,7 +392,7 @@ body {
   align-items: center;
 }
 
-.input-line input{
+.input-line input {
   padding: 0.6em;
   background-color: #d5ba5c;
   color: black;
@@ -408,7 +413,9 @@ body {
   margin: 1%;
 }
 
-.input-line input::placeholder, .text-input::placeholder, .textarea-half::placeholder{
+.input-line input::placeholder,
+.text-input::placeholder,
+.textarea-half::placeholder {
   color: rgb(80, 80, 80);
 }
 
@@ -433,7 +440,6 @@ body {
   background-color: #d5ba5c;
 }
 
-
 /*█▀█ ▀█▀ █░█ █▀▀ █▀█   █▀▀ █░░ █▀▀ █▀▄▀█ █▀▀ █▄░█ ▀█▀ █▀//
 //█▄█ ░█░ █▀█ ██▄ █▀▄   ██▄ █▄▄ ██▄ █░▀░█ ██▄ █░▀█ ░█░ ▄█*/
 
@@ -450,7 +456,7 @@ body {
   opacity: 0.6;
 }
 
-.rules-list li{
+.rules-list li {
   font-size: 1.1em;
   margin: 1em;
 }
@@ -462,7 +468,6 @@ body {
 .margin-bottom {
   margin-bottom: 1em;
 }
-
 
 /*██████╗░███████╗░██████╗██████╗░░█████╗░███╗░░██╗░██████╗██╗██╗░░░██╗███████╗
 //██╔══██╗██╔════╝██╔════╝██╔══██╗██╔══██╗████╗░██║██╔════╝██║██║░░░██║██╔════╝
@@ -477,8 +482,6 @@ body {
 //██║░░██║██╔══╝░░░╚═══██╗██║██║░░╚██╗██║╚████║
 //██████╔╝███████╗██████╔╝██║╚██████╔╝██║░╚███║
 //╚═════╝░╚══════╝╚═════╝░╚═╝░╚═════╝░╚═╝░░╚══╝*/
-
-
 
 /*█▀▀ █▀█ █▄░█ ▀█▀ ▄▀█ █ █▄░█ █▀▀ █▀█ █▀//
 //█▄▄ █▄█ █░▀█ ░█░ █▀█ █ █░▀█ ██▄ █▀▄ ▄█*/
@@ -495,7 +498,8 @@ body {
     padding: 0.5em 2em;
   }
 
-  .question, .show-result-question {
+  .question,
+  .show-result-question {
     width: 90vw;
   }
 }
@@ -511,7 +515,8 @@ body {
     padding: 0 2em;
   }
 
-  .question, .show-result-question {
+  .question,
+  .show-result-question {
     width: 90vw;
   }
 }
@@ -527,7 +532,8 @@ body {
     padding: 2em;
   }
 
-  .question, .show-result-question {
+  .question,
+  .show-result-question {
     width: 75vw;
   }
 }

@@ -130,6 +130,7 @@ class Admin(Resource):
                 "message": "Wrong token"
             }
 
+
     @cross_origin(supports_credentials=True)
     def post(self):
         args = create_question_args.parse_args()

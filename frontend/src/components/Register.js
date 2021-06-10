@@ -23,6 +23,9 @@ class Register extends Component {
         res: ''
     };
 
+
+
+    
     componentDidMount() {
         axios.get(this.state.server_ip + "questions", {params: {token: this.state.token}})
             .then(res => {
