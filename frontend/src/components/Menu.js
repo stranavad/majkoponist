@@ -6,7 +6,7 @@ class Menu extends Component {
     render() {
         return(
             <div className="menu">
-                <img src={favicon500} className="menu-logo"/>
+                <img src={favicon500} className="menu-logo" alt="menu logo"/>
                 <h1><a href="/">Čo vieš o Hane ?</a></h1>
             </div>
         );
