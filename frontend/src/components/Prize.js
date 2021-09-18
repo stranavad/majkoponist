@@ -9,19 +9,22 @@ class Prize extends Component {
     render() {
         let img;
         img = require("./assets/" + this.props.prize.image).default;
-        let component;
-        //console.log("Is special:" + this.props.prize.special);
-        //console.log("Average: " + this.props.average);
-        if(this.props.winner) {
-            if (this.props.average === 1 && this.props.prize.special === 1){
-                component = <button className="large-button" onClick={this.onSelectPrize}>Vybrat tuto vyhru</button>;
-            } else if (this.props.prize.special === 1){ // this is not working
+        let component = "";
+        if (this.props.winner) {
+            if (this.props.average === 1 && this.props.prize.special === 1) {
+                component = <button className="large-button" onClick={() => this.props.onSelect(this.props.prize)}>Vybrat tuto vyhru</button>;
+            } else if (this.props.prize.special === 1) { // this is not working
                 component = "";
             } else {
-                component = <button className="large-button" onClick={this.onSelectPrize}>Vybrat tuto vyhru</button>;
+                component = (
+                  <button
+                    className="large-button"
+                    onClick={() => this.props.onSelect(this.props.prize)}
+                  >
+                    Vybrat tuto vyhru
+                  </button>
+                );
             }
-        } else {
-            component = "";
         }
         
         return(

@@ -7,16 +7,23 @@ import ShowPrizes from './ShowPrizes';
 import Config from './Config';
 
 class ShowResult extends Component {
-    state = {
-        component_main: '',
-        show_prizes: false,
-        token: Config.token,
-        server_ip: Config.server_ip,
-        prizes: '',
-        select_prize: false,
-        select_prize_id: '',
-        show_sample_prizes: false,
-    };
+    constructor(props) {
+        super(props);
+     state = {
+       component_main: "",
+       show_prizes: false,
+       token: Config.token,
+       server_ip: Config.server_ip,
+       prizes: "",
+       select_prize: false,
+       select_prize_id: "",
+       show_sample_prizes: false,
+     };
+        this.onSelectPrize = this.onSelectPrize.bind(this);
+        this.showPrizes = this.showPrizes.bind(this);
+        this.showSamplePrizes = this.showSamplePrizes.bind(this);
+        this.onSubmitPrize = this.onSubmitPrize.bind(this);
+    }
 
     onSelectPrize = (prize) => {
         this.setState({

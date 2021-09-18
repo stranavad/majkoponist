@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class ShowQuestion extends Component {
-    state = {
-        user_answer: "",
+    constructor(props) {
+        super(props);
+        state = {
+            user_answer: ""
+        }
     }
 
     componentDidMount() {

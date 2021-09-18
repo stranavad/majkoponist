@@ -7,21 +7,28 @@ import Completed from './Completed';
 import Config from './Config';
 
 class Register extends Component {
-    state = {
-        token: Config.token,
-        server_ip: Config.server_ip,
-        res_answers: '',
-        res_average: '',
-        register_form: true,
-        show_error_text: false,
-        error_text: '',
-        show_result: false,
-        user: '',
-        show_result_component: '',
-        tries: 0,
-        price_selected: false,
-        res: ''
-    };
+    constructor(props) {
+        super(props);
+        state = {
+          token: Config.token,
+          server_ip: Config.server_ip,
+          res_answers: "",
+          res_average: "",
+          register_form: true,
+          show_error_text: false,
+          error_text: "",
+          show_result: false,
+          user: "",
+          show_result_component: "",
+          tries: 0,
+          price_selected: false,
+          res: "",
+        };
+        this.registerFunction = this.registerFunction.bind(this);
+        this.showResult = this.showResult.bind(this);
+        this.afterPriceSelect = this.afterPriceSelect.bind(this);
+        this.playAgain = this.playAgain(this);
+    }
 
 
 

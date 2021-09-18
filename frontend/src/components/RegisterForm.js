@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class RegisterForm extends Component {
-    state = {
-        email: '',
-        first_name: '',
-        last_name: '',
-        phone: '',
+    constructor(props) {
+        super(props);
+        state = {
+          email: "",
+          first_name: "",
+          last_name: "",
+          phone: "",
+        };
+        this.onSubmit = this.onSubmit.bind(this);
+        this.onChangeValue = this.onChangeValue.bind(this);
     }
 
     onSubmit = (e) => {

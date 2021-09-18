@@ -11,17 +11,19 @@ api_token = config["api_token"]
 admin_email = config["email"]
 admin_password = config["password"]
 db_password = config["db_password"]
+db_host = config["db_host"]
 mail_global = ""
 mail_to_send = config["mail_to_send"]
+mail_password = config["mail_password"]
 mycursor = ""
 
 
 # Change the ip address to new mysql database
 
 mydb = mysql.connector.connect(
-    host="139.162.161.156",
+    host=db_host,
     user="root",
-    passwd="<Code><Tech> 127521",
+    passwd=db_password,
     database="majkoponist",
     pool_name="batman",
     pool_size=5
@@ -34,7 +36,7 @@ def create_app():
     app.config['MAIL_SERVER'] = 'smtp.gmail.com'
     app.config['MAIL_PORT'] = 465
     app.config['MAIL_USERNAME'] = 'hanahegerovaquiz@gmail.com'
-    app.config['MAIL_PASSWORD'] = '8JxYXY^mDVfrN1'
+    app.config['MAIL_PASSWORD'] = mail_password
     app.config['MAIL_USE_TLS'] = False
     app.config['MAIL_USE_SSL'] = True
     app.config['SECRET_KEY'] = "MajkoPonistSecretKey"

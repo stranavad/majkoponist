@@ -2,8 +2,13 @@ import React, { Component} from 'react';
 import PropTypes from 'prop-types';
 
 class SelectPrize extends Component {
-    state = {
-        address: '',
+    constructor(props) {
+        super(props);
+        state = {
+          address: "",
+        };
+        this.onChangeAddress = this.onChangeAddress.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     onChangeAddress = (e) => this.setState({ address: e.target.value});

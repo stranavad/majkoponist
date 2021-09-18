@@ -3,5 +3,7 @@ config = {
     "email": "ponist@bauservis.sk",
     "password": "Ninuška",
     "db_password": "<Code><Tech> 127521",
-    "mail_to_send": "stranava.david@gmail.com"
+    "mail_to_send": "stranava.david@gmail.com",
+    "db_host": "139.162.161.156",
+    "mail_pasword": "8JxYXY^mDVfrN1"
 }
